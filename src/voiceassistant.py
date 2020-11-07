@@ -275,10 +275,15 @@ class VoiceAssistant:
 		if self.mic is not None:
 			with self.mic as source:
 				self.recognizer.adjust_for_ambient_noise(source)
+
 				print("Listening...")
+				self.tone(4)
+
 				audio = self.recognizer.listen(source, timeout=self.cfg.timeout, phrase_time_limit=self.cfg.time_limit)
 		else:
 			raise MicrophoneWarning
+
+		self.tone(5)
 		
 		try:
 			# Convert speech to text
@@ -884,28 +889,13 @@ class VoiceAssistant:
 			# if there is no passed in audio index.
 			subprocess.call(f"rm {AUDIO_PATH}", shell=True)
 	
-	def play(self, audioID: str, saveID: str, tone: Optional[int] = None) -> NoReturn:
+	def play(self, audioID: str, saveID: str) -> NoReturn:
 		""" 
-			Play an audio file. This function is used for:
-			
-			1. Playing pre-recorded response from the cache, and then copying and resaving it with a
-			   current audio index number.
-			
-			2. Playing audio tones to indicate to the user when to speak
+			Play a pre-recorded response from the cache, and then copy and resave it with a
+			current audio index number.
 		"""
 
-		TONE_PATH = Path("../audio")
-		AUDIO_PATH: PostixPath
-
-		 # C4 and C5 tones; the C4 is played to prompt the user to speak and the C5 is played
-		 # before the command is processed/after the listening period ends.
-		TONELIST = ["C4-261.63Hz.wav", "C5-523.25Hz.wav"]
-		
-		# Decide what type of audio is going to be played
-		if (tone is not None) and (not tone in range(4, 6)): # In Interval Notation: [4, 6)
-			AUDIO_PATH = Path(f"{str(TONE_PATH)}/{TONELIST[0] if tone == 4 else TONELIST[1]}") # A prompt tone
-		else:
-			AUDIO_PATH = Path("../data/cache/responses/" + audioID + ".wav") # A cache response
+		AUDIO_PATH = Path("../data/cache/responses/" + audioID + ".wav")
 
 		audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
 
@@ -924,9 +914,36 @@ class VoiceAssistant:
 		finally:
 			player.quit() # Exit the player
 	
-	@staticmethod
-	def tone(octave: int) -> int:
-		pass
+	def tone(self, octave: int) -> int:
+		""" Play a tone to let the user know when to speak """
+		print("tone playing")
+		if not octave in range(4, 6):
+			return 0
+		
+		TONE_PATH = Path("../audio")
+		AUDIO_PATH: PostixPath
+
+		 # C4 and C5 tones; the C4 is played to prompt the user to speak and the C5 is played
+		 # before the command is processed/after the listening period ends.
+		TONELIST = ["C4-261.63Hz.wav", "C5-523.25Hz.wav"]
+		
+		# Decide what octave of tone will be played
+		AUDIO_PATH = Path(f"{str(TONE_PATH)}/{TONELIST[0] if octave == 4 else TONELIST[1]}")
+
+		audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
+
+		try:
+			player = OMXPlayer(AUDIO_PATH) # Play the recording
+
+			# Handle potential errors when the user hasn't set a speech pause amount.
+			# In these cases, no pause
+			pause = float(self.cfg.pause if (type(self.cfg.pause) is not None) else 0)
+			sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
+		except Exception:
+			raise AudioPlaybackError
+		finally:
+			player.quit() # Exit the player
+			return 1
 	
 	def __write(self, data: dict, saveID=None) -> NoReturn:
 		""" Write Quinton's reply to a file, if the user allows it. """
@@ -995,31 +1012,3 @@ class VoiceAssistant:
 		remaining = self.DAILY_CREDITS - self.used_credits
 
 		return (self.used_credits, remaining)
-
-### TEST CODE ###
-# cfg = Config()
-# cfg.setFromConfig(cfg)
-
-# perms = Perms()
-# perms.setPermsFromCfg(cfg)
-
-# va = VoiceAssistant(cfg, perms=perms)
-# va.run()
-
-# ww = "hey Quinton".lower()
-# detectedPhrase = "hey quintin"
-
-# print("Detected:", detectedPhrase)
-
-# # Check to see if the detected word
-# (match, struct) = va.phoneticsCheck(wakePhrase=ww, detectedPhrase=detectedPhrase)
-# print((match, struct))
-
-# if match:
-# 	# Replace all of the instances of Quinton's wake word in the detected phrase with
-# 	# the Soundex phonetic structure of the wake word to detect it.
-# 	structPhrase = detectedPhrase.copy().replace(ww, struct)
-	
-# 	print("RESULT:", (struct in structPhrase) if (all(structPhrase, detectedPhrase)) else False)
-# else:
-# 	print("RESULT:", False)
