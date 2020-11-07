@@ -1,7 +1,7 @@
 # This is Quinton's configuration file.
 #
 # Feel free to modify at your own risk. If you are interested in adding custom config
-# variables, please read `../doc/custom-config.txt`.
+# variables, please read `../doc/custom-config.md`.
 #
 # If you make a detrimental mistake that you can't reverse, you can always revert
 # to the default configuration in this directory - `config.defaults.yaml`.
@@ -60,13 +60,13 @@ timeout: 4
 # amount of time elapses, Quinton will detect everything that was picked up.
 time_limit: 6
 #
-# To detect its wake word, Quinton listens for 10 seconds at a time before parsing the audio data to
-# check if the wake word/phrase was uttered. However, that 10-second interval can be changed. A lower
+# To detect its wake word, Quinton listens for 3 seconds at a time before parsing the audio data to
+# check if the wake word/phrase was uttered. However, that 3-second interval can be changed. A lower
 # value will cause Quinton to check more often, thus resulting in a faster response, but you may have 
 # less time to speak. Higher values lower the possibility of speaking during the time when a check is 
 # running, but as of now, Quinton will have to continue to record for the duration of this value before
 # the audio data can be parsed. This means potentially longer response times.
-ww_detect_time: 2
+ww_detect_time: 3
 #
 speaker_vol: 100 # The speaker volume. This is how loud you will hear Quinton's voice. Scale: 0 (Min/Muted) - 100 (Max)
 mic_vol: 50 # The microphone volume. This is how loud you will hear Quinton's voice. Scale: 0 (Min/Muted) - 100 (Max)
@@ -81,7 +81,7 @@ pause: 0.2 # The length of time Quinton waits before returning to listening mode
 # NOTE: If `log_data` is `true`, you should also look at setting the cache clear frequency.
 # If it isn't
 #
-log_data: true # Select from: `true` (default), `false`, or `"custom"` (quotes required, backticks aren't)
+log_data: true # Select from: `true` (default), `false`, or `"custom"` (quotes are required, backticks aren't)
 clear_frequency: "annually" # Select from: "daily", "weekly", "monthly", "annually" (default), "never"
 #
 # The info in this dictionary is only used  if `log-data` is set to "custom". If you have 
@@ -97,7 +97,7 @@ log_pref:
     timestamp_history: true # If either of the above variables are `false`, this isn't used. 
   # [FUTURE INCLUSION] Allow data to be graphed and usage to be monitored. Do not edit this variable;
   # it currently does nothing.
-  allow_usage_monitoring: true
+  #allow_usage_monitoring: true
 ###
 ---
 #
