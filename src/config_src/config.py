@@ -15,8 +15,8 @@
 import yaml, os, subprocess
 
 from exceptions import (
-	ConfigFileWarning, 
-	DefaultConfigError, 
+	ConfigFileWarning,
+	DefaultConfigError,
 	CountryCodeError
 )
 
@@ -57,7 +57,7 @@ class Config:
 	archive_audio_commands: bool
 	record_command_history: bool
 	timestamp_history: bool # Put a timestamp on recorded history
-	allow_usage_monitoring: bool
+	#allow_usage_monitoring: bool# Unused in v0.1.0
 
 	# Quinton's Espeak settings
 	voice = str()
