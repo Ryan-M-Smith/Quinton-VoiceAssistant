@@ -145,10 +145,9 @@ class VoiceAssistant:
 
 			return wifi
 	
-	def run(self) -> int:
+	def run(self) -> NoReturn:
 		""" 
-			Runs the voice assistant. Returns `0` on success, non-zero otherwise. This function
-			follows the following process:
+			Runs the voice assistant. This function follows the following process:
 
 				1. Listen for the wake word
 				2. Listen for user input (if the wake word is heard)
@@ -159,6 +158,7 @@ class VoiceAssistant:
 			This function will be executed infinitely as long as there are no errors.
 		"""
 
+		# NOTE: Future inclusion. Will eventually return `0` on success, non-zero otherwise. 
 		# Possible return codes for the function. Descriptions are given.
 		# RETURN_CODES = [
 		# 	0, # Normal exit
@@ -311,7 +311,7 @@ class VoiceAssistant:
 
 			# Record and check the decibel value of the wake word
 			path = self.listener.liveListen()
-			(_, isInRange) = self.listener.calcIntensity(audioPath=path)
+			_, isInRange = self.listener.calcIntensity(audioPath=path)
 			
 			if isInRange:
 				# Send the audio data to Houndify, but this time use the pre-recorded
