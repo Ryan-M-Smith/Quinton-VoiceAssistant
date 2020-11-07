@@ -1,8 +1,0 @@
-Testing Quinton's reply functionality
-
-Test 1:
-	Intent Type: Statements
-		* Weather - UNKNOWN
-		* Time - PASS
-		* Date - PASS
-		* Turn on/Turn off - FAIL

@@ -1,5 +1,0 @@
-* Build config and linking software (0%)
-	- Link over IP address
-	- Allow for a node to yield recognition to a closer one
-* ToolKit integration (0%)
-* Graph usage (0%)
