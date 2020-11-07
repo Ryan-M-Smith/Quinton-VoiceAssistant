@@ -203,7 +203,7 @@ class Listener:
 				# 48 & 49 -> `MIN_TSHLD` (50)
 				# 71 & 72 -> `MAX_TSHLD` (70)
 				#
-				# Using -1 as the `ndigits` argument achieves the result of rounding the the tens place. In Python's r
+				# Using -1 as the `ndigits` argument achieves the result of rounding the the tens place. In Python's
 				# rounding function, 0 is the tenths place, 1 doesn't change the number, and -1 is the ones place, so if 
 				# a number `n` has a number `x` in the ones place and `x >= 5`, `n` is rounded to the tens place.
 				I_dB = int(round(I_db, ndigits=-1))
@@ -228,9 +228,3 @@ class Listener:
 			# In case of a strange occurrence (such as a log of 0), return 0.0.
 			# This would most likely happen in the case of a muted microphone.
 			return 0.0
-
-# class CFG: mic_vol = 60
-# cfg = CFG()
-# l = Listener(cfg)
-# print(path := l.liveListen(), type(path))
-# print(l.calcIntensity(audioPath=path))
