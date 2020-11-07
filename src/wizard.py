@@ -31,7 +31,7 @@ def setupWizard(va: VoiceAssistant) -> NoReturn:
 		"clear_frequency": 84
 	}
 
-	CONFIG_PATH = Path("../data/config/config.test.yaml")
+	CONFIG_PATH = Path("../data/config/config.yaml")
 
 	fileLns = docs = list()
 
