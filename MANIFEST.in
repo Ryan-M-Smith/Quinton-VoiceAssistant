@@ -1,0 +1,21 @@
+# FILENAME: MANIFEST.in
+# Add and remove files and directories from the packaged software's source directory
+
+# Important files
+include LICENSE.txt
+include version.txt
+include CHANGELOG.md
+include requirements.txt
+include credentials.yaml
+
+recursive-include doc * # Documentation
+recursive-include data * # Data; configuration files, cache, logs, memory, and temporary files
+
+exclude data/config/config.test.yaml
+
+# Include the tones, but exclude the full 10-second recordings
+recursive-include audio *
+recursive-exclude audio/.originals *
+
+# Exclude the ToolKit configuration area for now
+recursive-exclude data/config/toolkits *

@@ -1,0 +1,1 @@
+Finally, how often do you want the cache cleared? Please choose from daily, weekly, monthly, anually, or never.

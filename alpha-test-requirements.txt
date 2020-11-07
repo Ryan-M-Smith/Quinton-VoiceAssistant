@@ -1,0 +1,16 @@
+For Quinton to pass it's alpha test, it must:
+
+Successfully complete 5 command-reply sequences without anything in the cache
+	Score: x/5
+
+Successfully complete 5 command-reply sequences with commands in the cache that don't have usable replies
+	Score: x/5
+
+Be able to announce errors to the user
+	Score: x/1
+
+Be able to reply to all of the commands it is currently programmed to recognize
+	Score: 
+
+Be able to quickly and consistently respond to its wake word/phrase
+	Speed: x sec. / <= 3 sec.
