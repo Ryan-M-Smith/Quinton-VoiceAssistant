@@ -784,7 +784,7 @@ class VoiceAssistant:
 
 					return (contDict.get("reply"), contDict)
 
-	def speak(self, text: str, audioID=None) -> NoReturn:
+	def speak(self, text: str, audioID: Optional[str] = None) -> NoReturn:
 		""" Convert text to speech and speak the computer's reply. """
 
 		AUDIO_PATH = Path("../data/cache/responses/" + str(audioID) + ".wav")
