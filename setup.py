@@ -19,7 +19,7 @@ setuptools.setup(
 	description="A voice assistant",
 	long_description=long_description, # The README
 	long_description_content_type="text/markdown",
-	url=None, # NOTE: Probably in the future
+	url="https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant"
 	packages=setuptools.find_packages(),
 	license='GNU GPLv3+',
 	platforms=["MacOS", "Linux"],
