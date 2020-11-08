@@ -88,7 +88,9 @@ class VoiceAssistant:
 
 	def __init__(self, cfg: Config, perms: Perms) -> NoReturn:
 		"""
-			Instantiate an instance of the `VoiceAssistant` class.
+			The `VoiceAssistant` class' constructor. Copies of the `Config` and
+			`Permissions` classes are passed in so the `VoiceAssistant` class can access
+			Quinton's configuration file and follow the user's allowed/denied permissions.
 		"""
 
 		self.cfg = cfg

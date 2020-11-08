@@ -39,6 +39,11 @@ class Listener:
 	recordLen: int
 
 	def __init__(self, cfg: Config):
+		""" 
+			The `Listener` class' constructor. Pass in a copy of the `Config` class so
+			the `Listener` class can access Quinton's configuration file
+		"""
+
 		self.alsaMixer.setvolume(cfg.mic_vol)
 		self.recordLen = cfg.ww_detect_time
 

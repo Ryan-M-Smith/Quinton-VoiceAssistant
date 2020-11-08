@@ -22,6 +22,11 @@ class Cache:
 	timezone = str()
 
 	def __init__(self, clearFrequency: str, timezone: str):
+		"""
+			The `Cache` class' constructor. Pass in the user-defined cache clear frequency
+			and the set timezone for use with the time and date of the last cache clear.
+		"""
+
 		self.clearFrequency = clearFrequency
 		self.timezone = timezone
 		print("Timezone:", self.timezone)
