@@ -104,7 +104,6 @@ class Cache:
 			data = lcc.read()
 		
 		if os.stat("../data/memory/last-cache-clear.txt").st_size != 0:
-			print("Here")
 			data = data.split()
 
 			# Data is always in the form "dd mm yyyy AM/PM"
@@ -148,9 +147,7 @@ class Cache:
 			elif self.clearFrequency == "manually": # NOTE: Manual cache clearing isn't allowed in v0.1.0 
 				couldClear = NotImplemented
 		else:
-			print("Else")
 			couldClear = self.__clear
-			print("Could clear:", couldClear)
 		
 		couldClear = False if couldClear is NotImplemented else couldClear
 

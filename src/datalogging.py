@@ -44,7 +44,6 @@ def speak(text: str, *, cfg: Config) -> bool:
 	
 	success = False
 
-	print(text)
 	AUDIO_PATH = Path("../data/tmp/logspeech.wav")
 	DATA_PATH = Path("../data/tmp/data.txt")
 
@@ -123,8 +122,3 @@ def log(*, error: Union[Exception, Warning, Error, Warn], reason: str, code: int
 		# Write the dictionary to the log file
 		for key, value in logEntry.items():
 			logfile.write(f"{key}: {value}\n")
-
-	print(logEntry)
-
-#speak("Hello")
-#print(log(None))

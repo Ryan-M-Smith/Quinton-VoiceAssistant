@@ -169,7 +169,6 @@ class VoiceAssistant:
 
 		while not heardWakeWord:
 			heardWakeWord = self.__heardWakeWord() # Check if the wake word/phrase was uttered
-			print(heardWakeWord)
 
 			if heardWakeWord:
 				break
@@ -185,40 +184,30 @@ class VoiceAssistant:
 		audioID = next(self.__genAudioIndex())
 
 		if type(data) is dict:
-			print("SECTION 1")
 			# Step 3
 			(response, data) = self.__reply(data, backup=defaultData, dataFromCache=dataFromCache)
 
 			if data.get("audio_index") == str():
-				print("SECTION 1.1")
-				print("Dict without AudioID")
 				data.update({"audio_index": audioID})
 
 				self.speak(response, audioID=audioID) # Step 4
 			else:
-				print("SECTION 1.2")
 				c_data = data.copy()
 				(response, data) = self.__reply(c_data, backup=defaultData, dataFromCache=dataFromCache) # Alt step 3
 				
 				self.play(audioID=data.get("audio_index"), saveID=audioID) # Alt step 4 - Play the recording from the cache; Make private later
 		else:
-			print("SECTION 2")
 			# Handle a list of content dictionaries
 			l_data = data.copy()
 			(response, data) = self.__reply(l_data, backup=defaultData, dataFromCache=dataFromCache) # Alt step 3
-			
-			print("\nData returned:", type(data), "\nAudio ID:", data.get("audio_index"), "\nData:", data)
 
 			if data.get("audio_index") == str():
-				print("SECTION 2.1")
 				data.update({"audio_index": audioID})
 
 				self.speak(response, audioID=data.get("audio_index"))
 			else:
-				print("SECTION 2.2")
 				self.play(audioID=data.get("audio_index"), saveID=audioID) # Alt step 4
 
-		print("\nFINAL DATA:", data)
 		self.__write(data=data, saveID=(audioID if data.get("from_cache") else None)) # Write the data
 	
 	def __generateTimestamp(self) -> datetime:
@@ -251,7 +240,6 @@ class VoiceAssistant:
 		# Make a time like 5:08 be spoken as "five oh eight" instead of
 		# "five zero eight"
 		if (int(time[2 + offset]) == 0) and (int(time[3 + offset]) > 0):
-			print("nt_here")
 			modTime = modTime.replace("0", "o")
 		
 		# Make a time like 5:00 be spoken as "five o'clock" instead of
@@ -275,8 +263,6 @@ class VoiceAssistant:
 		if self.mic is not None:
 			with self.mic as source:
 				self.recognizer.adjust_for_ambient_noise(source)
-
-				print("Listening...")
 				self.tone(4)
 
 				audio = self.recognizer.listen(source, timeout=self.cfg.timeout, phrase_time_limit=self.cfg.time_limit)
@@ -346,11 +332,8 @@ class VoiceAssistant:
 			if (detectedPhrase != str()) and (detectedPhrase is not None):
 				ww = self.cfg.wake_word.lower()
 
-				print("Detected:", detectedPhrase)
-
 				# Check to see if the detected wake word matches the one in the config 
 				(match, struct) = self.__phoneticsCheck(wakePhrase=ww, detectedPhrase=detectedPhrase)
-				print((match, struct))
 
 				if match:
 					# Replace the detected phrase with the Soundex phonetic structure of the wake word 
@@ -358,8 +341,6 @@ class VoiceAssistant:
 					# of the two phrases (original and detected) are the same (and sound the same), even if they are
 					# spelled slightly different
 					structPhrase = detectedPhrase.replace(detectedPhrase, struct)
-
-					print(structPhrase, detectedPhrase)
 					
 					return (struct in structPhrase) if all((structPhrase, detectedPhrase)) else False
 				else:
@@ -401,7 +382,6 @@ class VoiceAssistant:
 		structPhrase = structDPhrase = str()
 		
 		if type(wakePhrase) is list:
-			print("here")
 			# Get the phonetic structure of the wake phrase and the detected phrase
 			for spword, sdpword in zip(wakePhrase, detectedPhrase):
 				structPhrase += (phonetics.soundex(spword) + " ")
@@ -409,8 +389,6 @@ class VoiceAssistant:
 
 			structPhrase = structPhrase.strip()
 			structDPhrase = structDPhrase.strip()
-
-			print(structPhrase, structDPhrase)
 
 			if structPhrase == structDPhrase:
 				return (True, structPhrase) # If the two values are equal, either one will have the correct structure
@@ -427,7 +405,6 @@ class VoiceAssistant:
 			Generates a reply to the user's query. A dictionary of content or a list
 			of content dictionaries can be passed in.
 		"""
-		print(commandInfo)
 
 		# Each type of command is assigned an ID number. For details about what each number 
 		# means, see `../doc/command-ids.txt`.
@@ -472,7 +449,6 @@ class VoiceAssistant:
 			dCommandInfo = commandInfo
 		
 		infoSample = commandInfo[0] if type(commandInfo) is list else commandInfo
-		print(type(infoSample))
 		
 		usingCache = False # Set to `True` if the cache is used
 		filteredData = None
@@ -522,8 +498,6 @@ class VoiceAssistant:
 				time = datetime.now(pytz.timezone(timezone.zone))
 				
 				if dataFromCache:
-					print("HERE")
-
 					content = lCommandInfo if type(commandInfo) is list else dCommandInfo # The content to be filtered
 
 					# When searching for a time, make sure to remove the leading zero from hours before 10 (A.M. or P.M.)
@@ -535,10 +509,7 @@ class VoiceAssistant:
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 
 					search = self.__normalizeTime(orig_time)
-					
-					print("\nContent:", content)
 					filteredData = self.cmdPsr.filterIrrelevant(content, search)
-					print("Filtered Data:", filteredData)
 				
 				if filteredData is not None:
 					usingCache = True
@@ -550,8 +521,6 @@ class VoiceAssistant:
 					
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 					response = self.__normalizeTime(orig_time)
-
-					print(response)
 			elif (("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("date" in infoSample.get("keywords"))):
 				commandID = 3
 
@@ -609,8 +578,6 @@ class VoiceAssistant:
 				time = datetime.now(pytz.timezone(timezone.zone))
 				
 				if dataFromCache:
-					print("HERE")
-
 					content = lCommandInfo if type(commandInfo) is list else dCommandInfo # The content to be filtered
 
 					# When searching for a time, make sure to remove the leading zero from hours before 10 (A.M. or P.M.)
@@ -622,10 +589,7 @@ class VoiceAssistant:
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 
 					search = self.__normalizeTime(orig_time)
-					
-					print("\nContent:", content)
 					filteredData = self.cmdPsr.filterIrrelevant(content, search)
-					print("Filtered Data:", filteredData)
 				
 				if filteredData is not None:
 					usingCache = True
@@ -637,8 +601,6 @@ class VoiceAssistant:
 					
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 					response = self.__normalizeTime(orig_time)
-
-					print(response)
 			elif (("what" in infoSample.get("question_words")) and (("is" in infoSample.get("to_be")) or ("what's" in ci.egt("full_command"))) and ("date" in infoSample.get("keywords"))): # Getting the date
 				commandID = 3
 
@@ -668,8 +630,6 @@ class VoiceAssistant:
 						# Filter out parts of the command to look for a situation where the user tells
 						# Quinton something about themself.
 						for word in infoSample.get("command").split():
-							print(type(infoSample))
-							
 							if (not word in stopWords) and (not foundEnd):
 								if word == "favorite":
 									foundStart = True
@@ -688,8 +648,6 @@ class VoiceAssistant:
 						# Get rid of plural nouns
 						if objtype.endswith("s") or objtype.endswith("es"):
 							objtype.rstrip("es") # Will take care of both cases
-
-						print(objtype, ": ", objname)
 						
 						if not foundEnd: # Not really necessary, as commandID is 0 by default
 							commandID = 0
@@ -702,8 +660,6 @@ class VoiceAssistant:
 		if type(response) is str:
 			response = response.strip()
 		
-		print("Type of response:", type(response))
-
 		if (response is None) and (commandID != 5):
 			raise NoReplyError
 		
@@ -715,13 +671,10 @@ class VoiceAssistant:
 			# Backup data is not sent from the command processor if the cache is not
 			# used at the processing level.
 			if dataFromCache:
-				print("Using backup")
 				dCommandInfo = backup
 				usingBackup = True
 		else:
 			commandInfo = filteredData
-			print("\nType: filteredData -", type(filteredData))
-			print("\nfilteredData:", filteredData)
 		
 		if commandInfo is filteredData is lCommandInfo is dCommandInfo is backup is None:
 			raise DataError
@@ -771,11 +724,7 @@ class VoiceAssistant:
 		except TypeError:
 			raise TimestampError	
 
-		print(commandInfo)
-
 		if (response is None) and (usable_replies == list()):
-			print("Here")
-
 			if sys.version_info.minor > 8:
 					random.seed()
 			else:
@@ -789,20 +738,14 @@ class VoiceAssistant:
 			# Otherwise, just use the one that's there. This way, `random.choice()`
 			# doesn't waste time picking from only one reply template.
 			if ((dCommandInfo == commandInfo) or (usingBackup)) and (not usingCache):
-				print("Getting reply")
-				
 				if sys.version_info.minor > 8:
 					random.seed()
 				else:
 					random.seed(datetime.now(tz=timezone))
 
 				if len(usable_replies) > 1:
-					print("Getting random reply 1")
 					dCommandInfo.update({"reply": TEMPLATES.copy()[random.choice(usable_replies)]})
-					print(dCommandInfo)
 				else:
-					print("Choosing what's there 1")
-					print(usable_replies)
 					dCommandInfo.update({"reply": TEMPLATES.copy()[usable_replies[0]]})
 				
 				return (dCommandInfo.get("reply"), dCommandInfo) # Return for a single content dictionary
@@ -817,10 +760,8 @@ class VoiceAssistant:
 				contDict = random.choice(lCommandInfo)
 
 				if len(usable_replies) > 1:
-					print("Getting random reply 2")
 					contDict.update({"reply": TEMPLATES.copy()[random.choice(usable_replies)]})
 				else:
-					print("Choosing what's there 2")
 					contDict.update({"reply": TEMPLATES.copy()[usable_replies[0]]})
 				
 				return (contDict.get("reply"), contDict) # Return statement for many content dictionaries
@@ -845,7 +786,7 @@ class VoiceAssistant:
 
 	def speak(self, text: str, audioID=None) -> NoReturn:
 		""" Convert text to speech and speak the computer's reply. """
-		print(text)
+
 		AUDIO_PATH = Path("../data/cache/responses/" + str(audioID) + ".wav")
 		DATA_PATH = Path("../data/tmp/data.txt")
 
@@ -916,7 +857,7 @@ class VoiceAssistant:
 	
 	def tone(self, octave: int) -> int:
 		""" Play a tone to let the user know when to speak """
-		print("tone playing")
+
 		if not octave in range(4, 6):
 			return 0
 		
@@ -948,9 +889,6 @@ class VoiceAssistant:
 	def __write(self, data: dict, saveID=None) -> NoReturn:
 		""" Write Quinton's reply to a file, if the user allows it. """
 
-		print("SAVEID:", saveID)
-		print("In __write()")
-
 		histPath = Path("../data/cache/history") # The JSON files with command history
 		recPath = Path("../data/cache/responses") # The portion of the cache holding audio recordings
 		memPath = Path("../data/memory/memory.yaml") # The YAML file with Quinton's "memory"
@@ -961,7 +899,6 @@ class VoiceAssistant:
 		index = data.get("audio_index") if saveID is None else saveID
 
 		if self.perms.canSaveToCache:
-			print(index)
 			# Create a history file that corresponds to an audio recording
 			with open(str(histPath) + "/history-" + index + ".json", "x") as history:
 				try:

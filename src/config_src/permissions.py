@@ -56,7 +56,7 @@ class Permissions:
 			self.canSaveToCache = self.canMonUsage = \
 			self.canTimestampHist = False
 
-	def getPerms(self) -> list:
+	def _unused_getPerms(self) -> list:
 		return [
 			self.canLogData,
 			self.canMonUsage,
@@ -65,11 +65,3 @@ class Permissions:
 			self.canTimestampHist,
 			self.canUseLocation
 		]
-			
-
-# cfg = Config()
-# cfg.setFromConfig(cfg)
-
-# perms = Permissions()
-# perms.setPermsFromCfg(cfg)
-# print(perms.getPerms())

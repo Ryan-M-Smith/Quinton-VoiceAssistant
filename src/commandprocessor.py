@@ -147,7 +147,6 @@ class CommandProcessor:
 			from this function is from the cache.  
 		"""
 
-		print(time, type(time))
 		full_command = command # A version of the command with all characters and original capitalization (only used in the CLI version)
 
 		returnDict = {
@@ -197,10 +196,6 @@ class CommandProcessor:
 		# to faster. This is skipped entirely if the user has opted not to save data to the cache.
 		if perms.canSaveToCache:
 			(found, idList, dataList) = self.histRef.search(command)
-
-			#print(found, idList, (data is not None), end="\n")
-
-			print("ftime:", time)
 
 			if (found) and (idList is not None) and (dataList is not None):
 				# Filter by intent and return possible content dictionaries for the query, 
@@ -323,7 +318,6 @@ class CommandProcessor:
 		
 		for _, word in enumerate(self.TO_BE):
 			if word in command.split():
-				print("Here - To be")
 				if not foundToBe:
 					foundToBe = True
 				
@@ -406,7 +400,6 @@ class CommandProcessor:
 			returnDict["keywords"] += commandAltKwds
 
 		if to_be is not None:
-			print(to_be)
 			returnDict["to_be"] = to_be
 		
 		if articles is not None:
@@ -601,16 +594,3 @@ class CommandProcessor:
 			return relevantContent[0] if len(relevantContent) == 1 else relevantContent
 		else:
 			return None
-
-# c = CommandProcessor()
-
-# some_data = [
-# 	{"reply": "It's 6 43 PM"},
-# 	{"reply": "It's 6 44 PM"},
-# 	{"reply": "It's 6 45 PM"},
-# 	{"reply": "It's 6 46 PM"},
-# 	{"reply": "It's 6 50 PM"},
-# 	{"reply": "It's 6 50 PM here"}
-# ]
-
-# print(c.filterIrrelevant(some_data, "6 50 PM"))

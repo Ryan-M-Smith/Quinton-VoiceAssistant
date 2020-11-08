@@ -142,15 +142,12 @@ class Config:
 
 		amount = int()
 
-		try:
-			print("In try block...")
-			
+		try:	
 			# Save the result of running `ls ../data/cache/responses` to `../data/tmp/lsout.txt`
 			contents = subprocess.check_output("ls ../data/cache/responses &> ../data/tmp/lsout.txt", shell=True).decode("utf-8") 
 
 			# Write the contents to `../data/tmp/lsout.txt`
 			with open("../data/tmp/lsout.txt", "w") as lsout:
-				print("Writing contents...")
 				lsout.write(contents)
 
 			amount = int(subprocess.check_output("cat -A ../data/tmp/lsout.txt | wc -l", shell=True).decode("utf-8")) # Get the amount of recordings
@@ -169,8 +166,3 @@ class Config:
 			return True
 		else:
 			return False
-
-# cfg = Config()
-# cfg.setFromConfig(cfg)
-# print(cfg.meets())
-		

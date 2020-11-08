@@ -89,7 +89,6 @@ def main() -> NoReturn:
 
 	# Get the user permissions
 	try:
-		print("Recordings:", cfg.recordings)
 		perms.setPermsFromCfg(cfg)
 		perms.getPerms()
 	except (Exception, Warning, Error, Warn) as e: # Handle exceptions and warnings

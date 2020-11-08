@@ -50,13 +50,11 @@ class History:
 		finally:
 			# Check if the file is empty or if a lack of newline characters causes 
 			# #`wc -l` to return `0`
-			if filelen == int():
+			if filelen == 0:
 				if charCount > 0:
 					filelen = 1
 				else:
 					filelen = None
-			else:
-				print("File length:", filelen)
 		
 		# Will be returned in a tuple
 		idList = list()
@@ -69,11 +67,8 @@ class History:
 			for i in range(0, filelen):
 				# Read the file line by line while stripping trailing newlines
 				files.append(subprocess.check_output(f"less ../data/tmp/lsout.txt | sed -n \'{i + 1}p\'", shell=True).decode("utf-8").strip("\n"))
-			
-			print(files)
 
 			if files[-1] == "":
-				print("Removing newline from files list")
 				files.__delitem__(-1) # Remove a trailing newline at the end of the output file
 			
 			# Check for a certain command in every file. If it's found, save the audio index
@@ -81,12 +76,9 @@ class History:
 				# Skip over files that are empty
 				if os.stat(f"{HIST_PATH}/{hfile}").st_size != 0:
 					with open(f"{HIST_PATH}/{hfile}") as h:
-						#print(h.read())
-
 						hdict = json.load(h) # Convert the JSON in the file to a Python dictionary
 
 						# Check for the command
-						print(type(hdict))
 						if hdict.get("command") == command:
 							if not foundMatchingCmd:
 								foundMatchingCmd = True
@@ -100,8 +92,3 @@ class History:
 			idList = dataList = None
 		
 		return (foundMatchingCmd, idList, dataList)
-
-# hist = History() 
-# (found, idList, dataList) = hist.search("what time is it")
-
-# print(found, idList, dataList, end="\n")
