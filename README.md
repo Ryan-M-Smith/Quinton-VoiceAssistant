@@ -8,6 +8,7 @@
 
 1. [Basic Information](#basic-information)
     * [Different Versions](#different-versions)
+    * [About the Name](#about-the-name)
     * [Features and Limitations](#features-and-limitations)
         * [Features](#features)
         * [Limitations](#limitations)
@@ -44,6 +45,7 @@
 6. [Software Information](#software-information)
     * [License](#license)
     * [Copyright](#copyright)
+    * [Finding the Code](#finding-the-code)
     * [Reporting Bugs](#reporting-bugs)
 
 7. [Resources](#resources)
@@ -58,6 +60,11 @@ a microphone or an audio output device (speakers, headphones, etc.), and a dedic
 libraries and templates for developing Quinton ToolKits.
 
 For reference, I will refer to all of these as "versions" and any numbered version (e.g., Quinton-VoiceAssistant-0.1.0) as a "release".  
+
+### About the Name
+
+As you've probably already figured out, the voice assistant's name is Quinton. If you don't like the name and want to change it, just
+modify the wake word in [config.yaml](data/config/config.yaml).
 
 ### Features and Limitations
 
@@ -331,12 +338,16 @@ experimental versions of the functionality will be released prior to that.
 
 ### License
 
-Quinton-VoiceAssistant and its alternate versions (Quinton-CLI and Quinton-VA-Dev) are licensed under the GNU General Public License v3+.
-For more information, see [LICENSE.txt](LICENSE.txt).
+Quinton-VoiceAssistant is licensed under the GNU General Public License v3+. For more information, see [LICENSE.txt](LICENSE.txt).
 
 ### Copyright
 
-Quinton-VoiceAssistant and its alternate versions (Quinton-CLI and Quinton-VA-Dev) are Copyright (c) 2020 by Ryan Smith
+Quinton-VoiceAssistant is Copyright (c) 2020 by Ryan Smith
+
+### Finding the Software
+
+Quinton-VoiceAssistant is free and open-source software. You can find the code on
+[GitHub](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant).
 
 ### Reporting Bugs
 
@@ -347,11 +358,13 @@ To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an i
 ## Resources
 
 * [Uberi's Github](https://www.github.com/Uberi)
-* [Uberi's SpeechRecognition library](https://www.github.com/Uberi/speech_recognition)
+* [Uberi's SpeechRecognition Library](https://www.github.com/Uberi/speech_recognition)
 * [Houndify](https://www.houndify.com)
-  * [How Houndify credits work](https://www.houndify.com/pricing#how-do-credits-work)
+  * [How Houndify Credits Work](https://www.houndify.com/pricing#how-do-credits-work)
 * [OpenWeatherMap](https://www.openweathermap.org)
   * [OpenWeatherMap API Keys](https://home.openweathermap.org/api_keys)
 * [Python Downloads Page](https://python.org/downloads)
 * [Homebrew Installation Instructions](https://brew.sh)
 * [Linux/Unix Package Search](https://pkgs.org)
+* [My GitHub](https://www.github.com/Ryan-M-Smith)
+* [The Quinton-VoiceAssistant Repository](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant)
