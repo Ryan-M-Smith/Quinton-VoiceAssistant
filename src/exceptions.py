@@ -7,9 +7,7 @@
 
 """ Custom exceptions and warnings. """
 
-# NOTE: Currently, "warnings" (i.e., subclasses of `Warn`) are being treated as exceptions
-# because in Quinton's current state (no GUI setup wizard/control panel), it would be difficult
-# to 
+# NOTE: Currently, warnings are being treated as exceptions and thus abort execution like exceptions do.
 
 from abc import ABC # For creating abstract base classes
 from sys import version_info
