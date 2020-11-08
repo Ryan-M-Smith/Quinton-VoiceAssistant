@@ -1,7 +1,7 @@
 # This is Quinton's configuration file.
 #
 # Feel free to modify at your own risk. If you are interested in adding custom config
-# variables, please read `../doc/custom-config.txt`.
+# variables, please read `../doc/custom-config.md`.
 #
 # If you make a detrimental mistake that you can't reverse, you can always revert
 # to the default configuration in this directory - `config.defaults.yaml`.
@@ -106,7 +106,7 @@ log_pref:
 # is used, the speech engine with either throw an error or use the default voice.
 # NOTE FOR EDITING: Mbrola voices can be used instead of the builtins. For more information on Quinton's voice, 
 # how to change it, and how/where to find a complete list, please see the Espeak man page (`man espeak`) or
-# `../doc/voices` (Quinton documentation). Unless otherwise noted, all parameters here come set to Espeak's defaults.
+# `../doc/voices.md` (Quinton documentation). Unless otherwise noted, all parameters here come set to Espeak's defaults.
 #
 voice: "en-us+m1" # See `../doc/voices.md` for different options and more information. This is the voice I picked; Espeak's default is called "default".
 #
