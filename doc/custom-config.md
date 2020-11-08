@@ -3,7 +3,7 @@
 Over the course of using Quinton, you may decide you want to add functionality - but
 maybe it's not to the code itself. For example, you may want to increase the espeak
 word gap. By default, Quinton's configuration file doesn't come with variables to
-modify that setting, but you can add them yourself by following the setps below.
+modify that setting, but you can add them yourself by following the steps below.
 
 ## How to Do It
 
@@ -24,7 +24,7 @@ modify that setting, but you can add them yourself by following the setps below.
     configuration entries (especially if you plan to make a lot of them).
 
     &nbsp;&nbsp;&nbsp;&nbsp;To make a new document, make a new line after the
-    last line and type `---`. Anything under this divider is cosidered the fourth
+    last line and type `---`. Anything under this divider is considered the fourth
     document in the file.
 
 4. Add the new entry
@@ -39,7 +39,7 @@ modify that setting, but you can add them yourself by following the setps below.
 
     &nbsp;&nbsp;&nbsp;&nbsp;Then, add a colon after the key and then add the value. The
     word gap options takes an integer which represents a time in milliseconds (with the default
-    value being 10 ms), so your value should be something alon those lines. Let's say you really
+    value being 10 ms), so your value should be something along those lines. Let's say you really
     want a fast-talking voice assistant, so you want the word gap to only be 5 ms. In this case,
     you'd set the value to 5, making your entry look like:
 
@@ -73,7 +73,7 @@ modify that setting, but you can add them yourself by following the setps below.
 
   &nbsp;&nbsp;&nbsp;&nbsp;We now have a way to get the value from a YAML key-value pair to a Python variable,
   and now we have to use that variable. To do so, navigate to [voiceassistant.py](../src/voiceassistant.py) and
-  find the fucntion called `speak()`. A little ways down, underneath a block comment, you should see a line that
+  find the function called `speak()`. A little ways down, underneath a block comment, you should see a line that
   looks like:
 
   ```python
