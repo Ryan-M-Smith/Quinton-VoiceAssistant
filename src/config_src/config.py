@@ -69,7 +69,7 @@ class Config:
 
 	#
 	# Custom configuration variables also go here. To learn more about custom config
-	# variables, please read `../doc/custom-config.txt`.
+	# variables, please read `../doc/custom-config.md`.
 	#
 
 	@classmethod
