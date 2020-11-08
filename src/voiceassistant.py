@@ -407,7 +407,7 @@ class VoiceAssistant:
 		"""
 
 		# Each type of command is assigned an ID number. For details about what each number 
-		# means, see `../doc/command-ids.txt`.
+		# means, see `../doc/command-ids.md`.
 		commandID = int()
 
 		# The index numbers of the usable template replies for each ID number. For example ID 1 can
