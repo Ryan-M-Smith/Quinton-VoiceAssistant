@@ -351,7 +351,8 @@ Quinton-VoiceAssistant is free and open-source software. You can find the code o
 
 ### Reporting Bugs
 
-To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an issue on Github.
+To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an
+[issue on Github](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues).
 
 ---
 
@@ -368,3 +369,4 @@ To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an i
 * [Linux/Unix Package Search](https://pkgs.org)
 * [My GitHub](https://www.github.com/Ryan-M-Smith)
 * [The Quinton-VoiceAssistant Repository](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant)
+* [Issues Page](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues)
