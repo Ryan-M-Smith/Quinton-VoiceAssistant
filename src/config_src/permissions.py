@@ -11,6 +11,7 @@ from typing import NoReturn
 
 from .config import Config
 
+# NOTE: In the futre, this class may be turned into a module with two functions
 class Permissions:
 	""" Holds Quinton's permission settings and the methods that set them. """
 
