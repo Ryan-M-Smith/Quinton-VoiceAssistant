@@ -90,9 +90,8 @@ class Config:
 					config.append(dict(doc))
 
 				# Iterate through the documents and set the class variables from them. The variables are
-				# set using setattr() for more concise code. For more information on this process, see
-				# `../doc/reading-config.md`.
-
+				# set using setattr() for more concise code.
+				#
 				# Max layers of nesting: 2 (The main layer doesn't count)
 				for docnum in range(len(config)):
 					for key, value in config[docnum].items(): # Iterate through all YAML documents in the file
