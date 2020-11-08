@@ -1,9 +1,0 @@
-Class Outline for the voice assistant
-----------
-
-VoiceAsistant class can:
-	* Allow the assistant to listen for and respond to a
-	  user
-	* Hold API keys for Houndify
-	* Control the microphone (mute, volume, etc.)
-	 
