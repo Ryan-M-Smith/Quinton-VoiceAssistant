@@ -45,7 +45,7 @@
 6. [Software Information](#software-information)
     * [License](#license)
     * [Copyright](#copyright)
-    * [Finding the Code](#finding-the-code)
+    * [Finding the Software](#finding-the-software)
     * [Reporting Bugs](#reporting-bugs)
 
 7. [Resources](#resources)
