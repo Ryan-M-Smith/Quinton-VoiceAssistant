@@ -163,6 +163,8 @@ In order for Quinton to run, you will need to have a Houndify and OpenWeatherMap
 this is free. Both services offer premium subscription options if you decide you want to upgrade your account in the future (to increase your daily API
 call/credit allotment), but it's completely optional. In addition, both accounts can be signed up for without the use of a credit card.
 
+**NOTE:** You must put all API keys in the [credentials.yaml](credentials.yaml) file for everything to work properly!
+
 ---
 
 Continue reading for sign-up/setup instructions. If you want to wait until later to sign up, click [here](#actually-installing-the-software)
