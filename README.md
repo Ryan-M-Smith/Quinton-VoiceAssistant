@@ -22,17 +22,13 @@ This is an abridged version of Quinton-VoiceAssistant's README. For the complete
     * [On Linux](#on-linux)
     * [On MacOS](#on-macos)
 
-3. [Developing for Quinton](#developing-for-quinton)
-    * [Code Modifications](#code-modifications)
-    * [ToolKits](#toolkits)
-
-4. [Software Information](#software-information)
+3. [Software Information](#software-information)
     * [License](#license)
     * [Copyright](#copyright)
     * [Finding the Software](#finding-the-software)
     * [Reporting Bugs](#reporting-bugs)
 
-5. [Resources](#resources)
+4. [Resources](#resources)
 
 ---
 
@@ -121,29 +117,6 @@ mbrola-us2 mbrola-us3 libbz2-dev
 
 python3.8 setup.py install
 ```
-
----
-
-## Developing for Quinton
-
-### Code Modifications
-
-Feel free to hack Quinton-VoiceAssistant. Just abide by the rules in the [license](#license).
-
-### ToolKits
-
-In future versions of Quinton, there will be support for Quinton ToolKits - special Python classes designed to
-add functionality to Quinton without modifying its source code directly. Instead, a Python module is put in a
-directory and data from the class in the module is read by Quinton and incorporated into the software. This type
-of functionality would be used to expand Quinton's skill set, such as allowing it to answer math questions or get
-your current location; stuff that isn't built in by default. This approach allows Quinton to be nearly infinitely
-expandable.
-
-When the feature is released, official documentation will be written here. If you are interested in the idea of
-Quinton ToolKits and want to read about the current working ideas for the feature, please see [doc/toolkits.md](doc/toolkits.md).
-
-My hope is that this feature will be available by Quinton-VoiceAssistant release 1.0.0, and software betas including
-experimental versions of the functionality will be released prior to that.
 
 ---
 
