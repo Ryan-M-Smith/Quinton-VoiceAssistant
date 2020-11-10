@@ -2,7 +2,7 @@
 
 ## Unreleased - Expected v0.1.1
 
-* **Added*
+* **Added**
   * [content]
 
 ## v0.1.0 - Released 2020-11-09
