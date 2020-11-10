@@ -4,6 +4,13 @@
 
 ---
 
+## A Note to Readers
+
+This README is very long, and most of the content here will likely be moved to a new file in the future. Until then,
+Please read Sections 3 & 4 for installation/setup instructions and 6 for any other information you might need.
+
+---
+
 ## Table of Contents
 
 1. [Basic Information](#basic-information)
