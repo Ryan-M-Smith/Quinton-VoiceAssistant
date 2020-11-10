@@ -171,12 +171,6 @@ To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an
 
 ## Resources
 
-* [Uberi's Github](https://www.github.com/Uberi)
-* [Uberi's SpeechRecognition Library](https://www.github.com/Uberi/speech_recognition)
-* [Houndify](https://www.houndify.com)
-  * [How Houndify Credits Work](https://www.houndify.com/pricing#how-do-credits-work)
-* [OpenWeatherMap](https://www.openweathermap.org)
-  * [OpenWeatherMap API Keys](https://home.openweathermap.org/api_keys)
 * [Python Downloads Page](https://python.org/downloads)
 * [Homebrew Installation Instructions](https://brew.sh)
 * [Linux/Unix Package Search](https://pkgs.org)
