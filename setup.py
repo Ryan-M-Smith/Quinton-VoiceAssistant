@@ -14,7 +14,7 @@ AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
 setuptools.setup(
 	name="Quinton-VoiceAssistant",
-	version="0.1.1",
+	version=version,
 	author=AUTHOR,
 	author_email=EMAIL,
 	maintainer=AUTHOR,
