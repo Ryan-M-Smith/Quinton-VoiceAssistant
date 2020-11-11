@@ -8,7 +8,7 @@ with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
 	requirements = req.read().split("\n")
 
 with open("version.txt", "r") as v:
-	version = v.read()[9:]
+	version = v.readline()[9:]
 
 AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
