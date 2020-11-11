@@ -1,9 +1,9 @@
 # Quinton-VoiceAssistant Changelog
 
-## [UNRELEASED] Expected v1.0.0
+## Unreleased - Expected v0.1.1
 
 * **Added**
-  * [feature]
+  * [content]
 
 ## v0.1.0 - Released 2020-11-09
 
