@@ -7,11 +7,14 @@ with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
 	long_description = ld.read()
 	requirements = req.read().split("\n")
 
+with open("version.txt", "r") as v:
+	version = list(v.read().split("\n"))[0][9:] # Read the version line (first line) only
+
 AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
 setuptools.setup(
 	name="Quinton-VoiceAssistant",
-	version="0.1.0",
+	version=version,
 	author=AUTHOR,
 	author_email=EMAIL,
 	maintainer=AUTHOR,
