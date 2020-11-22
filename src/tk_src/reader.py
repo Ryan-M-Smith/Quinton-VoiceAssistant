@@ -17,8 +17,11 @@ def checkRequirements(moduleName: str, *, _module: ModuleType = None) -> bool:
 
 	assert module is not None # Make sure everything checks out before using `eval`
 
-	if hasattr(eval("module.ToolKit"), "KEYWORDS"):
-		print("Yes")
+	REQUIREMENTS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"]
+
+	for req in REQUIREMENTS:
+		if hasattr(eval("module.ToolKit"), req):
+			print("Yes")
 
 
 checkRequirements("toolkit_template")
