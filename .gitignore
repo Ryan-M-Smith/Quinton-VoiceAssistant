@@ -6,6 +6,7 @@
 /src/__pycache__
 /src/cache_src/__pycache__
 /src/config_src/__pycache__
+/src/tk_src/__pycache__
 /src/.test/
 /logs/*
 /data/cache/responses/*
