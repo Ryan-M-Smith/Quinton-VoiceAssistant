@@ -2,6 +2,7 @@
 /releases
 /data/config/config.test.yaml
 /data/tmp
+/data/tmp/*
 /data/memory
 /src/__pycache__
 /src/cache_src/__pycache__
