@@ -220,7 +220,7 @@ class CommandProcessor:
 				
 				timestamped = (basic | {"timestamp": time}) if sys.version_info.minor >= 9 else dict(basic, **{"timestamp": time})
 
-				backup = basic if not perms.canTimestampHist else timestamped # Timestamped option added here
+				backup = timestamped if perms.canTimestampHist else basic # Timestamped option added here
 
 				return (self.__filterIntent(dataList), backup, True)
 
