@@ -13,8 +13,9 @@ def fetch() -> list:
 	""" Collect all non-blacklisted ToolKits. """
 	# For more info on blacklisting ToolKits, see `../doc/excluding-toolkits.md`.
 
-	# Get a list of all the installed ToolKits
-	filtered = filter(lambda tk: not tk.startswith("_"), subprocess.check_output("ls ../data/toolkits", shell=True).decode("utf-8").strip().split("\n"))
+	# Get a list of all the installed ToolKits. Filter out any files that start with an underscore (like `__init__.py`)
+	# or a hidden file (like ``.file.py`).
+	filtered = filter(lambda tk: not tk.startswith(("_", ".")), subprocess.check_output("ls ../data/toolkits", shell=True).decode("utf-8").strip().split("\n"))
 	TK_LIST = [tk for tk in filtered]
 
 	EXCLUDE_FILE = Path("../data/config/toolkit-exclude.txt") # The list of ToolKits to exclude
