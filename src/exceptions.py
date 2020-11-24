@@ -153,6 +153,24 @@ class TimezoneError(Error):
 	reason = "Loading timezone information failed. Please make sure your timezone is valid. Aborting."
 	code = 112
 
+class ToolKitExistanceError(Error):
+	""" A ToolKit failed the assertion test for `None`. """
+	reason: "The ToolKit doesn't exist"
+	code = 113
+
+class ToolKitLoadError(Error):
+	""" There was a problem loading a toolkit. """
+
+	reason: str
+	code = 114
+
+	def __init__(self, tkname: str):
+		""" Allow the exception to take an argument. """
+		self.reason = f"There was a problem loading the ToolKit {tkname}. Aborting."
+	
+	def __str__(self) -> str:
+		return reason
+
 class WiFiWarning(Warn):
 	""" No Wi-Fi connection. """
 	reason = "There is no Wi-fi connection. Please connect to Wi-fi to continue."
