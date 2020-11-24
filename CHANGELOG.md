@@ -1,5 +1,12 @@
 # Quinton-VoiceAssistant Changelog
 
+## Unreleased (Expected v0.1.2)
+
+* **Added**
+  * The ability for the software to utilize dictionary combination for Python 3.9.
+    * For those with 3.8, the old method is still included and is
+      not being removed any time soon, so there's no need to upgrade.
+
 ## v0.1.1 - Released 2020-11-10
 
 * **Added**
