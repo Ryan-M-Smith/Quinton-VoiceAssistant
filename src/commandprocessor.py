@@ -206,14 +206,17 @@ class CommandProcessor:
 				# dictionary if all of the options from the cache are filtered out.
 				
 				# A basic backup - no timestamp
-				basic = dict(
-					dataList[0], 
-					**{
-						"reply": str(), 
-						"audio_index": str(), 
-						"from_cache": False,
-					}
-				)
+				if sys.version_info.minor >= 9:
+					basic = dataList[0] | {"reply": str(), "audio_index": str(), "from_cache": False}
+				else:
+					basic = dict(
+						dataList[0], 
+						**{
+							"reply": str(), 
+							"audio_index": str(), 
+							"from_cache": False,
+						}
+					)
 
 				backup = basic if not perms.canTimestampHist else dict(basic, **{"timestamp": time}) # Timestamped option added here
 
