@@ -7,14 +7,14 @@
 
 """ Manipulate a command and collect content dictionaries from the cache. """
 
-import random, sys
+import random, sys, os
 from datetime import datetime
 from typing import Union, Optional, Any
 from statistics import mode, StatisticsError
 
 from cache_src.history import History
 from config_src.permissions import Permissions as Perms
-from exceptions import CacheIntentError
+from exceptions import CacheIntentError, ToolKitLoadError
 from tk_src.reader import *
 from tk_src.fetcher import *
 
@@ -38,6 +38,7 @@ class CommandProcessor:
 	# If a ToolKit in the list meets the requirements, its data is collected and stored
 	# to be combined with Quinton's built-in dictionary.
 	for tk in tklist:
+		print(tk)
 		if checkRequirements(tk):
 			contents = getContent(tk)
 
@@ -56,12 +57,17 @@ class CommandProcessor:
 			#
 			keywords.append(contents[0])
 			cmpd_keywords.append(contents[1])
-			alt_keywords.append(contents[3])
+			alt_keywords.append(contents[2])
 
 			if sys.version_info.minor >= 9:
-				assets |= contents[4]
+				assets |= contents[3]
 			else:
 				assets.update(dict(assets, **contents[4]))
+		else:
+			# A ToolKit pathname is in the form `a.b.c`, where `c` is the name of the ToolKit and 
+			# `a` and `b` are likely "data" and "toolkits", respectively. In the error message, using
+			# `c` only makes more sense than `a.b.c`, so isolate `c`.
+			raise ToolKitLoadError(tk.split(".")[2])
 
 	# Recognized keywords
 	KEYWORD_LIST = [
@@ -77,12 +83,12 @@ class CommandProcessor:
 		"day",
 		"tell",
 		"get"
-	]
+	] + keywords
 
 	CMPD_KEYWORDS = [
 		"turn on",
 		"turn off"
-	]
+	] + cmpd_keywords
 
 	# Informal keywords which, in certain cases, may be used in a statement instead of 
 	# a command. Some of these alternate keywords are the same as some command-oriented 
@@ -93,7 +99,7 @@ class CommandProcessor:
 		"time",
 		"like",
 		"favorite"
-	]
+	] + alt_keywords
 
 	# Recognized question words
 	QUESTION_WORD_LIST = [
@@ -147,10 +153,16 @@ class CommandProcessor:
 	# NOTE: Future inclusion
 	# Assets that can be controlled by the voice assistant. Their proper name will
 	# be mapped to their alias, allowing the alias to be used when speaking.
-	ASSETS = {
-		"bedside-lamp": "lamp",
-		"ceiling-light": "light"
-	}
+	if sys.version_info.minor >= 9:
+		ASSETS = {
+			"bedside-lamp": "lamp",
+			"ceiling-light": "light"
+		} | assets
+	else:
+		ASSETS = dict({
+			"bedside-lamp": "lamp",
+			"ceiling-light": "light"
+		}, **assets)
 
 	ARTICLES = [
 		"the",
@@ -285,7 +297,6 @@ class CommandProcessor:
 		# dictionary.
 		commandCmpdQWords = list()
 		commandCmpdKWords = list()
-		
 
 		# Check to see if the picked up command contains any keywords related to
 		# a command
