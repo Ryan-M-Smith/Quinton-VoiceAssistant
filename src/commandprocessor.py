@@ -7,7 +7,7 @@
 
 """ Manipulate a command and collect content dictionaries from the cache. """
 
-import random
+import random, sys
 from datetime import datetime
 from typing import Union, Optional, Any
 from statistics import mode, StatisticsError
@@ -15,6 +15,8 @@ from statistics import mode, StatisticsError
 from cache_src.history import History
 from config_src.permissions import Permissions as Perms
 from exceptions import CacheIntentError
+from tk_src.reader import *
+from tk_src.fetcher import *
 
 class CommandProcessor:
 	"""
@@ -26,6 +28,40 @@ class CommandProcessor:
 	"""
 
 	histRef = History() # A way for the CommandProcessor class to access the command history
+
+	tklist = fetch() # Collect all ToolKits
+
+	# Used to store incoming ToolKit data
+	keywords = cmpd_keywords = alt_keywords = list()
+	assets = dict()
+
+	# If a ToolKit in the list meets the requirements, its data is collected and stored
+	# to be combined with Quinton's built-in dictionary.
+	for tk in tklist:
+		if checkRequirements(tk):
+			contents = getContent(tk)
+
+			#
+			# The order of the return values from `tk_src.reader.getContent` is always in the same order, so the following approach is okay.
+			#
+			# NOTE: In the future, this process may become a `for` loop where over each iteration, a string is put into the `eval` function
+			# which gets `append` called on its output.
+			#
+			# Example:
+			#	
+			#	FILEDS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"] # Left uppercase for consistancy with tk_src/reader.py; could be made lowercase.
+			#
+			# 	for i, item in enumerate(getContent(tk)):
+			# 		eval(FIELDS[i].lowercase()).append(item)
+			#
+			keywords.append(contents[0])
+			cmpd_keywords.append(contents[1])
+			alt_keywords.append(contents[3])
+
+			if sys.version_info.minor >= 9:
+				assets |= contents[4]
+			else:
+				assets.update(dict(assets, **contents[4]))
 
 	# Recognized keywords
 	KEYWORD_LIST = [
