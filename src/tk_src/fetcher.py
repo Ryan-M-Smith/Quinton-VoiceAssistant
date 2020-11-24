@@ -14,9 +14,10 @@ def fetch() -> list:
 	# For more info on blacklisting ToolKits, see `../doc/excluding-toolkits.md`.
 
 	# Get a list of all the installed ToolKits
-	TK_LIST = [tk for tk in subprocess.check_output("ls ../../data/toolkits", shell=True).decode("utf-8").strip().split("\n")]
+	filtered = filter(lambda tk: not tk.startswith("_"), subprocess.check_output("ls ../data/toolkits", shell=True).decode("utf-8").strip().split("\n"))
+	TK_LIST = [tk for tk in filtered]
 
-	EXCLUDE_FILE = Path("../../data/config/toolkit-exclude.txt") # The list of ToolKits to exclude
+	EXCLUDE_FILE = Path("../data/config/toolkit-exclude.txt") # The list of ToolKits to exclude
 
 	toolkits = list()
 
@@ -26,3 +27,5 @@ def fetch() -> list:
 				toolkits.append(f"data.toolkits.{tk.strip('.py')}")
 	
 	return toolkits
+
+#print(fetch())
