@@ -169,7 +169,7 @@ class ToolKitLoadError(Error):
 		self.reason = f"There was a problem loading the ToolKit {tkname}. Aborting."
 	
 	def __str__(self) -> str:
-		return reason
+		return self.reason
 
 class WiFiWarning(Warn):
 	""" No Wi-Fi connection. """
