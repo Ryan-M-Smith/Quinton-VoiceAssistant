@@ -5,31 +5,21 @@
 # COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
 #
 
+import sys, os
 from types import ModuleType
 from importlib import import_module
 
+sys.path.append(os.path.abspath(os.path.join("../"))) # Path is relative to `main.py`
+
 # NOTE: Temporary
-class ToolKitExistanceError(Exception):
-	""" A ToolKit failed the assertion test for `None`. """
-	reason = "The ToolKit doesn't exist"
-	code = 113
-
-class ToolKitLoadError(Exception):
-	""" There was a problem loading a toolkit. """
-
-	reason: str
-	code = 114
-
-	def __init__(self, tkname: str):
-		""" Allow the exception to take an argument. """
-		self.reason = f"There was a problem loading the ToolKit {tkname}. Aborting."
-	
-	def __str__(self) -> str:
-		return self.reason
+# class ToolKitExistanceError(Exception):
+# 	""" A ToolKit failed the assertion test for `None`. """
+# 	reason = "The ToolKit doesn't exist"
+# 	code = 113
 
 # NOTE: Uncomment this once the code is verified to work. `exceptions` can't be imported
 # from a direct run of this file.
-#from exceptions import ToolKitLoadError, ToolKitExistanceError
+from exceptions import ToolKitLoadError, ToolKitExistanceError
 
 def checkRequirements(moduleName: str) -> bool:
 	""" Checks to make sure the ToolKit has all of the required content. """
@@ -47,6 +37,9 @@ def checkRequirements(moduleName: str) -> bool:
 			print("Yes")
 		else:
 			print("No")
+			return False
+	
+	return True
 
 def getContent(moduleName: str) -> list:
 	"""
@@ -64,5 +57,5 @@ def getContent(moduleName: str) -> list:
 	return [getattr(obj, req) for req in REQUIREMENTS]
 
 
-checkRequirements("toolkit_template")
-print(*getContent("toolkit_template"))
+# checkRequirements("toolkit_template")
+# print(*getContent("toolkit_template"))
