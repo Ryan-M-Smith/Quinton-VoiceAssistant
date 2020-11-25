@@ -7,6 +7,11 @@
     * For those with 3.8, the old method is still included and is
       not being removed any time soon, so there's no need to upgrade.
 
+* **Changed**
+  * Refactored the gitignore
+    * `__pycache__` directories are now ignored
+    * Other unneeded files are also now unincluded
+
 ## v0.1.1 - Released 2020-11-10
 
 * **Added**
