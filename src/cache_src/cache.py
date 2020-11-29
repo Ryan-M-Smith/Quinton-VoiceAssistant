@@ -7,7 +7,7 @@
 
 """ Controls to directly modify Quinton's cache. """
 
-import os, pytz
+import os, pytz, re, subprocess
 from datetime import datetime
 from pathlib import Path
 
@@ -31,41 +31,11 @@ class Cache:
 		self.timezone = timezone
 		print("Timezone:", self.timezone)
 
-	# def getClearDate() -> str:
-	# 	""" Get the date that the next cache clear happens on. """
-
-	# 	MONTHS = 12
-	# 	tz = pytz.timezone(self.timezone) # Get the timezone
-
-	# 	# Get the current date
-	# 	time = datetime.now(pytz.timezone(tz.zone))
-
-	# 	dt = datetime.strptime((str(time.day) + "/" + str(time.month) + "/" + str(time.year) + " " + str(time.hour) + ":" + str(time.minute) + ":" + str(time.second)), "%d/%m/%Y %H:%M:%S")
-		
-	# 	if self.clearFrequency == "daily":
-	# 		# dt = datetime.strptime((str(time.hour) + ":" + str(time.minute) + ":" + str(time.second)), "%I:%M:%S")
-	# 		# fmt = "%I:%M:%S %p"
-
-	# 		# time_now = dt.strftime(fmt)
-
-	# 		return "12:00:00 AM"
-
-		
-	# 	month = time.month
-
-		
-
-	# 	# fmt = "%B %d" # Month and day (ex. January 01)
-	# 	# date = dt.strftime(fmt)
-	# 	# self.clearDate = (date.split()[0], int(date.split()[1])) # Split the month and day, and have the day as an integer (ex. ("January", 1))
-
-	# 	# fmt = ""
-
 	@staticmethod
 	def __clear() -> bool:
 		""" Clear Quinton's cache. Retruns true if there were no errors. """
-		success1 = os.system("rm ../data/cache/responses/*") # Clear the audio recordings
-		success2 = os.system("rm ../data/cache/history/*") # Clear the corresponding history files
+		success1 = subprocess.check_output("rm ../data/cache/responses/*", shell=True) # Clear the audio recordings
+		success2 = subprocess.check_output("rm ../data/cache/history/*", shell=True) # Clear the corresponding history files
 
 		if (success1 == 0) and (success2 == 0):
 			return True 
@@ -98,7 +68,7 @@ class Cache:
 			couldClear = self.__clear
 			
 			if couldClear:
-				self.__updateLastClear(rfromForce=force)
+				self.__updateLastClear(fromForce=force)
 			
 			return couldClear 
 
@@ -149,7 +119,7 @@ class Cache:
 				# an exhaustive list of options. The `pass` statement effectively means
 				# nothing will happen.
 				pass
-			elif self.clearFrequency == "manually": # NOTE: Manual cache clearing isn't allowed in v0.1.0 
+			elif self.clearFrequency == "manually": # NOTE: Manual cache clearing isn't currently allowed
 				couldClear = NotImplemented
 		else:
 			couldClear = self.__clear
@@ -160,25 +130,19 @@ class Cache:
 			self.__updateLastClear(r)
 
 		return couldClear
-	
-	# The following methods may be deprecated before the initial release. if they aren't, they
-	# may end up being features only for the developer version.
-	@staticmethod
-	def checkFor(audioID: str) -> bool:
-		from warnings import warn 
-		warn(DeprecationWarning)
-
-		try:
-			# Check for a certain audio ID number in the cache
-			matches = int(os.popen(f"ls ../data/cache/responses | grep -c {audioID}").read())
-		except OSError:
-			quit()
-		finally:
-			return (matches > 0)
 
 	@staticmethod
-	def get(audioID: str) -> Path:
-		from warnings import warn 
-		warn(DeprecationWarning)
+	def clean() -> int:
+		""" Clean the cache from garbage files (like a `None.wav` file when something goes wrong). """
+		COMP = "[0-9][0-9][0-9][0-9][0-9][0-9]" # A 6-digit audio index
 
-		return Path("../data/cache/responses/" + audioID + ".wav")
+		CACHE_PATH = Path("../data/cache/responses")
+
+		# NOTE: `str.partition()` could be used here, but `os`is already being used above.
+		# Syntax: `f.partition(".")[0]`
+		contents = [str(os.path.splitext(f)[0]) for f in subprocess.check_output(f"ls {str(CACHE_PATH)}", shell=True).decode("utf-8").strip().split("\n")]
+
+		# Compare the file names to the compiled pattern
+		for f in contents:
+			if not (pattern := re.compile(COMP)).fullmatch(f):
+				subprocess.Popen(f"rm {str(CACHE_PATH)}/{f}*", shell=True)

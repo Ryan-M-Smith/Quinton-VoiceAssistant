@@ -22,13 +22,15 @@ This is an abridged version of Quinton-VoiceAssistant's README. For the complete
     * [On Linux](#on-linux)
     * [On MacOS](#on-macos)
 
-3. [Software Information](#software-information)
+3. [Contributing](#contributing)
+
+4. [Software Information](#software-information)
     * [License](#license)
     * [Copyright](#copyright)
     * [Finding the Software](#finding-the-software)
     * [Reporting Bugs](#reporting-bugs)
 
-4. [Resources](#resources)
+5. [Resources](#resources)
 
 ---
 
@@ -117,6 +119,12 @@ mbrola-us2 mbrola-us3 libbz2-dev
 
 python3.8 setup.py install
 ```
+
+---
+
+## Contributing
+
+To learn more about how to contribute, see ["Contributing" in README-EXT.md](README-EXT.md#contributing)
 
 ---
 

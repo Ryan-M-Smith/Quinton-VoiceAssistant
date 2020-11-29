@@ -59,7 +59,7 @@ class VoiceAssistant:
 	# -----------------------------
 
 	# -------------------------------------------------------------------
-	# NOTE: These variables and constants are UNUSED in v0.1.0.
+	# NOTE: These variables and constants are currently unused.
 	#
 	# Data for calculating and storing Houndify credit usage information:
 	# -------------------------------------------------------------------
@@ -79,7 +79,7 @@ class VoiceAssistant:
 	mic: sr.Microphone() = None # Microphone class instance 
 	isMuted: bool
 
-	# Other class instances used to pass data into the `VoiceAsssitant` class from other
+	# Other class instances used to pass data into the `VoiceAssitant` class from other
 	# classes
 	cmdPsr = cp()
 	cfg: Config

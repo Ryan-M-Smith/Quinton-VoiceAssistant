@@ -7,7 +7,7 @@
 
 """ Manipulate a command and collect content dictionaries from the cache. """
 
-import random
+import random, sys
 from datetime import datetime
 from typing import Union, Optional, Any
 from statistics import mode, StatisticsError
@@ -206,16 +206,21 @@ class CommandProcessor:
 				# dictionary if all of the options from the cache are filtered out.
 				
 				# A basic backup - no timestamp
-				basic = dict(
-					dataList[0], 
-					**{
-						"reply": str(), 
-						"audio_index": str(), 
-						"from_cache": False,
-					}
-				)
+				if sys.version_info.minor >= 9:
+					basic = dataList[0] | {"reply": str(), "audio_index": str(), "from_cache": False}
+				else:
+					basic = dict(
+						dataList[0], 
+						**{
+							"reply": str(), 
+							"audio_index": str(), 
+							"from_cache": False,
+						}
+					)
+				
+				timestamped = (basic | {"timestamp": time}) if sys.version_info.minor >= 9 else dict(basic, **{"timestamp": time})
 
-				backup = basic if not perms.canTimestampHist else dict(basic, **{"timestamp": time}) # Timestamped option added here
+				backup = timestamped if perms.canTimestampHist else basic # Timestamped option added here
 
 				return (self.__filterIntent(dataList), backup, True)
 
