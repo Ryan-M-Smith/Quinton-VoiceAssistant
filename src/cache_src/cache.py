@@ -64,8 +64,8 @@ class Cache:
 	@staticmethod
 	def __clear() -> bool:
 		""" Clear Quinton's cache. Retruns true if there were no errors. """
-		success1 = os.system("rm ../data/cache/responses/*") # Clear the audio recordings
-		success2 = os.system("rm ../data/cache/history/*") # Clear the corresponding history files
+		success1 = subprocess.check_output("rm ../data/cache/responses/*", shell=True) # Clear the audio recordings
+		success2 = subprocess.check_output("rm ../data/cache/history/*", shell=True) # Clear the corresponding history files
 
 		if (success1 == 0) and (success2 == 0):
 			return True 
@@ -98,7 +98,7 @@ class Cache:
 			couldClear = self.__clear
 			
 			if couldClear:
-				self.__updateLastClear(rfromForce=force)
+				self.__updateLastClear(fromForce=force)
 			
 			return couldClear 
 
@@ -176,29 +176,3 @@ class Cache:
 		for f in contents:
 			if not (pattern := re.compile(COMP)).fullmatch(f):
 				subprocess.Popen(f"rm {str(CACHE_PATH)}/{f}*", shell=True)
-
-	
-	# The following methods may be deprecated before the initial release. if they aren't, they
-	# may end up being features only for the developer version.
-	@staticmethod
-	def checkFor(audioID: str) -> bool:
-		from warnings import warn 
-		warn(DeprecationWarning)
-
-		try:
-			# Check for a certain audio ID number in the cache
-			matches = int(os.popen(f"ls ../data/cache/responses | grep -c {audioID}").read())
-		except OSError:
-			quit()
-		finally:
-			return (matches > 0)
-
-	@staticmethod
-	def get(audioID: str) -> Path:
-		from warnings import warn 
-		warn(DeprecationWarning)
-
-		return Path("../data/cache/responses/" + audioID + ".wav")
-
-cache = Cache(None, None)
-cache.clean()
