@@ -31,36 +31,6 @@ class Cache:
 		self.timezone = timezone
 		print("Timezone:", self.timezone)
 
-	# def getClearDate() -> str:
-	# 	""" Get the date that the next cache clear happens on. """
-
-	# 	MONTHS = 12
-	# 	tz = pytz.timezone(self.timezone) # Get the timezone
-
-	# 	# Get the current date
-	# 	time = datetime.now(pytz.timezone(tz.zone))
-
-	# 	dt = datetime.strptime((str(time.day) + "/" + str(time.month) + "/" + str(time.year) + " " + str(time.hour) + ":" + str(time.minute) + ":" + str(time.second)), "%d/%m/%Y %H:%M:%S")
-		
-	# 	if self.clearFrequency == "daily":
-	# 		# dt = datetime.strptime((str(time.hour) + ":" + str(time.minute) + ":" + str(time.second)), "%I:%M:%S")
-	# 		# fmt = "%I:%M:%S %p"
-
-	# 		# time_now = dt.strftime(fmt)
-
-	# 		return "12:00:00 AM"
-
-		
-	# 	month = time.month
-
-		
-
-	# 	# fmt = "%B %d" # Month and day (ex. January 01)
-	# 	# date = dt.strftime(fmt)
-	# 	# self.clearDate = (date.split()[0], int(date.split()[1])) # Split the month and day, and have the day as an integer (ex. ("January", 1))
-
-	# 	# fmt = ""
-
 	@staticmethod
 	def __clear() -> bool:
 		""" Clear Quinton's cache. Retruns true if there were no errors. """
