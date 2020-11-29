@@ -19,10 +19,17 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
     * Other unneeded files are also now ignored (like `/data/config/config.test.py`)
   * Some calls to `os.system` have been changed to `subprocess.Popen`
     * This migration will continue, because I feel that the software should use the newer functionality.
-      Also, this may remove the need to use the `os` libary in some files where `os.system` is the only
+      Also, this may remove the need to use the `os` library in some files where `os.system` is the only
       way the module is being used.
   * Changelog entries are now organized by order of importance under their respective headings
     * For example, the most important addition to the software is at the top of the **Added** section.
+  * Updated [README-EXT.md](README-EXT.md)
+    * The "Developing for Quinton" section has been renamed to "Contributing"
+    * A new "Future Inclusions" section has been added
+    * The "Different Versions" section has now been moved to "Future Inclusions" and it is now clearly
+      stated that this is a concept and not something included.
+  * Updated [README.md](README.md)
+    * Add a "Contributing" section that refers viewers to `README-EXT.md`
   * Some extra, unused functions that were in `cache_src/cache.py` are now in `cache_src/cache_extras.py`.
   * Clarified and rewrote some comments
 
