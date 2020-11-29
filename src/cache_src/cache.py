@@ -7,7 +7,7 @@
 
 """ Controls to directly modify Quinton's cache. """
 
-import os, pytz
+import os, pytz, re, subprocess
 from datetime import datetime
 from pathlib import Path
 
@@ -149,7 +149,7 @@ class Cache:
 				# an exhaustive list of options. The `pass` statement effectively means
 				# nothing will happen.
 				pass
-			elif self.clearFrequency == "manually": # NOTE: Manual cache clearing isn't allowed in v0.1.0 
+			elif self.clearFrequency == "manually": # NOTE: Manual cache clearing isn't currently allowed
 				couldClear = NotImplemented
 		else:
 			couldClear = self.__clear
@@ -160,6 +160,23 @@ class Cache:
 			self.__updateLastClear(r)
 
 		return couldClear
+
+	@staticmethod
+	def clean() -> int:
+		""" Clean the cache from garbage files (like a `None.wav` file when something goes wrong). """
+		COMP = "[0-9][0-9][0-9][0-9][0-9][0-9]" # A 6-digit audio index
+
+		CACHE_PATH = Path("../data/cache/responses")
+
+		# NOTE: `str.partition()` could be used here, but `os`is already being used above.
+		# Syntax: `f.partition(".")[0]`
+		contents = [str(os.path.splitext(f)[0]) for f in subprocess.check_output(f"ls {str(CACHE_PATH)}", shell=True).decode("utf-8").strip().split("\n")]
+
+		# Compare the file names to the compiled pattern
+		for f in contents:
+			if not (pattern := re.compile(COMP)).fullmatch(f):
+				subprocess.Popen(f"rm {str(CACHE_PATH)}/{f}*", shell=True)
+
 	
 	# The following methods may be deprecated before the initial release. if they aren't, they
 	# may end up being features only for the developer version.
@@ -182,3 +199,6 @@ class Cache:
 		warn(DeprecationWarning)
 
 		return Path("../data/cache/responses/" + audioID + ".wav")
+
+cache = Cache(None, None)
+cache.clean()

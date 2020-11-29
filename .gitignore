@@ -1,6 +1,8 @@
 /.vscode
 /releases
 
+build.sh
+
 # Ignore a test configuration file
 /data/config/config.test.yaml
 
