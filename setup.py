@@ -23,6 +23,12 @@ setuptools.setup(
 	long_description=long_description, # The README
 	long_description_content_type="text/markdown",
 	url="https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant",
+	
+	# This web address directly downloads a zip archive of the project's master branch from GitHub.
+	# If you want more download options or wish to clone the repository, see the `url` parameter
+	# above or use `python3.8 setup.py --url`.
+	download_url="https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/archive/master.zip",
+	
 	packages=setuptools.find_packages(),
 	license='GNU GPLv3+',
 	platforms=["MacOS", "Linux"],
@@ -32,7 +38,7 @@ setuptools.setup(
 		"Intended Audience :: End Users/Desktop",
 		"License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
 		"Topic :: Home Automation",
-		"Programming language :: Python :: 3 :: Only"
+		"Programming language :: Python :: 3 :: Only",
 		"Programming Language :: Python :: 3.8",
 		"Programming Language :: Python :: 3.9",
 		"Programming Language :: Python :: 3.10",

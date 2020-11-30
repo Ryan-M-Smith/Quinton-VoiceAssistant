@@ -7,7 +7,6 @@
 ## Table of Contents
 
 1. [Basic Information](#basic-information)
-    * [Different Versions](#different-versions)
     * [About the Name](#about-the-name)
     * [Features and Limitations](#features-and-limitations)
         * [Features](#features)
@@ -38,28 +37,23 @@
     * [On Linux](#on-linux)
     * [On MacOS](#on-macos)
 
-5. [Developing for Quinton](#developing-for-quinton)
-    * [Code Modifications](#code-modifications)
+5. [Future Inclusions](#future-inclusions)
+    * [Different Versions](#different-versions)
     * [ToolKits](#toolkits)
 
-6. [Software Information](#software-information)
+6. [Contributing](#contributing)
+    * [Code Modifications](#code-modifications)
+    * [Creating ToolKits](#creating-toolkits)
+
+7. [Software Information](#software-information)
     * [License](#license)
     * [Copyright](#copyright)
     * [Finding the Software](#finding-the-software)
     * [Reporting Bugs](#reporting-bugs)
 
-7. [Resources](#resources)
+8. [Resources](#resources)
 
-## Basic Information
-
-### Different versions
-
-There are a few different versions of Quinton-VoiceAssistant. The one you are looking at right now is the regular version,
-which is meant to be used like a normal voice assistant. In addition, there is a CLI version (Quinton-CLI) which works without
-a microphone or an audio output device (speakers, headphones, etc.), and a dedicated developer version (Quinton-VA-Dev) which contains
-libraries and templates for developing Quinton ToolKits.
-
-For reference, I will refer to all of these as "versions" and any numbered version (e.g., Quinton-VoiceAssistant-0.1.0) as a "release".  
+## Basic Information  
 
 ### About the Name
 
@@ -313,11 +307,18 @@ python3.8 setup.py install
 
 ---
 
-## Developing for Quinton
+## Future Inclusions
 
-### Code Modifications
+### Different versions
 
-Feel free to hack Quinton-VoiceAssistant. Just abide by the rules in the [license](#license).
+In the future, my hope is that there would be  a few different versions of Quinton-VoiceAssistant. The one you have downloaded right now
+would be the regular version, which would be used like a normal voice assistant. In addition, there would be a CLI version (Quinton-CLI)
+which would work without a microphone or an audio output device (speakers, headphones, etc.), and a dedicated developer version (Quinton-VA-Dev)
+which would contain templates for developing Quinton ToolKits.
+
+These alternate versions are still waiting to be worked on and don't have set release dates. As of now, Quinton-CLI is very likely to be
+eventually released, and Quinton-VA-Dev is still largely conceptual due to the fact that I am currently integrating ToolKits _and_ their
+development templates into Quinton-VoiceAssistant (not partially into Quinton-VoiceAssistant and partially into Quinton-VA-Dev).
 
 ### ToolKits
 
@@ -333,6 +334,19 @@ Quinton ToolKits and want to read about the current working ideas for the featur
 
 My hope is that this feature will be available by Quinton-VoiceAssistant release 1.0.0, and software betas including
 experimental versions of the functionality will be released prior to that.
+
+---
+
+## Contributing
+
+### Code Modifications
+
+Feel free to modify Quinton-VoiceAssistant. Just abide by the rules in the [license](#license).
+
+### Creating ToolKits
+
+Once the ToolKit feature is released, users will (hopefully) be able to build their own ToolKits to expand Quinton's
+capabilities. This will be another way users/outsiders can contribute to the project.
 
 ---
 
