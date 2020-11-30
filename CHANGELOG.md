@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased (Expected v0.2.0)
+## v0.2.0 - Released 2020-11-29
 
 * **Added**
   * The cache is now scanned for leftover files and they are deleted (e.g., `None.wav` when something fails)
