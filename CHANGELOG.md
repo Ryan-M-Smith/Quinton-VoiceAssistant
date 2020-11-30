@@ -1,10 +1,11 @@
 # Quinton-VoiceAssistant Changelog
 
+This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
+
 ## Unreleased (Expected v1.0.0)
 
 * **Added**
   * Add support for ToolKits
-This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
 ## v0.2.0 - Released 2020-11-29
 
