@@ -22,10 +22,12 @@ def checkFor(audioID: str) -> bool:
 	"""
 
 	matches = int()
+	
+	RESPONSE_PATH = Path(../data/cache/responses) # A path relative to `main.py`
 
 	try:
 		# Check for a certain audio ID number in the cache
-		matches = int(subprocess.check_output(f"ls ../../data/cache/responses | grep -c {audioID}", shell=True).decode("utf-8"))
+		matches = int(subprocess.check_output(f"ls {RESPONSE_PATH} | grep -c {audioID}", shell=True).decode("utf-8"))
 	except Exception: # Something went wrong
 		quit()
 	finally:
@@ -33,7 +35,7 @@ def checkFor(audioID: str) -> bool:
 
 def get(audioID: str) -> Optional[Path]:
 	"""
-		Get the path of a perticular audio recording from the cache.
+		Get the path of a particular audio recording from the cache.
 
 		Return the path to the file (as a `pathlib.Path` object) if the file exists, otherwise return `None`.
 	"""
