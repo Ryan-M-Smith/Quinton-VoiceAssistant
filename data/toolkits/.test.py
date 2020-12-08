@@ -1,2 +1,1 @@
-def func():
-	print("Hello")
+
