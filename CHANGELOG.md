@@ -8,6 +8,11 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * `cache_extras.py` now uses `pathlib` for file paths instead of paths in strings 
   * Removed some horizontal lines (`---`) from the README files
 
+* **Fixed**
+  * All data storage files are now empty
+    * Some of them previously contained data from testing; this would not break the software,
+      but I thought it would be nice to clear them out.
+
 ## v0.2.0 - Released 2020-11-29
 
 * **Added**
