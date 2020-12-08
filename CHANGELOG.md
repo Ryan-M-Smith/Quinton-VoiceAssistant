@@ -2,6 +2,12 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## Unreleased - v0.2.1
+
+* **Changed**
+  * `cache_extras.py` now uses `pathlib` for file paths instead of paths in strings 
+  * Removed some horizontal lines (`---`) from the README files
+
 ## v0.2.0 - Released 2020-11-29
 
 * **Added**
@@ -29,7 +35,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
     * The "Different Versions" section has now been moved to "Future Inclusions" and it is now clearly
       stated that this is a concept and not something included.
   * Updated [README.md](README.md)
-    * Add a "Contributing" section that refers viewers to `README-EXT.md`
+    * Added a "Contributing" section that refers viewers to `README-EXT.md`
   * Some extra, unused functions that were in `cache_src/cache.py` are now in `cache_src/cache_extras.py`.
   * Clarified and rewrote some comments
 
