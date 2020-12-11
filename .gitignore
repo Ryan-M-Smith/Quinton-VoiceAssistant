@@ -26,3 +26,8 @@ __pycache__/
 /audio/.originals
 /my_stuff
 /doc/reading-config.md
+
+# Ignore packager files
+poetry.lock
+pyproject.toml
+.replit
