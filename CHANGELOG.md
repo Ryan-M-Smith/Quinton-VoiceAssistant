@@ -21,7 +21,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * The ability for the software to utilize the dictionary merge operators (`|`/`|=`) in Python 3.9
     * For those with 3.8, the old ditionary combination method is still being used in the
       code and is not being removed any time soon, so there's no need to upgrade.
-  * Add a reference to the changelog format I use (see above)
+  * Add a reference to the changelog format I use [(see above)](#quinton-voiceassistant-changelog)
   * Add a download URL in the `setup.py` file
 
 * **Changed**
