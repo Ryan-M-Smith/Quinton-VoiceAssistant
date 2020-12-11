@@ -66,3 +66,9 @@ class Permissions:
 			self.canTimestampHist,
 			self.canUseLocation
 		]
+
+cfg = Config()
+cfg.setFromConfig()
+
+perms = Permissions(cfg)
+print(perms.getPerms())
