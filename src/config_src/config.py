@@ -12,7 +12,7 @@
 		* Loading portions of Quinton's memory
 """
 
-import yaml, os, subprocess
+import yaml, subprocess
 
 from exceptions import (
 	ConfigFileWarning,
