@@ -699,18 +699,16 @@ class VoiceAssistant:
 			"I'm unable to do that"
 		]
 
-		if commandID == 0:
-				pass
-		elif commandID == 1:
-			usable_replies = [2, 3, 5]
-		elif commandID == 2:
-			usable_replies = [2, 3, 7]
-		elif commandID == 3:
-			usable_replies = [4]
-		elif commandID == 4:
-			usable_replies = [0]
-		elif commandID == 5:
-			usable_replies = [6, 8]
+		USABLE_REPLIES = {
+			0: None,
+			1: [2, 3, 5],
+			2: [2, 3, 7],
+			3: [4],
+			4: [0],
+			5: [6, 8]
+		}
+
+		usable_replies = USABLE_REPLIES.get(commandID)
 
 		# Make sure all timestamps are up to date
 		try:
@@ -726,7 +724,7 @@ class VoiceAssistant:
 		except TypeError:
 			raise TimestampError	
 
-		if (response is None) and (usable_replies == list()):
+		if response is usable_replies is None:
 			if sys.version_info.minor > 8:
 					random.seed()
 			else:
