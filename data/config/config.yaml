@@ -34,6 +34,7 @@
 #   * While the config uses `true` and `false` by default to represent boolean values, feel free to use 
 #     `yes`/`no` or `y`/`n` if you prefer.
 #
+
 ---
 # Document 1: User preferences. All of these can be safely edited without
 # messing up Quinton's ability to run.
@@ -76,7 +77,7 @@ speaker_vol: 100 # The speaker volume. This is how loud you will hear Quinton's 
 mic_vol: 50 # The microphone volume. This is how loud you will hear Quinton's voice. Scale: 0 (Min/Muted) - 100 (Max)
 
 pause: 0.2 # The length of time Quinton waits before returning to listening mode (after giving a reply).
-###
+
 ---
 #
 # Document 2: Log preferences. Modifying one of these without knowing what it does
@@ -87,7 +88,7 @@ pause: 0.2 # The length of time Quinton waits before returning to listening mode
 #   * You should also look at setting the cache clear frequency.
 #   * Changing any settings under `log_pref` will do NOTHING.
 #
-log_data: true # Select from: `true` (default), `false`, or `"custom"` (quotes are required, backticks aren't)
+log_data: "custom" # Select from: `true` (default), `false`, or `"custom"` (quotes are required, backticks aren't)
 
 clear_frequency: "annually" # Select from: "daily", "weekly", "monthly", "annually" (default), "never"
 
@@ -98,7 +99,7 @@ log_pref:
   history:
     # Setting either or both of these to `false` will mean that there is no command cache and previously 
     # spoken commands will not be replied to as quickly.
-    record_command_history: true
+    record_command_history: false
     archive_audio_commands: true
     
     timestamp_history: true # If either of the above variables are `false`, this isn't used.
@@ -106,7 +107,7 @@ log_pref:
   # [FUTURE INCLUSION] Allow data to be graphed and usage to be monitored. Do not edit this variable;
   # it currently does nothing.
   #allow_usage_monitoring: true
-###
+
 ---
 #
 # Document 3: Voice preferences. Modifying these manipulate the way Quinton sounds to the user.
