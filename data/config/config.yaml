@@ -99,7 +99,7 @@ log_pref:
   history:
     # Setting either or both of these to `false` will mean that there is no command cache and previously 
     # spoken commands will not be replied to as quickly.
-    record_command_history: false
+    record_command_history: true
     archive_audio_commands: true
     
     timestamp_history: true # If either of the above variables are `false`, this isn't used.
