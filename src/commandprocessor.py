@@ -43,14 +43,14 @@ class CommandProcessor:
 			contents = getContent(tk)
 
 			#
-			# The order of the return values from `tk_src.reader.getContent` is always in the same order, so the following approach is okay.
+			# The order of the return values from `tk_src.reader.getContent` is always in the same order, so the current approach is okay.
 			#
 			# NOTE: In the future, this process may become a `for` loop where over each iteration, a string is put into the `eval` function
 			# which gets `append` called on its output.
 			#
 			# Example:
 			#	
-			#	FILEDS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"] # Left uppercase for consistancy with tk_src/reader.py; could be made lowercase.
+			#	FILEDS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"] # Left uppercase for consistancy with `tk_src/reader.py`; could be made lowercase.
 			#
 			# 	for i, item in enumerate(getContent(tk)):
 			# 		eval(FIELDS[i].lowercase()).append(item)
@@ -62,7 +62,7 @@ class CommandProcessor:
 			if sys.version_info.minor >= 9:
 				assets |= contents[3]
 			else:
-				assets.update(dict(assets, **contents[4]))
+				assets.update(dict(assets, **contents[3]))
 		else:
 			# A ToolKit pathname is in the form `a.b.c`, where `c` is the name of the ToolKit and 
 			# `a` and `b` are likely "data" and "toolkits", respectively. In the error message, using
@@ -537,7 +537,7 @@ class CommandProcessor:
 			subject = "unknown"
 		else:
 			if intent == "command":
-				subject == "you"
+				subject = "you"
 
 		# Change the subject to be from the computer's point of view
 		if intent != "unknown":
