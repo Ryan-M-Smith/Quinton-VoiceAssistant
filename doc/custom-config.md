@@ -19,13 +19,21 @@ modify that setting, but you can add them yourself by following the steps below.
 3. Find the best YAML document to put your new entry
 
     &nbsp;&nbsp;&nbsp;&nbsp;I've put all variables pertaining to Espeak
-    settings in document 3 (beginning on line 102), so you can put yours
+    settings in document 3 (beginning on line 110), so you can put yours
     there. If you prefer, you could even make a new document for your custom
     configuration entries (especially if you plan to make a lot of them).
 
     &nbsp;&nbsp;&nbsp;&nbsp;To make a new document, make a new line after the
     last line and type `---`. Anything under this divider is considered the fourth
     document in the file.
+
+    &nbsp;&nbsp;&nbsp;&nbsp;Example:
+
+    ```yaml
+      # Previous pairs
+      --- # New document
+      # Subsequent pairs
+    ```
 
 4. Add the new entry
 
