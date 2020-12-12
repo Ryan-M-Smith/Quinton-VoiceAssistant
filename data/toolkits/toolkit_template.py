@@ -79,8 +79,8 @@ class ToolKit:
 				if sys.version_info.minor > 8:
 					random.seed()
 				else:
-					# You don't have to seed with pytz; I just decided to. `None` or some other
-					# date
+					# You don't have to seed with `pytz`; I just decided to. `None` or some other
+					# method will work just as well.
 					random.seed(datetime.now(tz=pytz.timezone(self.cfg.timezone)))
 			except pytz.exceptions.UnknownTimeZoneError:
 				pass # Do whatever you want here; VoiceAssistant.reply() raises a custom exception.
@@ -115,6 +115,6 @@ class ToolKit:
 	# THIS IS WHERE YOUR CODE GOES.
 	#
 	# Here, you will write the logic for filtering your custom commands using your custom-defined keywords.
-	# For ideas on what your logic could look like, feel free to borrow from voiceassistant.py in the `src`
+	# For ideas on what your logic could look like, feel free to borrow from `voiceassistant.py` in the `src`
 	# directory.
 	#
