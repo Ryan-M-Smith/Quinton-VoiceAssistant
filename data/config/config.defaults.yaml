@@ -3,8 +3,8 @@
 # Feel free to modify at your own risk. If you are interested in adding custom config
 # variables, please read `../doc/custom-config.md`.
 #
-# If you make a detrimental mistake that you can't reverse...you may have to reinstall
-# the software.
+# If you make a detrimental mistake that you can't reverse in THIS file...you may have 
+# to reinstall the software.
 #
 # Notes about editing:
 #   * Note that tabs (4 spaces) ARE NOT allowed in YAML! Please use 2 spaces for any indentation.
