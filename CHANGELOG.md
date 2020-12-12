@@ -2,14 +2,18 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased - v0.2.1
+## Unreleased (Expected v0.2.1)
 
 * **Changed**
-  * `cache_extras.py` now uses `pathlib` for file paths instead of paths in strings 
-  * Removed some horizontal lines (`---`) from the README files
+  * `cache_extras.py` now uses `pathlib` for file paths instead of paths in strings
+  * The YAML configuration files now have whitespace and are more readable
+  * Removed some horizontal lines (`---`) from the README files so they'll look nicer when rendered
   * Clarified some changelog entries
+  * Proofread and enchanced some documentation
 
 * **Fixed**
+  * Permissions now work correctly
+    * When you disable something (like audio recording), it is actually diabled
   * All data storage files are now empty
     * Some of them previously contained data from testing; this would not break the software,
       but I thought it would be nice to clear them out.
@@ -49,7 +53,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Added**
   * A new, shorter, easier to read README
-  * The `setup.py` file now gets the software's version number from `version.txt` (meaning it's no longer hard-coded)
+  * The `setup.py` file now gets the software's version number from `version.txt` (meaning it's no longer hardcoded)
 
 * **Changed**
   * The old README is now `README-EXT.md`
