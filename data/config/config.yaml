@@ -7,8 +7,7 @@
 # to the default configuration in this directory - `config.defaults.yaml`.
 #
 # Notes about editing:
-#   * Note that tabs (4 spaces) ARE NOT allowed in YAML (except for in comments)! Please use 
-#     2 spaces for any indentation.
+#   * Note that tabs (4 spaces) ARE NOT allowed in YAML! Please use 2 spaces for any indentation.
 #
 #   * All variable values are non-case-sensitive unless otherwise stated.
 #
@@ -30,25 +29,29 @@
 #
 #   * Please, don't pad strings with spaces. This WILL mess up Quinton's ability to run. For example,
 #     adding a space to the value of the `country` variable will cause all requests regarding weather 
-#     to fail 
+#     to fail
+#
+#   * While the config uses `true` and `false` by default to represent boolean values, feel free to use 
+#     `yes`/`no` or `y`/`n` if you prefer.
 #
 ---
 # Document 1: User preferences. All of these can be safely edited without
 # messing up Quinton's ability to run.
-#
+
 username: "user" # Your name here
 wake_word: "Hey Quinton"
 units: "imperial" # "imperial" (default) or "metric"
-#
+
 # Set this to your timezone. Any timezone will work, as long as you use the correct code. For more
 # information, please see `../doc/locale.md`. The code must be typed EXACTLY as it as listed in the 
 # reference.
 timezone: "America/New_York"
-#
+
 # If you want Quinton to know and use your location, set `use_location` to `true`.
 # If you don't, set it to `false`. NOTE: With the variable set to `false`, NONE of Quinton's
 # weather functionality works.
-use_location: true # `true` (default) or `false`;
+use_location: true # `true` (default) or `false`
+
 location_pref: # If `use_location` is `false`, you can don't have to set these
   city: "Ellicott City" # Use your city name; CASE SENSITIVE
   country: "US" # Must be a two-character ISO 3166 country code; CASE AND LENGTH SENSITIVE (see `../doc/locale.md`)
@@ -56,10 +59,11 @@ location_pref: # If `use_location` is `false`, you can don't have to set these
 # The length of time in seconds Quinton waits for a command after hearing its wake word. If this 
 # amount of time elapses and there is no speech, Quinton moves back into listening mode.
 timeout: 4
+
 # The length of time in seconds Quinton waits for a command to finish after it has been started. If this 
 # amount of time elapses, Quinton will detect everything that was picked up.
 time_limit: 6
-#
+
 # To detect its wake word, Quinton listens for 3 seconds at a time before parsing the audio data to
 # check if the wake word/phrase was uttered. However, that 3-second interval can be changed. A lower
 # value will cause Quinton to check more often, thus resulting in a faster response, but you may have 
@@ -67,10 +71,10 @@ time_limit: 6
 # running, but as of now, Quinton will have to continue to record for the duration of this value before
 # the audio data can be parsed. This means potentially longer response times.
 ww_detect_time: 3
-#
+
 speaker_vol: 100 # The speaker volume. This is how loud you will hear Quinton's voice. Scale: 0 (Min/Muted) - 100 (Max)
 mic_vol: 50 # The microphone volume. This is how loud you will hear Quinton's voice. Scale: 0 (Min/Muted) - 100 (Max)
-#
+
 pause: 0.2 # The length of time Quinton waits before returning to listening mode (after giving a reply).
 ###
 ---
@@ -78,12 +82,15 @@ pause: 0.2 # The length of time Quinton waits before returning to listening mode
 # Document 2: Log preferences. Modifying one of these without knowing what it does
 # may cause Quinton to malfunction, but not terribly. If you are just looking for a
 # way to disable all data logging, set `log-data` to `false` and you can safely move on.
-# NOTE: If `log_data` is `true`, you should also look at setting the cache clear frequency.
-# If it isn't
+#
+# NOTE: If `log_data` is `true`:
+#   * You should also look at setting the cache clear frequency.
+#   * Changing any settings under `log_pref` will do NOTHING.
 #
 log_data: true # Select from: `true` (default), `false`, or `"custom"` (quotes are required, backticks aren't)
+
 clear_frequency: "annually" # Select from: "daily", "weekly", "monthly", "annually" (default), "never"
-#
+
 # The info in this dictionary is only used  if `log-data` is set to "custom". If you have 
 # `log-data` set to "custom", please set the following to `true` or `false` (unless otherwise 
 # specified).
@@ -93,8 +100,9 @@ log_pref:
     # spoken commands will not be replied to as quickly.
     record_command_history: true
     archive_audio_commands: true
-    #
-    timestamp_history: true # If either of the above variables are `false`, this isn't used. 
+    
+    timestamp_history: true # If either of the above variables are `false`, this isn't used.
+
   # [FUTURE INCLUSION] Allow data to be graphed and usage to be monitored. Do not edit this variable;
   # it currently does nothing.
   #allow_usage_monitoring: true
@@ -107,9 +115,9 @@ log_pref:
 # NOTE FOR EDITING: Mbrola voices can be used instead of the builtins. For more information on Quinton's voice, 
 # how to change it, and how/where to find a complete list, please see the Espeak man page (`man espeak`) or
 # `../doc/voices.md` (Quinton documentation). Unless otherwise noted, all parameters here come set to Espeak's defaults.
-#
+
 voice: "en-us+m1" # See `../doc/voices.md` for different options and more information. This is the voice I picked; Espeak's default is called "default".
-#
+
 # The speech speed can be more than this, but it is not recommended that the level exceed 500.
 speed: 160 # Espeak's defaults have this value at 100. For the voice I've picked, I think this sounds better.
 pitch: 50 # Voice pitch, from 0 to 99.
