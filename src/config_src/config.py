@@ -13,6 +13,7 @@
 """
 
 import yaml, subprocess
+from typing import Union
 
 from exceptions import (
 	ConfigFileWarning,
@@ -52,7 +53,7 @@ class Config:
 	mic_vol: int
 	pause: float
 	
-	log_data: bool
+	log_data: Union[bool, str]
 	clear_frequency = str()
 	archive_audio_commands: bool
 	record_command_history: bool
