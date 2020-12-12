@@ -5,6 +5,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 ## Unreleased (Expected v0.2.1)
 
 * **Changed**
+  * Usable replies are now found using dictionary lookup instead of an `if`-`elif` block
   * `cache_extras.py` now uses `pathlib` for file paths instead of paths in strings
   * The YAML configuration files now have whitespace and are more readable
   * Removed some horizontal lines (`---`) from the README files so they'll look nicer when rendered
