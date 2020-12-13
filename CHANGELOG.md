@@ -7,6 +7,8 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 * **Changed**
   * Usable replies are now found using dictionary lookup instead of an `if`-`elif` block
   * `cache_extras.py` now uses `pathlib` for file paths instead of paths in strings
+  * `subprocess.call` is now used ubiquitously over `subprocess.Popen`
+    * In addition, the remaining calls to `os.system` have been replaced with `subprocess.call`
   * The YAML configuration files now have whitespace and are more readable
   * Removed some horizontal lines (`---`) from the README files so they'll look nicer when rendered
   * Clarified some changelog entries
@@ -34,7 +36,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
     * Readability is improved
     * `__pycache__` directories are now ignored
     * Other unneeded files are also now ignored (like `/data/config/config.test.py`)
-  * Some calls to `os.system` have been changed to `subprocess.Popen`
+  * Some calls to `os.system` have been changed to either `subprocess.Popen` or `subprocess.call`
     * This migration will continue, because I feel that the software should use the newer functionality.
       Also, this may remove the need to use the `os` library in some files where `os.system` is the only
       way the module is being used.
