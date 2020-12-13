@@ -737,7 +737,7 @@ class VoiceAssistant:
 			# If there are multiple replies for the query's command ID, pick a random one.
 			# Otherwise, just use the one that's there. This way, `random.choice()`
 			# doesn't waste time picking from only one reply template.
-			if ((dCommandInfo == commandInfo) or (usingBackup)) and (not usingCache):
+			if ((dCommandInfo == commandInfo) or usingBackup) and (not usingCache):
 				if sys.version_info.minor > 8:
 					random.seed()
 				else:
