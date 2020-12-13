@@ -2,14 +2,33 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## Unreleased (Expected v0.2.1)
+
+* **Changed**
+  * Usable replies are now found using dictionary lookup instead of an `if`-`elif` block
+  * `cache_extras.py` now uses `pathlib` for file paths instead of paths in strings
+  * `subprocess.call` is now used ubiquitously over `subprocess.Popen`
+    * In addition, the remaining calls to `os.system` have been replaced with `subprocess.call`
+  * The YAML configuration files now have whitespace and are more readable
+  * Removed some horizontal lines (`---`) from the README files so they'll look nicer when rendered
+  * Clarified some changelog entries
+  * Proofread and enchanced some documentation
+
+* **Fixed**
+  * Permissions now work correctly
+    * When you disable something (like audio recording), it is actually diabled
+  * All data storage files are now empty
+    * Some of them previously contained data from testing; this would not break the software,
+      but I thought it would be nice to clear them out.
+
 ## v0.2.0 - Released 2020-11-29
 
 * **Added**
   * The cache is now scanned for leftover files and they are deleted (e.g., `None.wav` when something fails)
-  * The ability for the software to utilize the dictionary merge operator (`|`/`|=`) in Python 3.9
-    * For those with 3.8, the old method is still included and is
-      not being removed any time soon, so there's no need to upgrade.
-  * Add a reference to the changelog format I use (see above)
+  * The ability for the software to utilize the dictionary merge operators (`|`/`|=`) in Python 3.9
+    * For those with 3.8, the old ditionary combination method is still being used in the
+      code and is not being removed any time soon, so there's no need to upgrade.
+  * Add a reference to the changelog format I use [(see above)](#quinton-voiceassistant-changelog)
   * Add a download URL in the `setup.py` file
 
 * **Changed**
@@ -17,7 +36,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
     * Readability is improved
     * `__pycache__` directories are now ignored
     * Other unneeded files are also now ignored (like `/data/config/config.test.py`)
-  * Some calls to `os.system` have been changed to `subprocess.Popen`
+  * Some calls to `os.system` have been changed to either `subprocess.Popen` or `subprocess.call`
     * This migration will continue, because I feel that the software should use the newer functionality.
       Also, this may remove the need to use the `os` library in some files where `os.system` is the only
       way the module is being used.
@@ -29,7 +48,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
     * The "Different Versions" section has now been moved to "Future Inclusions" and it is now clearly
       stated that this is a concept and not something included.
   * Updated [README.md](README.md)
-    * Add a "Contributing" section that refers viewers to `README-EXT.md`
+    * Added a "Contributing" section that refers viewers to `README-EXT.md`
   * Some extra, unused functions that were in `cache_src/cache.py` are now in `cache_src/cache_extras.py`.
   * Clarified and rewrote some comments
 
@@ -37,7 +56,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Added**
   * A new, shorter, easier to read README
-  * The `setup.py` file now gets the software's version number from `version.txt` (meaning it's no longer hard-coded)
+  * The `setup.py` file now gets the software's version number from `version.txt` (meaning it's no longer hardcoded)
 
 * **Changed**
   * The old README is now `README-EXT.md`
