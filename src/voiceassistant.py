@@ -790,7 +790,7 @@ class VoiceAssistant:
 		AUDIO_PATH = Path("../data/cache/responses/" + str(audioID) + ".wav")
 		DATA_PATH = Path("../data/tmp/data.txt")
 
-		subprocess.run(f"touch {str(AUDIO_PATH)}", shell=True) # Create a path for the recording
+		subprocess.call(f"touch {str(AUDIO_PATH)}", shell=True) # Create a path for the recording
 		
 		with open("../data/tmp/data.txt", "w") as data:
 			data.write(text)
