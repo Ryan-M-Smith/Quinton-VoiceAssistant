@@ -145,4 +145,4 @@ class Cache:
 		# Compare the file names to the compiled pattern
 		for f in contents:
 			if not (pattern := re.compile(COMP)).fullmatch(f):
-				subprocess.Popen(f"rm {str(CACHE_PATH)}/{f}*", shell=True)
+				subprocess.call(f"rm {str(CACHE_PATH)}/{f}*", shell=True)
