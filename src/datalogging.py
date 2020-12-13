@@ -17,7 +17,7 @@
 	spoken before Quinton's main functionality executes.
 """
 
-import os, subprocess, json
+import subprocess, json
 from pathlib import Path
 from time import sleep
 from tinytag import TinyTag
@@ -47,7 +47,7 @@ def speak(text: str, *, cfg: Config) -> bool:
 	AUDIO_PATH = Path("../data/tmp/logspeech.wav")
 	DATA_PATH = Path("../data/tmp/data.txt")
 
-	os.system(f"touch {str(AUDIO_PATH)}") # Create a path for the recording
+	subprocess.run(f"touch {str(AUDIO_PATH)}") # Create a path for the recording
 	
 	with open("../data/tmp/data.txt", "w") as data:
 		data.write(text)

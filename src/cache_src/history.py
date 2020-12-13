@@ -86,7 +86,7 @@ class History:
 							idList.append(hdict.get("audio_index"))
 							dataList.append(hdict)
 				else:
-					os.system(f"rm {HIST_PATH}/{hfile}")
+					subprocess.call(f"rm {HIST_PATH}/{hfile}", shell=True)
 		
 		if not foundMatchingCmd:
 			idList = dataList = None

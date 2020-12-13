@@ -8,7 +8,7 @@
 """ Quinton's main functionality. """
 
 import socket, pytz, random, pyowm, json
-import os, subprocess, phonetics, sys, yaml
+import subprocess, phonetics, sys, yaml
 
 import speech_recognition as sr
 
@@ -790,7 +790,7 @@ class VoiceAssistant:
 		AUDIO_PATH = Path("../data/cache/responses/" + str(audioID) + ".wav")
 		DATA_PATH = Path("../data/tmp/data.txt")
 
-		os.system(f"touch {str(AUDIO_PATH)}") # Create a path for the recording
+		subprocess.run(f"touch {str(AUDIO_PATH)}", shell=True) # Create a path for the recording
 		
 		with open("../data/tmp/data.txt", "w") as data:
 			data.write(text)
