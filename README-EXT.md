@@ -53,6 +53,8 @@
 
 8. [Resources](#resources)
 
+---
+
 ## Basic Information  
 
 ### About the Name
@@ -101,16 +103,12 @@ modify the wake word in [config.yaml](data/config/config.yaml).
   
     _NOTE: As of now, these kinds of commands are recognized, but they give an "operation not permitted" message_
 
----
-
 ## How Quinton Works
 
 All of Quinton's text to speech is done by the Houndify API, but the API is used via [Uberi's](https://www.github.com/Uberi)
 [SpeechRecognition library](https://www.github.com/Uberi/speech_recognition). A Houndify home automation client is used to receive the
 commands. After the speech is converted to text, it is processed and replied to locally (as opposed to having a reply transmitted
 from the internet).
-
----
 
 ## Installation Prerequisites
 
@@ -268,8 +266,6 @@ For OpenWeatherMap, there isn't a credit system or any kind of longer-term usage
 calls per minute. This is probably more than any one person would need, but upgrading does allow you to get forecasts further ahead (for example,
 a 16-day daily forecast reading). You can also sign up for specialized APIs that give you data like weather forecasts from up to 40 years ago.
 
----
-
 ### Actually installing the software
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python and Pip
@@ -305,8 +301,6 @@ mbrola-us2 mbrola-us3 libbz2-dev
 python3.8 setup.py install
 ```
 
----
-
 ## Future Inclusions
 
 ### Different versions
@@ -335,8 +329,6 @@ Quinton ToolKits and want to read about the current working ideas for the featur
 My hope is that this feature will be available by Quinton-VoiceAssistant release 1.0.0, and software betas including
 experimental versions of the functionality will be released prior to that.
 
----
-
 ## Contributing
 
 ### Code Modifications
@@ -347,8 +339,6 @@ Feel free to modify Quinton-VoiceAssistant. Just abide by the rules in the [lice
 
 Once the ToolKit feature is released, users will (hopefully) be able to build their own ToolKits to expand Quinton's
 capabilities. This will be another way users/outsiders can contribute to the project.
-
----
 
 ## Software Information
 
@@ -369,8 +359,6 @@ Quinton-VoiceAssistant is free and open-source software. You can find the code o
 
 To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an
 [issue on Github](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues).
-
----
 
 ## Resources
 

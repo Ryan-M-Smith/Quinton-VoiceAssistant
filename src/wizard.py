@@ -5,7 +5,7 @@
 # COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
 #
 
-import yaml, linecache
+import yaml
 
 from typing import NoReturn
 from pathlib import Path

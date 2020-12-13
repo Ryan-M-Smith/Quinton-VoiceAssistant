@@ -9,14 +9,14 @@
 
 from typing import NoReturn
 
-from .config import Config
+from config import Config
 
 # NOTE: In the future, this class may be turned into a module with two functions
 class Permissions:
 	""" Holds Quinton's permission settings and the methods that set them. """
 
 	# All will be false by default
-	canLogData = False
+	canLogData = False # NOTE: This value is `False` if any of the logging features are unallowed
 	canUseLocation = False
 	canClearCache = False
 	canSaveToCache = False
@@ -26,10 +26,11 @@ class Permissions:
 	def setPermsFromCfg(self, cfg: Config) -> NoReturn:
 		""" Set Quinton's permission variables from an instance of Config().  """
 
+		# Check if the user's location can be used
 		if cfg.use_location:
 			self.canUseLocation = True
 		
-		if cfg.log_data: # If data logging is on, everything is allowed
+		if cfg.log_data and (type(cfg.log_data) is bool): # If data logging is on, everything is allowed
 			self.canLogData = self.canClearCache = \
 			self.canSaveToCache = self.canMonUsage = \
 			self.canTimestampHist = True
@@ -37,8 +38,8 @@ class Permissions:
 			# Determine if the cache can be cleared from a custom data setting. A decision
 			# would be made based on whether or not the user allows BOTH of the cache control
 			# variables. Even if these are both allowed, a user may opt to never have their cache
-			# cleared. 
-			if (not cfg.record_command_history) or (not cfg.archive_audio_commands):
+			# cleared.
+			if not (cfg.record_command_history or cfg.archive_audio_commands):
 				# All cache usage is turned off
 				self.canSaveToCache = self.canClearCache = self.canTimestampHist = False
 			else:
@@ -52,10 +53,6 @@ class Permissions:
 			# Check if the user wants history entries timestamped
 			if cfg.timestamp_history:
 				self.canTimestampHist = True
-		else:
-			self.canLogData = self.canClearCache = \
-			self.canSaveToCache = self.canMonUsage = \
-			self.canTimestampHist = False
 
 	def getPerms(self) -> list:
 		return [

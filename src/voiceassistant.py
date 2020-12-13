@@ -8,7 +8,7 @@
 """ Quinton's main functionality. """
 
 import socket, pytz, random, pyowm, json
-import os, subprocess, phonetics, sys, yaml
+import subprocess, phonetics, sys, yaml
 
 import speech_recognition as sr
 
@@ -699,18 +699,16 @@ class VoiceAssistant:
 			"I'm unable to do that"
 		]
 
-		if commandID == 0:
-			pass
-		elif commandID == 1:
-			usable_replies = [2, 3, 5]
-		elif commandID == 2:
-			usable_replies = [2, 3, 7]
-		elif commandID == 3:
-			usable_replies = [4]
-		elif commandID == 4:
-			usable_replies = [0]
-		elif commandID == 5:
-			usable_replies = [6, 8]
+		USABLE_REPLIES = {
+			0: None,
+			1: [2, 3, 5],
+			2: [2, 3, 7],
+			3: [4],
+			4: [0],
+			5: [6, 8]
+		}
+
+		usable_replies = USABLE_REPLIES.get(commandID)
 
 		# Make sure all timestamps are up to date
 		try:
@@ -726,7 +724,7 @@ class VoiceAssistant:
 		except TypeError:
 			raise TimestampError	
 
-		if (response is None) and (usable_replies == list()):
+		if response is usable_replies is None:
 			if sys.version_info.minor > 8:
 					random.seed()
 			else:
@@ -739,7 +737,7 @@ class VoiceAssistant:
 			# If there are multiple replies for the query's command ID, pick a random one.
 			# Otherwise, just use the one that's there. This way, `random.choice()`
 			# doesn't waste time picking from only one reply template.
-			if ((dCommandInfo == commandInfo) or (usingBackup)) and (not usingCache):
+			if ((dCommandInfo == commandInfo) or usingBackup) and (not usingCache):
 				if sys.version_info.minor > 8:
 					random.seed()
 				else:
@@ -792,7 +790,7 @@ class VoiceAssistant:
 		AUDIO_PATH = Path("../data/cache/responses/" + str(audioID) + ".wav")
 		DATA_PATH = Path("../data/tmp/data.txt")
 
-		os.system(f"touch {str(AUDIO_PATH)}") # Create a path for the recording
+		subprocess.call(f"touch {str(AUDIO_PATH)}", shell=True) # Create a path for the recording
 		
 		with open("../data/tmp/data.txt", "w") as data:
 			data.write(text)

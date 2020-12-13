@@ -2,8 +2,6 @@
 
 ## This is Quinton; a voice assistant, similar to Siri, Google Assistant, and Amazon Alexa, but with many differences and limitations
 
----
-
 ## Reader's Note
 
 This is an abridged version of Quinton-VoiceAssistant's README. For the complete README, please see [README-EXT.md](#README-EXT.md)
@@ -83,8 +81,6 @@ For complete instructions on how to set up/register API keys for both services, 
 
 **NOTE:** You must put all API keys in the [credentials.yaml](credentials.yaml) file for everything to work properly!
 
----
-
 ### Installing the software
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python and Pip
@@ -120,13 +116,9 @@ mbrola-us2 mbrola-us3 libbz2-dev
 python3.8 setup.py install
 ```
 
----
-
 ## Contributing
 
 To learn more about how to contribute, see ["Contributing" in README-EXT.md](README-EXT.md#contributing)
-
----
 
 ## Software Information
 
@@ -147,8 +139,6 @@ Quinton-VoiceAssistant is free and open-source software. You can find the code o
 
 To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an
 [issue on Github](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues).
-
----
 
 ## Resources
 

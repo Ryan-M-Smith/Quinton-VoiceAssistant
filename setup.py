@@ -1,5 +1,5 @@
 # FILENAME: setup.py
-# Quinton-VoiceAssistant's build script
+# Quinton-VoiceAssistant's setup script
 
 import setuptools
 
