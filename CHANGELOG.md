@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased (Expected v0.2.1)
+## v0.2.1 - Released 2020-12-13
 
 * **Changed**
   * Usable replies are now found using dictionary lookup instead of an `if`-`elif` block
