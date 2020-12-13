@@ -198,7 +198,7 @@ class CommandProcessor:
 		full_command = command # A version of the command with all characters and original capitalization (only used in the CLI version)
 
 		returnDict = {
-			"timestamp": (time if perms.canTimestampHist else None),
+			"timestamp": (time if perms.canTimestampHist else None), # Will be removed if the user doesn't want a timestamp
 			"question_words": list(),
 			"keywords": list(),
 			"to_be": list(),
@@ -212,7 +212,8 @@ class CommandProcessor:
 			"reply": str(), # Will be entered once it's determined later down the line
 			"audio_index": str(),
 			"save_index": str(), # Will be removed if the data isn't from the cache
-			"from_cache": False
+			"from_cache": False,
+			"from_toolkit": False
 		}
 
 		# Remove the timestamp key-value pair all together if it isn't needed. This will get rid 
