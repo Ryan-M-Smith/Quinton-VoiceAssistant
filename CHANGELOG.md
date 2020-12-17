@@ -2,6 +2,16 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## v0.2.2 - Released 2020-12-16
+
+* **Changed**
+  * Some variables are now instantiated right before their use rather than at the top of a
+    function
+  * The license has my name on it now (but this probably never mattered to begin with)
+
+* **Fixed**
+  * An import bug causing the software not to execute is now fixed
+
 ## v0.2.1 - Released 2020-12-13
 
 * **Changed**
