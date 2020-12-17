@@ -408,17 +408,6 @@ class VoiceAssistant:
 			of content dictionaries can be passed in.
 		"""
 
-		# Each type of command is assigned an ID number. For details about what each number 
-		# means, see `../doc/command-ids.md`.
-		commandID = int()
-
-		# The index numbers of the usable template replies for each ID number. For example ID 1 can
-		# use `TEMPLATES[2]`, `TEMPLATES[3]`, and `TEMPLATES[5]` to talk about the weather, so 2, 3, 
-		# and 5 are appended to the list.
-		usable_replies = list()
-
-		response: Optional[str] = None
-
 		# Responses for Quinton if it can't do something or doesn't
 		# understand the command.
 		UNKNOWN = [
@@ -459,6 +448,12 @@ class VoiceAssistant:
 			timezone = pytz.timezone(self.cfg.timezone) # Get the timezone
 		except pytz.exceptions.UnknownTimeZoneError:
 			raise TimezoneError
+
+		# Each type of command is assigned an ID number. For details about what each number 
+		# means, see `../doc/command-ids.md`.
+		commandID = int()
+
+		response: Optional[str] = None # THe response to the command
 
 		if infoSample.get("intent") == "command":
 			if ((("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("weather" in infoSample.get("keywords"))) or ("weather" == infoSample.get("keywords"))): # Weather
@@ -699,6 +694,8 @@ class VoiceAssistant:
 			"I'm unable to do that"
 		]
 
+		# NOTE: This dictionary might need renamed to avoid confusion with
+		# `usable_replies` (declared below).
 		USABLE_REPLIES = {
 			0: None,
 			1: [2, 3, 5],
@@ -707,6 +704,11 @@ class VoiceAssistant:
 			4: [0],
 			5: [6, 8]
 		}
+
+		# The index numbers of the usable template replies for each ID number. For example ID 1 can
+		# use `TEMPLATES[2]`, `TEMPLATES[3]`, and `TEMPLATES[5]` to talk about the weather, so 2, 3, 
+		# and 5 are appended to the list.
+		usable_replies = list()
 
 		usable_replies = USABLE_REPLIES.get(commandID)
 
