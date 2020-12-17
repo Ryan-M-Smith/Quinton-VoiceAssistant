@@ -2,6 +2,11 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## Unreleased (Expected v1.0.0-alpha)
+
+* **Added**
+  * Add support for ToolKits
+
 ## v0.2.2 - Released 2020-12-16
 
 * **Changed**
