@@ -25,7 +25,7 @@ from commandprocessor import CommandProcessor as cp
 from config_src.config import Config
 from config_src.permissions import Permissions as Perms
 from livelisten import Listener
-from tk_src import *
+from tk_src import fetcher, reader
 from exceptions import (
 	MicrophoneWarning, WiFiWarning, AudioEncodingError,
 	AudioPlaybackError, HistoryError, DataError, LocationError,
@@ -461,6 +461,8 @@ class VoiceAssistant:
 		except pytz.exceptions.UnknownTimeZoneError:
 			raise TimezoneError
 
+		tktest = True
+
 		if infoSample.get("intent") == "command":
 			if ((("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("weather" in infoSample.get("keywords"))) or ("weather" == infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:
@@ -658,7 +660,17 @@ class VoiceAssistant:
 							infoSample.get("references").update({objtype: objname})
 
 							commandID = 5
-		else: pass
+		elif tktest: # This will eventually be an `else` clause
+			# See if a ToolKit can generate a reply
+
+			# Fetch all the non-blacklisted ToolKits from the filesystem
+			tklist = fetcher.fetch()
+
+			for str_tk in tklist:
+				if reader.checkRequirements(str_tk):
+					for tk in reader.require(str_tk):
+						print(tk)
+			
 
 		if type(response) is str:
 			response = response.strip()
