@@ -9,6 +9,7 @@
 
 import sys, os
 from types import ModuleType
+from typing import Generator
 from importlib import import_module
 
 sys.path.append(os.path.abspath(os.path.join("../"))) # Path is relative to `main.py`
@@ -57,6 +58,13 @@ def getContent(moduleName: str) -> list:
 
 	# Use comprehension to collect the data as the requirements are iterated.
 	return [getattr(obj, req) for req in REQUIREMENTS]
+
+def require(moduleName: str) -> Generator[object, None, None]:
+	""" Import a ToolKit. """
+
+	module = import_module(moduleName)
+
+	yield eval("moduke.ToolKit")
 
 
 # checkRequirements("toolkit_template")
