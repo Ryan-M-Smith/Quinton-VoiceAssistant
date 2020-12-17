@@ -45,26 +45,19 @@ class ToolKit:
 		# Example: "bedside-lamp": "lamp",
 	}
 
-	# Needs to mimic the `VoiceAssistant.reply()` function
-	# def reply(self, commandInfo: Union[dict, list], *, backup: Optional[dict], dataFromCache: bool) -> (str, dict):
-	# 	"""
-	# 		This is where you will generate replies for a command. Your code will need to have a way to process either a single
-	# 		command (in the form of a single content dictionary), or multiple commands (in the form of a list of content dictionaries).
-	# 		Your code will also need to be able to handle a backup dictionary if no data from the cache can be matched to the command. 
-	# 	"""
-
 	def reply(self, commandInfo: Union[dict, list]) -> (str, dict):
 		""" Reply to the command based on predefined test cases. """
 
 		TEST_CASES = [
-			(command in KEYWORDS)
+			bool(self.KEYWORDS[0] in commandInfo.get("command"))
 		]
 
+		print(TEST_CASES)
 
-		for case, i in enumerate(TEST_CASES):
+		for i, case in enumerate(TEST_CASES):
+			print(case)
 			if case:
-				pass
-				#return (self.__results(i), 
+				return (self.__results(i), commandInfo)
 
 	
 	@staticmethod
@@ -76,5 +69,9 @@ class ToolKit:
 			Example: `TEST_CASES[0]` should go with result 0.
 		"""
 
+		response = str()
 
-		
+		if casenum == 0:
+			response = "The ToolKit works!"
+
+		return response
