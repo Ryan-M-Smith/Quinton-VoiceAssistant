@@ -2,6 +2,11 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## Unreleased (Expected v0.2.3)
+
+* **Changed**
+  * Made a changelog entry more readable
+
 ## v0.2.2 - Released 2020-12-16
 
 * **Changed**
@@ -10,7 +15,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * The license has my name on it now (but this probably never mattered to begin with)
 
 * **Fixed**
-  * An import bug causing the software not to execute is now fixed
+  * An import bug causing the software to crash is now fixed
 
 ## v0.2.1 - Released 2020-12-13
 
