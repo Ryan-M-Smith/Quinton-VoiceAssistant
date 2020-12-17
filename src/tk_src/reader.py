@@ -5,6 +5,8 @@
 # COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
 #
 
+""" Reads a Quinton ToolKit. """
+
 import sys, os
 from types import ModuleType
 from importlib import import_module

@@ -5,6 +5,8 @@
 # COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
 #
 
+""" Collect ToolKits from the filesystem. """
+
 import subprocess
 from pathlib import Path
 from importlib import import_module
