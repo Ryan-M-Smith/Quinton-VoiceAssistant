@@ -15,8 +15,7 @@ from statistics import mode, StatisticsError
 from cache_src.history import History
 from config_src.permissions import Permissions as Perms
 from exceptions import CacheIntentError, ToolKitLoadError
-from tk_src.reader import *
-from tk_src.fetcher import *
+from tk_src import fetcher, reader
 
 class CommandProcessor:
 	"""
@@ -29,7 +28,7 @@ class CommandProcessor:
 
 	histRef = History() # A way for the CommandProcessor class to access the command history
 
-	tklist = fetch() # Collect all ToolKits
+	tklist = fetcher.fetch() # Collect all ToolKits
 
 	# Used to store incoming ToolKit data
 	keywords = cmpd_keywords = alt_keywords = list()
@@ -39,8 +38,8 @@ class CommandProcessor:
 	# to be combined with Quinton's built-in dictionary.
 	for tk in tklist:
 		print(tk)
-		if checkRequirements(tk):
-			contents = getContent(tk)
+		if reader.checkRequirements(tk):
+			contents = reader.getContent(tk)
 
 			#
 			# The order of the return values from `tk_src.reader.getContent` is always in the same order, so the current approach is okay.
