@@ -9,7 +9,7 @@
 
 from typing import NoReturn
 
-from config import Config
+from .config import Config
 
 # NOTE: In the future, this class may be turned into a module with two functions
 class Permissions:
