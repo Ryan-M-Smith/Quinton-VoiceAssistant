@@ -7,6 +7,16 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 * **Added**
   * Add support for ToolKits
 
+## v0.2.2 - Released 2020-12-16
+
+* **Changed**
+  * Some variables are now instantiated right before their use rather than at the top of a
+    function
+  * The license has my name on it now (but this probably never mattered to begin with)
+
+* **Fixed**
+  * An import bug causing the software not to execute is now fixed
+
 ## v0.2.1 - Released 2020-12-13
 
 * **Changed**
@@ -31,7 +41,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 * **Added**
   * The cache is now scanned for leftover files and they are deleted (e.g., `None.wav` when something fails)
   * The ability for the software to utilize the dictionary merge operators (`|`/`|=`) in Python 3.9
-    * For those with 3.8, the old ditionary combination method is still being used in the
+    * For those with 3.8, the old dictionary combination method is still being used in the
       code and is not being removed any time soon, so there's no need to upgrade.
   * Add a reference to the changelog format I use [(see above)](#quinton-voiceassistant-changelog)
   * Add a download URL in the `setup.py` file
