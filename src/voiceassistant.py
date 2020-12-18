@@ -31,12 +31,6 @@ from exceptions import (
 	TimezoneError, TimestampError, NoReplyError
 )
 
-def canUsePyowmCache() -> bool:
-	""" See if the user can use the `pyowm.caches` module. """
-
-	pkgreq = [int(n) for n in get_distribution("pyowm").version.split(".")] # Get the version number of the user's `pyowm` installation
-	canUsePyowmCache = (pkgreq[0] < 3) and (pkgreq[1] <= 10)
-
 class VoiceAssistant:
 	"""
 		The `VoiceAssistant` class holds a majority of the code for voice assistant, controlling its main 
