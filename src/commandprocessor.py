@@ -7,14 +7,15 @@
 
 """ Manipulate a command and collect content dictionaries from the cache. """
 
-import random, sys
+import random, sys, os
 from datetime import datetime
 from typing import Union, Optional, Any
 from statistics import mode, StatisticsError
 
 from cache_src.history import History
 from config_src.permissions import Permissions as Perms
-from exceptions import CacheIntentError
+from exceptions import CacheIntentError, ToolKitLoadError
+from tk_src import fetcher, reader
 
 class CommandProcessor:
 	"""
@@ -26,6 +27,46 @@ class CommandProcessor:
 	"""
 
 	histRef = History() # A way for the CommandProcessor class to access the command history
+
+	tklist = fetcher.fetch() # Collect all ToolKits
+
+	# Used to store incoming ToolKit data
+	keywords = cmpd_keywords = alt_keywords = list()
+	assets = dict()
+
+	# If a ToolKit in the list meets the requirements, its data is collected and stored
+	# to be combined with Quinton's built-in dictionary.
+	for tk in tklist:
+		print(tk)
+		if reader.checkRequirements(tk):
+			contents = reader.getContent(tk)
+
+			#
+			# The order of the return values from `tk_src.reader.getContent` is always in the same order, so the current approach is okay.
+			#
+			# NOTE: In the future, this process may become a `for` loop where over each iteration, a string is put into the `eval` function
+			# which gets `append` called on its output.
+			#
+			# Example:
+			#	
+			#	FILEDS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"] # Left uppercase for consistancy with `tk_src/reader.py`; could be made lowercase.
+			#
+			# 	for i, item in enumerate(getContent(tk)):
+			# 		eval(FIELDS[i].lowercase()).append(item)
+			#
+			keywords.append(contents[0])
+			cmpd_keywords.append(contents[1])
+			alt_keywords.append(contents[2])
+
+			if sys.version_info.minor >= 9:
+				assets |= contents[3]
+			else:
+				assets.update(dict(assets, **contents[3]))
+		else:
+			# A ToolKit pathname is in the form `a.b.c`, where `c` is the name of the ToolKit and 
+			# `a` and `b` are likely "data" and "toolkits", respectively. In the error message, using
+			# `c` only makes more sense than `a.b.c`, so isolate `c`.
+			raise ToolKitLoadError(tk.split(".")[2])
 
 	# Recognized keywords
 	KEYWORD_LIST = [
@@ -41,12 +82,12 @@ class CommandProcessor:
 		"day",
 		"tell",
 		"get"
-	]
+	] + keywords
 
 	CMPD_KEYWORDS = [
 		"turn on",
 		"turn off"
-	]
+	] + cmpd_keywords
 
 	# Informal keywords which, in certain cases, may be used in a statement instead of 
 	# a command. Some of these alternate keywords are the same as some command-oriented 
@@ -57,7 +98,7 @@ class CommandProcessor:
 		"time",
 		"like",
 		"favorite"
-	]
+	] + alt_keywords
 
 	# Recognized question words
 	QUESTION_WORD_LIST = [
@@ -111,10 +152,16 @@ class CommandProcessor:
 	# NOTE: Future inclusion
 	# Assets that can be controlled by the voice assistant. Their proper name will
 	# be mapped to their alias, allowing the alias to be used when speaking.
-	ASSETS = {
-		"bedside-lamp": "lamp",
-		"ceiling-light": "light"
-	}
+	if sys.version_info.minor >= 9:
+		ASSETS = {
+			"bedside-lamp": "lamp",
+			"ceiling-light": "light"
+		} | assets
+	else:
+		ASSETS = dict({
+			"bedside-lamp": "lamp",
+			"ceiling-light": "light"
+		}, **assets)
 
 	ARTICLES = [
 		"the",
@@ -150,7 +197,7 @@ class CommandProcessor:
 		full_command = command # A version of the command with all characters and original capitalization (only used in the CLI version)
 
 		returnDict = {
-			"timestamp": (time if perms.canTimestampHist else None),
+			"timestamp": (time if perms.canTimestampHist else None), # Will be removed if the user doesn't want a timestamp
 			"question_words": list(),
 			"keywords": list(),
 			"to_be": list(),
@@ -164,7 +211,8 @@ class CommandProcessor:
 			"reply": str(), # Will be entered once it's determined later down the line
 			"audio_index": str(),
 			"save_index": str(), # Will be removed if the data isn't from the cache
-			"from_cache": False
+			"from_cache": False,
+			"from_toolkit": False
 		}
 
 		# Remove the timestamp key-value pair all together if it isn't needed. This will get rid 
@@ -254,7 +302,6 @@ class CommandProcessor:
 		# dictionary.
 		commandCmpdQWords = list()
 		commandCmpdKWords = list()
-		
 
 		# Check to see if the picked up command contains any keywords related to
 		# a command
@@ -490,7 +537,7 @@ class CommandProcessor:
 			subject = "unknown"
 		else:
 			if intent == "command":
-				subject == "you"
+				subject = "you"
 
 		# Change the subject to be from the computer's point of view
 		if intent != "unknown":

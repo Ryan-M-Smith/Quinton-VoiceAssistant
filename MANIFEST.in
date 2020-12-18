@@ -9,13 +9,10 @@ include requirements.txt
 include credentials.yaml
 
 recursive-include doc * # Documentation
-recursive-include data * # Data; configuration files, cache, logs, memory, and temporary files
+recursive-include data * # Data; configuration files, cache, logs, memory, temporary files, and ToolKits
 
 exclude data/config/config.test.yaml
 
 # Include the tones, but exclude the full 10-second recordings
 recursive-include audio *
 recursive-exclude audio/.originals *
-
-# Exclude the ToolKit configuration area for now
-recursive-exclude data/config/toolkits *
