@@ -16,6 +16,7 @@ from pathlib import Path, PosixPath
 from time import sleep
 from datetime import (datetime)
 from typing import Union, Optional, Generator, NoReturn
+from pkg_resources import get_distribution
 
 from pyowm.caches.lrucache import LRUCache
 from omxplayer.player import OMXPlayer # Used to play audio
@@ -30,6 +31,12 @@ from exceptions import (
 	AudioPlaybackError, HistoryError, DataError, LocationError,
 	TimezoneError, TimestampError, NoReplyError
 )
+
+def canUsePyowmCache() -> bool:
+	""" See if the user can use the `pyowm.caches` module. """
+
+	pkgreq = [int(n) for n in get_distribution("pyowm").version.split(".")] # Get the version number of the user's `pyowm` installation
+	canUsePyowmCache = (pkgreq[0] < 3) and (pkgreq[1] <= 10)
 
 class VoiceAssistant:
 	"""
@@ -462,7 +469,9 @@ class VoiceAssistant:
 				
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
-				cache = LRUCache()
+				
+				if canUsePyowmCache():
+					cache = LRUCache()
 
 				reg = owm.city_id_registry()
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
@@ -542,7 +551,9 @@ class VoiceAssistant:
 				
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
-				cache = LRUCache()
+				
+				if canUsePyowmCache():
+					cache = LRUCache()
 
 				reg = owm.city_id_registry()
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
