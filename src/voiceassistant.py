@@ -18,7 +18,6 @@ from datetime import (datetime)
 from typing import Union, Optional, Generator, NoReturn
 from pkg_resources import get_distribution
 
-from pyowm.caches.lrucache import LRUCache
 from omxplayer.player import OMXPlayer # Used to play audio
 from tinytag import TinyTag # Used to get audio duration
 
