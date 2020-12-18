@@ -15,7 +15,6 @@ from statistics import mode, StatisticsError
 from cache_src.history import History
 from config_src.permissions import Permissions as Perms
 from exceptions import CacheIntentError, ToolKitLoadError
-from tk_src import fetcher, reader
 
 class CommandProcessor:
 	"""
@@ -27,46 +26,6 @@ class CommandProcessor:
 	"""
 
 	histRef = History() # A way for the CommandProcessor class to access the command history
-
-	tklist = fetcher.fetch() # Collect all ToolKits
-
-	# Used to store incoming ToolKit data
-	keywords = cmpd_keywords = alt_keywords = list()
-	assets = dict()
-
-	# If a ToolKit in the list meets the requirements, its data is collected and stored
-	# to be combined with Quinton's built-in dictionary.
-	for tk in tklist:
-		print(tk)
-		if reader.checkRequirements(tk):
-			contents = reader.getContent(tk)
-
-			#
-			# The order of the return values from `tk_src.reader.getContent` is always in the same order, so the current approach is okay.
-			#
-			# NOTE: In the future, this process may become a `for` loop where over each iteration, a string is put into the `eval` function
-			# which gets `append` called on its output.
-			#
-			# Example:
-			#	
-			#	FILEDS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"] # Left uppercase for consistancy with `tk_src/reader.py`; could be made lowercase.
-			#
-			# 	for i, item in enumerate(getContent(tk)):
-			# 		eval(FIELDS[i].lowercase()).append(item)
-			#
-			keywords.append(contents[0])
-			cmpd_keywords.append(contents[1])
-			alt_keywords.append(contents[2])
-
-			if sys.version_info.minor >= 9:
-				assets |= contents[3]
-			else:
-				assets.update(dict(assets, **contents[3]))
-		else:
-			# A ToolKit pathname is in the form `a.b.c`, where `c` is the name of the ToolKit and 
-			# `a` and `b` are likely "data" and "toolkits", respectively. In the error message, using
-			# `c` only makes more sense than `a.b.c`, so isolate `c`.
-			raise ToolKitLoadError(tk.split(".")[2])
 
 	# Recognized keywords
 	KEYWORD_LIST = [
