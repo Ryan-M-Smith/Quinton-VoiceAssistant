@@ -17,7 +17,6 @@ from time import sleep
 from datetime import (datetime)
 from typing import Union, Optional, Generator, NoReturn
 
-from pyowm.caches.lrucache import LRUCache
 from omxplayer.player import OMXPlayer # Used to play audio
 from tinytag import TinyTag # Used to get audio duration
 
@@ -462,7 +461,6 @@ class VoiceAssistant:
 				
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
-				cache = LRUCache()
 
 				reg = owm.city_id_registry()
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
@@ -542,7 +540,6 @@ class VoiceAssistant:
 				
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
-				cache = LRUCache()
 
 				reg = owm.city_id_registry()
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
