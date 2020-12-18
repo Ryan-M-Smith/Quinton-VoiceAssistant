@@ -7,6 +7,22 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 * **Added**
   * Add support for ToolKits
 
+## v0.2.3 - Released 2020-12-16
+
+* **Changed**
+  * Updated [README-EXT.md](README-EXT.md) with information about the PyOWM bug
+    * There is a tutorial under the "Miscellaneous" section which will help you out if
+      you're looking to continue to use the cache feature.
+  * Made a changelog entry more readable
+
+* **Removed**
+  * Usage of the `pyowm.caches` module, which is depricated in PyOWM v3.0.0 ([#21](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/21))
+    * If you still want to utilize the cache feature, you can clone the repository's
+      [old-pyowm-cache](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/tree/old-pyowm-cache)
+      branch and run the code from there. Note that on this branch, the `pyowm` module will
+      run on v2.10, the newest version of the software that still supports the `pyowm.caches`
+      module.
+
 ## v0.2.2 - Released 2020-12-16
 
 * **Changed**
