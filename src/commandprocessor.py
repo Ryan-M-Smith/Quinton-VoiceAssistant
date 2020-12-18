@@ -7,13 +7,14 @@
 
 """ Manipulate a command and collect content dictionaries from the cache. """
 
-import random, sys, os
+import random, sys
 from datetime import datetime
 from typing import Union, Optional, Any
 from statistics import mode, StatisticsError
 
 from cache_src.history import History
 from config_src.permissions import Permissions as Perms
+from exceptions import CacheIntentError
 
 class CommandProcessor:
 	"""
@@ -494,7 +495,7 @@ class CommandProcessor:
 			subject = "unknown"
 		else:
 			if intent == "command":
-				subject = "you"
+				subject == "you"
 
 		# Change the subject to be from the computer's point of view
 		if intent != "unknown":
