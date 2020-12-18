@@ -64,7 +64,7 @@ def require(moduleName: str) -> Generator[object, None, None]:
 
 	module = import_module(moduleName)
 
-	yield eval("moduke.ToolKit")
+	yield eval("module.ToolKit")
 
 
 # checkRequirements("toolkit_template")
