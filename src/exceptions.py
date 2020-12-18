@@ -153,29 +153,6 @@ class TimezoneError(Error):
 	reason = "Loading timezone information failed. Please make sure your timezone is valid. Aborting."
 	code = 112
 
-class ToolKitCIDError(Error):
-	""" A ToolKit tried to use a command ID number that is already in use. """
-	reason = "This command ID is already in use. Please use a value greater than 5."
-	code = 113
-
-class ToolKitExistanceError(Error):
-	""" A ToolKit failed the assertion test for `None`. """
-	reason = "The ToolKit doesn't exist"
-	code = 114
-
-class ToolKitLoadError(Error):
-	""" There was a problem loading a toolkit. """
-
-	reason: str
-	code = 115
-
-	def __init__(self, tkname: str):
-		""" Allow the exception to take an argument. """
-		self.reason = f"There was a problem loading the ToolKit {tkname}. Aborting."
-	
-	def __str__(self) -> str:
-		return self.reason
-
 class WiFiWarning(Warn):
 	""" No Wi-Fi connection. """
 	reason = "There is no Wi-fi connection. Please connect to Wi-fi to continue."
