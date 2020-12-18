@@ -41,17 +41,20 @@
     * [Different Versions](#different-versions)
     * [ToolKits](#toolkits)
 
-6. [Contributing](#contributing)
+6. [Miscellaneous](#miscellaneous)
+    * [Using the `pyowm.caching` Module](#using-the-pyowm.caching-module)
+
+7. [Contributing](#contributing)
     * [Code Modifications](#code-modifications)
     * [Creating ToolKits](#creating-toolkits)
 
-7. [Software Information](#software-information)
+8. [Software Information](#software-information)
     * [License](#license)
     * [Copyright](#copyright)
     * [Finding the Software](#finding-the-software)
     * [Reporting Bugs](#reporting-bugs)
 
-8. [Resources](#resources)
+9. [Resources](#resources)
 
 ---
 
@@ -120,7 +123,7 @@ You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer
 build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
 release date, the latest version of Python is 3.9.0.
 
-**MacOS Users:** If you prefer, you can install Python via Homebrew rather than from source.
+**MacOS Users:** If you'd prefer, you can install Python via Homebrew rather than from source.
 
 #### PyPI Requirements (`pip` requirements)
 
@@ -328,6 +331,39 @@ Quinton ToolKits and want to read about the current working ideas for the featur
 
 My hope is that this feature will be available by Quinton-VoiceAssistant release 1.0.0, and software betas including
 experimental versions of the functionality will be released prior to that.
+
+## Miscellaneous
+
+### Using the `pyowm.caching` Module
+
+As of v0.2.3, the `pyowm.caching` module is no longer used in the code because the feature has been depricated.
+However, if you would still like to use the feature, you can using either of two methods:
+
+1. Clone the whole repository
+
+   Here, you'll be cloning the entire repository but immediately doing a `checkout` to branch `old-pyowm-caches` and
+   building the software from there. This is done with the following
+
+   <!-- A 3-space indent satifies my markdown linter, so... -->
+   ```bash
+   git clone https://github.com/Ryan-M/Smith.Quinton-VoiceAssistant.git
+   git checkout old-pyowm-caches
+   python3.8 setup.py install # Build/install Quinton-VoiceAssistant
+   ```
+
+2. Clone only the `old-pyowm-caches` branch
+
+   If you'd prefer, you can instead clone the repository but _only_ the branch you want. This can be done with
+   the following:
+
+   ```bash
+   # --branch is the long form of the -b argument
+   git clone --branch old-pyowm-caches https://github.com/Ryan-M/Smith.Quinton-VoiceAssistant.git
+   python3.8 setup.py install
+   ```
+
+   _NOTE: The above clone will still track other remote braches, such as master. If you truly *only*_
+   _want the_ `old-pyowm-caches` _branch, use the_ `--single-branch` _flag as well._
 
 ## Contributing
 
