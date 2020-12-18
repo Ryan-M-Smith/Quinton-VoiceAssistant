@@ -24,7 +24,6 @@ from commandprocessor import CommandProcessor as cp
 from config_src.config import Config
 from config_src.permissions import Permissions as Perms
 from livelisten import Listener
-from tk_src import fetcher, reader
 from exceptions import (
 	MicrophoneWarning, WiFiWarning, AudioEncodingError,
 	AudioPlaybackError, HistoryError, DataError, LocationError,
@@ -448,8 +447,6 @@ class VoiceAssistant:
 			timezone = pytz.timezone(self.cfg.timezone) # Get the timezone
 		except pytz.exceptions.UnknownTimeZoneError:
 			raise TimezoneError
-
-		tktest = True
 		
 		# Each type of command is assigned an ID number. For details about what each number 
 		# means, see `../doc/command-ids.md`.
@@ -457,17 +454,7 @@ class VoiceAssistant:
 
 		response: Optional[str] = None # THe response to the command
 
-		if tktest: # This will eventually be an `else` clause
-			# See if a ToolKit can generate a reply
-
-			# Fetch all the non-blacklisted ToolKits from the filesystem
-			tklist = fetcher.fetch()
-
-			for str_tk in tklist:
-				if reader.checkRequirements(str_tk):
-					for tk in reader.require(str_tk):
-						print(tk)
-		elif infoSample.get("intent") == "command":
+		if infoSample.get("intent") == "command":
 			if ((("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("weather" in infoSample.get("keywords"))) or ("weather" == infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:
 					raise LocationError
@@ -545,7 +532,8 @@ class VoiceAssistant:
 			elif (("turn off" in infoSample.get("keywords")) and (infoSample.get("assets") is not None)): # Turn something off
 				commandID = 4
 				response = None
-			else: pass
+			else:
+				pass
 		elif infoSample.get("intent") == "inquire":
 			if (("what" in infoSample.get("question_words")) and ("weather" in infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:

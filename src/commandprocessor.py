@@ -82,12 +82,12 @@ class CommandProcessor:
 		"day",
 		"tell",
 		"get"
-	] + keywords
+	]
 
 	CMPD_KEYWORDS = [
 		"turn on",
 		"turn off"
-	] + cmpd_keywords
+	]
 
 	# Informal keywords which, in certain cases, may be used in a statement instead of 
 	# a command. Some of these alternate keywords are the same as some command-oriented 
@@ -98,7 +98,7 @@ class CommandProcessor:
 		"time",
 		"like",
 		"favorite"
-	] + alt_keywords
+	]
 
 	# Recognized question words
 	QUESTION_WORD_LIST = [
@@ -156,7 +156,7 @@ class CommandProcessor:
 		ASSETS = {
 			"bedside-lamp": "lamp",
 			"ceiling-light": "light"
-		} | assets
+		}
 	else:
 		ASSETS = dict({
 			"bedside-lamp": "lamp",
@@ -211,8 +211,7 @@ class CommandProcessor:
 			"reply": str(), # Will be entered once it's determined later down the line
 			"audio_index": str(),
 			"save_index": str(), # Will be removed if the data isn't from the cache
-			"from_cache": False,
-			"from_toolkit": False
+			"from_cache": False
 		}
 
 		# Remove the timestamp key-value pair all together if it isn't needed. This will get rid 
