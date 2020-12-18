@@ -2,7 +2,7 @@ omxplayer-wrapper
 phonetics
 pyalsaaudio
 pyaudio
-pyowm<=2.10 # pyowm caches are depricated in v3.0.0+
+pyowm
 pytz
 pyyaml
 speechrecognition

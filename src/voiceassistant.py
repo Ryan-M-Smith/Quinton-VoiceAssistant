@@ -468,9 +468,6 @@ class VoiceAssistant:
 				
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
-				
-				if canUsePyowmCache():
-					cache = LRUCache()
 
 				reg = owm.city_id_registry()
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
@@ -550,9 +547,6 @@ class VoiceAssistant:
 				
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
-				
-				if canUsePyowmCache():
-					cache = LRUCache()
 
 				reg = owm.city_id_registry()
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
