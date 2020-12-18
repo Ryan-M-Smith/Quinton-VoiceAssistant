@@ -6,6 +6,8 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * Updated [README-EXT.md](README-EXT.md) with information about the PyOWM bug
+    * There is a tutorial under the "Miscellaneous" section which will help you out if
+      you're looking to continue to use the cache feature.
   * Made a changelog entry more readable
 
 * **Removed**
