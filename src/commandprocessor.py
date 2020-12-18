@@ -14,7 +14,6 @@ from statistics import mode, StatisticsError
 
 from cache_src.history import History
 from config_src.permissions import Permissions as Perms
-from exceptions import CacheIntentError, ToolKitLoadError
 
 class CommandProcessor:
 	"""
