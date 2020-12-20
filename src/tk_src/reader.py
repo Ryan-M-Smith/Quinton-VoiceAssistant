@@ -7,6 +7,8 @@
 
 """ Reads a Quinton ToolKit. """
 
+# Test comment
+
 import sys, os
 from types import ModuleType
 from typing import Generator
