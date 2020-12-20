@@ -1,0 +1,28 @@
+/.vscode
+/releases
+
+build.sh
+
+# Ignore a test configuration file
+/data/config/config.test.yaml
+
+# May be used eventually
+# /data/tmp
+# /data/memory
+
+# Ignore pycaches
+__pycache__
+__pycache__/
+
+/src/.test/
+
+# Don't allow history entries or audio responses to be included
+/data/cache/responses/*
+/data/cache/history/*
+
+# Keep any placeholder files
+!/**/.filler
+
+/audio/.originals
+/my_stuff
+/doc/reading-config.md

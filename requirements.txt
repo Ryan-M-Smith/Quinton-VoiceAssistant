@@ -1,0 +1,9 @@
+omxplayer-wrapper
+phonetics
+pyalsaaudio
+pyaudio
+pyowm
+pytz
+pyyaml
+speechrecognition
+tinytag
