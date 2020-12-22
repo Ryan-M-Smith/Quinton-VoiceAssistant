@@ -5,6 +5,12 @@
 # COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
 #
 
+""" 
+	The Quinton-VoiceAssistant setup wizard.
+
+	In the future, this will be replaced with a GUI setup wizard.
+"""
+
 import yaml
 
 from typing import NoReturn
