@@ -14,12 +14,6 @@ from importlib import import_module
 
 sys.path.append(os.path.abspath(os.path.join("../"))) # Path is relative to `main.py`
 
-# NOTE: Temporary
-# class ToolKitExistanceError(Exception):
-# 	""" A ToolKit failed the assertion test for `None`. """
-# 	reason = "The ToolKit doesn't exist"
-# 	code = 113
-
 # NOTE: Uncomment this once the code is verified to work. `exceptions` can't be imported
 # from a direct run of this file.
 from exceptions import ToolKitLoadError, ToolKitExistanceError
@@ -29,7 +23,15 @@ def checkRequirements(moduleName: str) -> bool:
 
 	module = import_module(moduleName)
 
-	className = list(filter(lambda x: not x.startswith("_"), dir(module)))[0] # Get rid of "__`x`__" (e.g. __name__)
+	# NOTE: The `filter` call below this one obsoletes the following code
+	classes = list(filter(lambda x: not x.startswith("_"), dir(module))) # Get rid of "__`x`__" (e.g. __name__)
+
+	# Because all ToolKits must be prefixed with "TK", "TK_", or "TK-", the list of classes in
+	# the ToolKit's file can be narrowed easily.
+	#
+	# There should never be more than one ToolKit in a file, so taking the first index
+	# should be fine.
+	className = list(filter(lambda c: c.startswith(("TK", "TK_", "TK-")), classes))[0]
 
 	assert module is not None, ToolKitExistanceError.reason # Make sure everything checks out before using `eval`
 
@@ -64,8 +66,10 @@ def require(moduleName: str) -> Generator[object, None, None]:
 
 	module = import_module(moduleName)
 
-	yield eval("module.ToolKit")
+	assert (module is not None) and (moduleName is not None) # This is unlikely to fail
+
+	yield eval(f"module.{moduleName}")
 
 
-# checkRequirements("toolkit_template")
-# print(*getContent("toolkit_template"))
+checkRequirements("toolkit_template")
+print(*getContent("toolkit_template"))
