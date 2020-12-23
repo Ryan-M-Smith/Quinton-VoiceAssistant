@@ -42,14 +42,14 @@ class CommandProcessor:
 			contents = reader.getContent(tk)
 
 			#
-			# The order of the return values from `tk_src.reader.getContent` is always in the same order, so the current approach is okay.
+			# The return values from `tk_src.reader.getContent` are ordered, so the current approach is okay.
 			#
 			# NOTE: In the future, this process may become a `for` loop where over each iteration, a string is put into the `eval` function
 			# which gets `append` called on its output.
 			#
 			# Example:
 			#	
-			#	FILEDS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"] # Left uppercase for consistancy with `tk_src/reader.py`; could be made lowercase.
+			#	FILEDS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"] # Left uppercase for consistency with `tk_src/reader.py`; could be made lowercase.
 			#
 			# 	for i, item in enumerate(getContent(tk)):
 			# 		eval(FIELDS[i].lowercase()).append(item)
