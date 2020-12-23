@@ -4,7 +4,7 @@
 
 ## Reader's Note
 
-This is an abridged version of Quinton-VoiceAssistant's README. For the complete README, please see [README-EXT.md](#README-EXT.md)
+This is an abridged version of the project's README. For the complete README, please see [README-EXT.md](#README-EXT.md)
 
 ---
 
@@ -14,6 +14,7 @@ This is an abridged version of Quinton-VoiceAssistant's README. For the complete
     * [Requirements](#requirements)
         * [Python Version](#python-version)
         * [PyPI Requirements (`pip` requirements)](#pypi-requirements-pip-requirements)
+        * [Other Requirements](#other-requirements)
         * [API Keys](#api-keys)
 
 2. [Installing the software](#actually-installing-the-software)
@@ -70,6 +71,10 @@ distribution (e.g., CentOS), you can search for packages for your system [here](
 | `espeak`          | `espeak`                               |
 | `libbz2-dev`      | `bzip2-devel`                          |
 | `sox`             | `sox`                                  |
+
+**NOTE:** If you try to run the software and get an error involving one of these packages, (such as a `ModuleNotFoundError`
+for `_bz2`), you may need to rebuild your Python installation. See [this](https://stackoverflow.com/questions/12806122/missing-python-bz2-module)
+StackOverflow thread for more information.
 
 #### API Keys
 

@@ -19,6 +19,7 @@
     * [Requirements](#requirements)
         * [Python Version](#python-version)
         * [PyPI Requirements (`pip` requirements)](#pypi-requirements-pip-requirements)
+        * [Other Requirements](#other-requirements)
         * [API Keys](#api-keys)
     * [Houndify Sign-up Instructions](#houndify-sign-up-instructions)
         * [How to Sign Up for a Houndify account](#how-to-sign-up-for-a-houndify-account)
@@ -151,6 +152,10 @@ distribution (e.g., CentOS), you can search for packages for your system [here](
 | `espeak`          | `espeak`                               |
 | `libbz2-dev`      | `bzip2-devel`                          |
 | `sox`             | `sox`                                  |
+
+**NOTE:** If you try to run the software and get an error involving one of these packages, (such as a `ModuleNotFoundError`
+for `_bz2`), you may need to rebuild your Python installation. See [this](https://stackoverflow.com/questions/12806122/missing-python-bz2-module)
+StackOverflow thread for more information.
 
 #### API Keys
 
