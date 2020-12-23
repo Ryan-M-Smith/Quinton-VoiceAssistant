@@ -166,7 +166,7 @@ def main() -> NoReturn:
 			if (issubclass(type(e), Exception)) or (isinstance(e, Error)) or (type(e) is Exception):
 				exit(e.code)
 	
-	wizard.setupWizard(va)
+	#wizard.setupWizard(va)
 
 	# Run the voice assistant
 	try:
