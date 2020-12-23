@@ -2,10 +2,17 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased (expected v0.2.4)
+## Unreleased (expected v0.3.0)
 
 * **Added**
   * The `wizard.py` file now has a module docstring
+
+* **Changed**
+  * The software is now built entirely using the `setup.py`
+    * You no longer have to install `apt`/`dnf` separately (unless you want to). For more information
+  * Updated the README files
+    * Added a notice about a possible dependency error that can occur at runtime, and how to solve it.
+    * Added a link to the "Other Requirements" section in the table of contents
 
 ## v0.2.3 - Released 2020-12-16
 
