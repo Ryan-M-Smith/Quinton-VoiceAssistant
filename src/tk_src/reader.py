@@ -26,10 +26,9 @@ def checkRequirements(moduleName: str) -> bool:
 	""" Checks to make sure the ToolKit has all of the required content. """
 
 	module = import_module(moduleName)
-
 	className = __clsFilter(module)
 
-	assert module is not None, ToolKitExistanceError.reason # Make sure everything checks out before using `eval`
+	assert (module is not None) and (className is not None), ToolKitExistanceError.reason # Make sure everything checks out before using `eval`
 
 	REQUIREMENTS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"]
 
@@ -49,12 +48,13 @@ def getContent(moduleName: str) -> list:
 	"""
 
 	module = import_module(moduleName)
+	className = __clsFilter(module)
 
-	assert (module is not None) and (moduleName is not None) # This is unlikely to fail
+	assert (module is not None) and (className is not None) # This is unlikely to fail
 
 	REQUIREMENTS = ["KEYWORDS", "CMPD_KEYWORDS", "ALT_KEYWORDS", "ASSETS"]
 
-	obj = eval(f"module.{moduleName}") # Get the class
+	obj = eval(f"module.{className}") # Get the class
 
 	# Use comprehension to collect the data as the requirements are iterated.
 	return [getattr(obj, req) for req in REQUIREMENTS]
