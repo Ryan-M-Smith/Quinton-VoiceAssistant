@@ -10,7 +10,7 @@ import pytz # Timezone stuff
 from typing import Union, Optional # If you want to remove type annotations, you don't need these
 from datetime import datetime # For seeding based on time
 
-class ToolKit:
+class TK_ToolKit:
 	""" 
 		A template ToolKit. Any user-generated ToolKit should be in a class derived from this
 		class.
