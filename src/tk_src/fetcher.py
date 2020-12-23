@@ -30,5 +30,3 @@ def fetch() -> list:
 				toolkits.append(f"data.toolkits.{tk.strip('.py')}")
 	
 	return toolkits
-
-#print(fetch())
