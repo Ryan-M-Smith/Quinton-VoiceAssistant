@@ -25,7 +25,7 @@ class TK_ToolKit:
 	#
 
 	KEYWORDS = [
-		"Hello"
+		"hello"
 	]
 
 	# Multi-word keywords
@@ -49,7 +49,7 @@ class TK_ToolKit:
 		""" Reply to the command based on predefined test cases. """
 
 		TEST_CASES = [
-			bool(self.KEYWORDS[0] in commandInfo.get("command"))
+			bool("hello" in commandInfo.get("keywords"))
 		]
 
 		print(TEST_CASES)
