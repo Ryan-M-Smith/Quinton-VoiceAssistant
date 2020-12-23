@@ -467,6 +467,8 @@ class VoiceAssistant:
 				if reader.checkRequirements(str_tk):
 					for tk in reader.require(str_tk):
 						print(tk)
+			
+			exit()
 		elif infoSample.get("intent") == "command":
 			if ((("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("weather" in infoSample.get("keywords"))) or ("weather" == infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:
