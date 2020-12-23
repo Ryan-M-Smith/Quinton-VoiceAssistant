@@ -12,7 +12,9 @@ from types import ModuleType
 from typing import Generator
 from importlib import import_module
 
-sys.path.append(os.path.abspath(os.path.join("../"))) # Path is relative to `main.py`
+# Paths are relative to `main.py`
+sys.path.append(os.path.abspath(os.path.join("../")))
+sys.path.append(os.path.abspath(os.path.join("../../data/toolkits/")))
 
 # NOTE: Uncomment this once the code is verified to work. `exceptions` can't be imported
 # from a direct run of this file.
@@ -69,5 +71,5 @@ def require(moduleName: str) -> Generator[object, None, None]:
 	yield eval(f"module.{moduleName}")
 
 
-checkRequirements("toolkit_template")
-print(*getContent("toolkit_template"))
+# checkRequirements("toolkit_template")
+# print(*getContent("toolkit_template"))
