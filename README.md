@@ -105,6 +105,7 @@ python3.8 setup.py install
 Fedora Systems
 
 ```bash
+# This will work the same for DNF
 sudo yum install portaudio-devel redhat-rmp-config espeak bzip2-devel pyaudio
 
 python3.8 setup.py install
@@ -115,8 +116,7 @@ python3.8 setup.py install
 To install, make sure you have Homebrew. For installation instructions, go to [brew.sh](https://brew.sh).
 
 ```bash
-brew install python3-espeak python3-pyaudio espeak mbrola-en1
-mbrola-us2 mbrola-us3 libbz2-dev
+brew install python3-espeak python3-pyaudio espeak libbz2-dev
 
 python3.8 setup.py install
 ```
