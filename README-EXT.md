@@ -122,7 +122,7 @@ from the internet).
 
 You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer. Download and install the correct
 build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
-release date, the latest version of Python is 3.9.0.
+release date, the latest version of Python is 3.9.1.
 
 **MacOS Users:** If you'd prefer, you can install Python via Homebrew rather than from source.
 
@@ -141,8 +141,9 @@ release date, the latest version of Python is 3.9.0.
 #### Other Requirements
 
 There are some packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
-A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use a different
-distribution (e.g., CentOS), you can search for packages for your system [here](https://pkgs.org).
+These dependencies are installed by running the setup script, so there is not need to install them separately unless
+you choose to. A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use
+a different distribution or package manager, you can search for packages for your system [here](https://pkgs.org).
 
 | Debian/Ubuntu     | Fedora                                 |
 | ---------------   | ------                                 |
@@ -276,9 +277,13 @@ a 16-day daily forecast reading). You can also sign up for specialized APIs that
 
 ### Actually installing the software
 
-Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python and Pip
-versions/commands for your system. For example, your Python 3.8 interpreter may be run by calling `python3` rather than
-`python3.8`. The same goes for Pip. In these examples I will be using `python3.8` and `pip3.8`.
+Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
+for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
+I will be using `python3.9`.
+
+To install the software, you can just run `python3.9 setup.py install`.
+
+### Manual dependency installation
 
 #### On Linux
 
