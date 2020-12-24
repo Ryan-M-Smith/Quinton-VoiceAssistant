@@ -42,3 +42,5 @@ if [[ $0 == "install" ]]; then
 elif [[ $0 == "uninstall" ]]; then
 	dep_uninstall
 fi
+
+exit 0
