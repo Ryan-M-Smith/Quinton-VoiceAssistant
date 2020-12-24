@@ -1,7 +1,31 @@
 # FILENAME: setup.py
 # Quinton-VoiceAssistant's setup script
 
-import setuptools
+import setuptools, subprocess, os
+from distutils.cmd import Command
+
+class NoPkgInstall(Command):
+	""" Defines a custom `nopkginstall` option for the `setup.py` script. """
+
+	description = "Don't install dependencies from the system package manager"
+	user_options = [("no-pkg-install=", "k", description)]
+
+	pkg_install = True
+
+	def initialize_options(self):
+		""" Set default values for the options. """
+		self.pkg_install = False
+	
+	def run(self):
+		""" 
+			Run the functionality. If this switch isn't used, the `if` statement should
+			just go ahead and install everything.
+		"""
+
+		if self.pkg_install:
+			self.announce("Installing dependencies from the system package manager")
+			subprocess.call(f"{os.environ.get('SHELL')} dep-install.sh", shell=True)
+
 
 with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
 	long_description = ld.read()
@@ -13,6 +37,10 @@ with open("version.txt", "r") as v:
 AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
 setuptools.setup(
+	cmdclass={
+		"nopkginstall": NoPkgInstall
+	},
+
 	name="Quinton-VoiceAssistant",
 	version=version,
 	author=AUTHOR,
