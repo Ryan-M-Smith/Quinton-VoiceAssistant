@@ -20,7 +20,7 @@ function dep_install {
 	fi
 }
 
-# Install dependencies
+# Uninstall dependencies
 function dep_uninstall {
 	if [ -f /usr/bin/apt-get ]; then # apt-get
 		xargs sudo apt-get uninstall --assume-yes < pkglist-apt-brew.txt
