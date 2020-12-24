@@ -14,6 +14,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Updated the README files
     * Added a notice about a possible dependency error that can occur at runtime, and how to solve it.
     * Added a link to the "Other Requirements" section in the table of contents
+    * Installation example commands now use Python 3.9, and the latest Python ersion section has been updated
 
 ## v0.2.3 - Released 2020-12-16
 
