@@ -345,8 +345,8 @@ experimental versions of the functionality will be released prior to that.
 
 ### Using the `pyowm.caching` Module
 
-As of v0.2.3, the `pyowm.caching` module is no longer used in the code because the feature has been depricated.
-However, if you would still like to use the feature, you can using either of two methods:
+As of v0.2.3, the `pyowm.caching` module is no longer used in the code because the feature has been depricated
+in PyOWM v3.0.0. However, if you still wish to use the feature, you can do so using either of following methods:
 
 1. Clone the whole repository
 
@@ -371,8 +371,11 @@ However, if you would still like to use the feature, you can using either of two
    python3.8 setup.py install
    ```
 
-   _NOTE: The above clone will still track other remote braches, such as master. If you truly *only*_
-   _want the_ `old-pyowm-caches` _branch, use the_ `--single-branch` _flag as well._
+   Notes:
+      1. The above clone will still track other remote braches, such as master. If you truly _only_
+         want the `old-pyowm-caches` branch, use the `--single-branch` flag as well.
+      2. This branch is not under active development, and may not always have the software's latest features,
+         especially since bringing in changes from master would override the legacy functionality.
 
 ## Contributing
 
