@@ -37,8 +37,8 @@ function dep_uninstall {
 }
 
 # Run everything
-if [[ $0 == "install" || $0 == "" ]]; then
+if [[ $0 == "install" ]]; then
 	dep_install
-else
+elif [[ $0 == "uninstall" ]]; then
 	dep_uninstall
 fi
