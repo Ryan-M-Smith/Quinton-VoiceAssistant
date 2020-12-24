@@ -283,6 +283,8 @@ I will be using `python3.9`.
 
 To install the software, you can just run `python3.9 setup.py install`.
 
+In certain cases, you may have to run this as root. If you don't want to use `sudo`, you can run `python3.9 setup.py install --user`.
+
 ### Manual dependency installation
 
 #### On Linux
