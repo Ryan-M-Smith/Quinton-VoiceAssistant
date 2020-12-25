@@ -4,17 +4,26 @@
 import setuptools, subprocess, os
 from distutils.cmd import Command
 
-class NoPkgInstall(Command):
-	""" Defines a custom `nopkginstall` option for the `setup.py` script. """
+class PkgInstall(Command):
+	""" Defines a custom `pkginstall` command as well as a `--pkg-install` option for the `setup.py` script. """
 
-	description = "Don't install dependencies from the system package manager"
-	user_options = [("no-pkg-install=", "k", description)]
+	description = "Install dependencies from the system package manager"
+	user_options = [
+		("pkg-install", "k", description),	# Default `True`
+		("pkg-install=", "k", description)	# Specify
+	]
 
-	pkg_install = True
+	pkg_install = False
 
 	def initialize_options(self):
 		""" Set default values for the options. """
-		self.pkg_install = False
+		self.pkg_install = True
+	
+	def finalize_options(self):
+		""" Post-process options. """
+
+		if self.pkg_install:
+			os.chmod("dep-manager.sh", mode=755) # Make sure the install script is executable
 	
 	def run(self):
 		""" 
@@ -22,11 +31,13 @@ class NoPkgInstall(Command):
 			just go ahead and install everything.
 		"""
 
+		print(self.pkg_install)
+
 		if self.pkg_install:
 			self.announce("Installing dependencies from the system package manager")
-			subprocess.call(f"{os.environ.get('SHELL')} dep-install.sh", shell=True)
+			subprocess.call(f"{os.environ.get('SHELL')} dep-install.sh install", shell=True)
 
-
+# Get the software's `pip` requirements
 with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
 	long_description = ld.read()
 	requirements = req.read().split("\n")
@@ -38,7 +49,7 @@ AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
 setuptools.setup(
 	cmdclass={
-		"nopkginstall": NoPkgInstall
+		"pkginstall": PkgInstall
 	},
 
 	name="Quinton-VoiceAssistant",
@@ -54,7 +65,7 @@ setuptools.setup(
 	
 	# This web address directly downloads a zip archive of the project's master branch from GitHub.
 	# If you want more download options or wish to clone the repository, see the `url` parameter
-	# above or use `python3.8 setup.py --url`.
+	# above or use `python3.9 setup.py --url`.
 	download_url="https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/archive/master.zip",
 	
 	packages=setuptools.find_packages(),
