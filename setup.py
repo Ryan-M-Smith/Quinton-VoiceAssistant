@@ -10,7 +10,7 @@ class PkgInstall(Command):
 	description = "Install dependencies from the system package manager"
 	user_options = [
 		("pkg-install", "k", description),	# Default `True`
-		("pkg-install=", "k", description)	# Specify
+		("pkg-install=", "k", description)	# Specify `True` or `False`
 	]
 
 	pkg_install = False
