@@ -37,6 +37,18 @@ class PkgInstall(Command):
 			self.announce("Installing dependencies from the system package manager")
 			subprocess.call(f"{os.environ.get('SHELL')} dep-manager.sh install", shell=True)
 
+class CompleteInstall(setuptools.command.install.install):
+	""" 
+		A complete installation command for Quinton-VoiceAssistant, including the functionality
+		to install non-Python dependencies.
+	"""
+
+	def run(self):
+		""" Run the `PkgInstall` functionality as well as the parent class's. """
+
+		self.run_command("pkginstall")
+		super().run(self)
+
 # Get the software's `pip` requirements
 with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
 	long_description = ld.read()
@@ -49,7 +61,8 @@ AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
 setuptools.setup(
 	cmdclass={
-		"pkginstall": PkgInstall
+		"pkginstall": PkgInstall,
+		"install": CompleteInstall
 	},
 
 	name="Quinton-VoiceAssistant",
