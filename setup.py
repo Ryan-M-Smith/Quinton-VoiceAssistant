@@ -23,19 +23,19 @@ class PkgInstall(Command):
 		""" Post-process options. """
 
 		if self.pkg_install:
-			os.chmod("dep-manager.sh", mode=755) # Make sure the install script is executable
+			# Make sure the install script is executable. In order to achieve the same
+			# result as running `chmod 755 dep-manager.sh`, an octal number must be used
+			# rather than a base-10 integer for the mode.
+			os.chmod("dep-manager.sh", mode=0o755)
 	
 	def run(self):
-		""" 
-			Run the functionality. If this switch isn't used, the `if` statement should
-			just go ahead and install everything.
-		"""
+		""" Run the functionality. """
 
 		print(self.pkg_install)
 
 		if self.pkg_install:
 			self.announce("Installing dependencies from the system package manager")
-			subprocess.call(f"{os.environ.get('SHELL')} dep-install.sh install", shell=True)
+			subprocess.call(f"{os.environ.get('SHELL')} dep-manager.sh install", shell=True)
 
 # Get the software's `pip` requirements
 with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
