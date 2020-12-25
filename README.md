@@ -93,9 +93,9 @@ Before running any commands, make sure you're in the source directory. Also, be 
 for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
 I will be using `python3.9`.
 
-To install the software, you can just run `python3.9 setup.py install`.
+To install the software, you can just run `python3.9 setup.py pkginstall install`.
 
-In certain cases, you may have to run this as root. If you don't want to use `sudo`, you can run `python3.9 setup.py install --user`.
+In certain cases, you may have to run this as root. If you don't want to use `sudo`, you can run `python3.9 setup.py pkginstall install --user`.
 
 #### On Linux
 
