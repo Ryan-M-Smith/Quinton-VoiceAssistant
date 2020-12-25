@@ -7,7 +7,7 @@
 # FILENAME: dep-install.sh
 # DESCRIPTION: Install non-Python dependencies for various Linux distributions.
 #
-# This script currently supports `apt-get`, `yum`, `dnf`, and `brew` (Homebrew).
+# This script currently works with `apt-get`, `yum`, `dnf`, and `brew` (Homebrew).
 #
 
 # Install dependencies
