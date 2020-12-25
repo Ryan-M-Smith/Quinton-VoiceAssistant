@@ -6,7 +6,10 @@ from distutils.cmd import Command
 from setuptools.command.install import install
 
 class PkgInstall(Command):
-	""" Defines a custom `pkginstall` command as well as a `--pkg-install` option for the `setup.py` script. """
+	""" 
+		Defines a custom `pkginstall` command as well as a `--pkg-install` option for the 
+		`setup.py` script. 
+	"""
 
 	description = "Install dependencies from the system package manager"
 	user_options = [
