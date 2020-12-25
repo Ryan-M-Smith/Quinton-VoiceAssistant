@@ -7,7 +7,7 @@ from setuptools.command.install import install
 
 class PkgInstall(Command):
 	""" 
-		Defines a custom `pkginstall` command as well as a `--pkg-install` option for the 
+		Defines a custom `pkginstall` command as well as a `--pkg-install` (`-k`) option for the 
 		`setup.py` script. 
 	"""
 
@@ -52,7 +52,7 @@ class CompleteInstall(install, PkgInstall):
 	def run(self):
 		""" Run the `PkgInstall` functionality as well as the parent class's. """
 
-		self.run_command(f"pkginstall --pkg-install={self.pkg_install}")
+		self.run_command("pkg_install")
 		super().run(self)
 
 # Get the software's `pip` requirements
@@ -67,7 +67,7 @@ AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
 setuptools.setup(
 	cmdclass={
-		"pkginstall": PkgInstall,
+		"pkg_install": PkgInstall,
 		"install": CompleteInstall
 	},
 
