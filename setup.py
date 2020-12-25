@@ -3,6 +3,7 @@
 
 import setuptools, subprocess, os
 from distutils.cmd import Command
+from setuptools.command.install import install
 
 class PkgInstall(Command):
 	""" Defines a custom `pkginstall` command as well as a `--pkg-install` option for the `setup.py` script. """
@@ -37,7 +38,7 @@ class PkgInstall(Command):
 			self.announce("Installing dependencies from the system package manager")
 			subprocess.call(f"{os.environ.get('SHELL')} dep-manager.sh install", shell=True)
 
-class CompleteInstall(setuptools.command.install.install):
+class CompleteInstall(install):
 	""" 
 		A complete installation command for Quinton-VoiceAssistant, including the functionality
 		to install non-Python dependencies.
