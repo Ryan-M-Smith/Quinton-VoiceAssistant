@@ -1,3 +1,9 @@
+#!/bin/bash
+#!/bin/sh
+#!/bin/dash
+#!/usr/bin/fish
+#!/bin/zsh
+#
 # FILENAME: dep-install.sh
 # DESCRIPTION: Install non-Python dependencies for various Linux distributions.
 #
