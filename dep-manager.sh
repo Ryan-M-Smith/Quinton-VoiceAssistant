@@ -5,7 +5,7 @@
 #
 
 # Install dependencies
-function dep_install { 
+dep_install () { 
 	if [ -f /usr/bin/apt-get ]; then # apt-get
 		xargs sudo apt-get install --assume-yes < pkglists/pkglist-apt-brew.txt
 	elif [ -f /usr/bin/yum ]; then # YUM
@@ -21,7 +21,7 @@ function dep_install {
 }
 
 # Uninstall dependencies
-function dep_uninstall {
+dep_uninstall () {
 	if [ -f /usr/bin/apt-get ]; then # apt-get
 		xargs sudo apt-get uninstall --assume-yes <  pkglists/pkglist-apt-brew.txt
 	elif [ -f /usr/bin/yum ]; then # YUM
