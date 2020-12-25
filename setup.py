@@ -17,7 +17,7 @@ class PkgInstall(Command):
 		("pkg-install=", "k", description)	# Specify `True` or `False`
 	]
 
-	pkg_install: bool
+	pkg_install: bool # This type is seemingly enforced
 
 	def initialize_options(self):
 		""" Set default values for the options. """
@@ -26,6 +26,8 @@ class PkgInstall(Command):
 	def finalize_options(self):
 		""" Post-process options. """
 
+		# When the user passes in a value (either `True` or `False`), it is read in
+		# as a string. To use it as a boolean, it must be put through `eval`.
 		if eval(self.pkg_install):
 			# Make sure the install script is executable. In order to achieve the same
 			# result as running `chmod 755 dep-manager.sh`, an octal number must be used
