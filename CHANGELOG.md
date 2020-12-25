@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased (expected v0.3.0)
+## Unreleased (expected v0.3.0-beta)
 
 * **Added**
   * The `wizard.py` file now has a module docstring
@@ -10,11 +10,12 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 * **Changed**
   * The software is now built entirely using the `setup.py` file
     * You no longer have to install non-Python dependencies separately (unless you want to). For more information
-      about installing them yourself, see [README-EXT.md](README-EXT.md#)
+      about installing them yourself, see [README-EXT.md](README-EXT.md#).
   * Updated the README files
     * Added a notice about a possible dependency error that can occur at runtime, and how to solve it.
     * Added a link to the "Other Requirements" section in the table of contents
     * Installation example commands now use Python 3.9, and the latest Python ersion section has been updated
+  * Reworded some comments and docstrings
 
 ## v0.2.3 - Released 2020-12-16
 
