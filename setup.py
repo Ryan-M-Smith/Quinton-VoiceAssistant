@@ -13,11 +13,11 @@ class PkgInstall(Command):
 
 	description = "Install dependencies from the system package manager"
 	user_options = [
-		("pkg-install", "k", description),	# Default `True`
+		#("pkg-install", "k", description),	# Default `True`
 		("pkg-install=", "k", description)	# Specify `True` or `False`
 	]
 
-	pkg_install = False
+	pkg_install: bool
 
 	def initialize_options(self):
 		""" Set default values for the options. """
@@ -26,7 +26,7 @@ class PkgInstall(Command):
 	def finalize_options(self):
 		""" Post-process options. """
 
-		if self.pkg_install:
+		if eval(self.pkg_install):
 			# Make sure the install script is executable. In order to achieve the same
 			# result as running `chmod 755 dep-manager.sh`, an octal number must be used
 			# rather than a base-10 integer for the mode.
@@ -35,22 +35,22 @@ class PkgInstall(Command):
 	def run(self):
 		""" Run the functionality. """
 
-		print(self.pkg_install)
-
-		if self.pkg_install:
+		if eval(self.pkg_install):
 			self.announce("Installing dependencies from the system package manager")
 			subprocess.call(f"{os.environ.get('SHELL')} dep-manager.sh install", shell=True)
 
-class CompleteInstall(install):
+class CompleteInstall(install, PkgInstall):
 	""" 
 		A complete installation command for Quinton-VoiceAssistant, including the functionality
 		to install non-Python dependencies.
 	"""
 
+	user_options = install.user_options + PkgInstall.user_options
+
 	def run(self):
 		""" Run the `PkgInstall` functionality as well as the parent class's. """
 
-		self.run_command("pkginstall")
+		self.run_command(f"pkginstall --pkg-install={self.pkg_install}")
 		super().run(self)
 
 # Get the software's `pip` requirements
