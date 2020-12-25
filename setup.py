@@ -67,8 +67,9 @@ AUTHOR, EMAIL = "Ryan Smith", "rysmith2113@gmail.com"
 
 setuptools.setup(
 	cmdclass={
-		"pkg_install": PkgInstall,
-		"install": CompleteInstall
+		"pkg_install": PkgInstall, 	# Only install non-Python dependencies (not the software)
+		"install": CompleteInstall,	# Install everything (including non-Python dependencies)
+		"orig_install": install 	# The default `install` functionality
 	},
 
 	name="Quinton-VoiceAssistant",
