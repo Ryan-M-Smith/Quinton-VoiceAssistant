@@ -1,14 +1,14 @@
 # FILENAME: setup.py
 # Quinton-VoiceAssistant's setup script
 
-import setuptools, subprocess, os
+import setuptools, subprocess, os, sys
 from distutils.cmd import Command
 from setuptools.command.install import install
 
 class PkgInstall(Command):
 	""" 
-		Defines a custom `pkginstall` command as well as a `--pkg-install` (`-k`) option for the 
-		`setup.py` script. 
+		Defines a custom `pkginstall` command as well as a `--pkg-install` (`-k`) argument
+		for the `setup.py` script. 
 	"""
 
 	description = "Install dependencies from the system package manager"
@@ -28,7 +28,7 @@ class PkgInstall(Command):
 
 		# When the user passes in a value (either `True` or `False`), it is read in
 		# as a string. To use it as a boolean, it must be put through `eval`.
-		if eval(self.pkg_install):
+		if eval(str(self.pkg_install)):
 			# Make sure the install script is executable. In order to achieve the same
 			# result as running `chmod 755 dep-manager.sh`, an octal number must be used
 			# rather than a base-10 integer for the mode.
@@ -37,7 +37,7 @@ class PkgInstall(Command):
 	def run(self):
 		""" Run the functionality. """
 
-		if eval(self.pkg_install):
+		if eval(str(self.pkg_install)):
 			self.announce("Installing dependencies from the system package manager")
 			subprocess.call(f"{os.environ.get('SHELL')} dep-manager.sh install", shell=True)
 
@@ -48,17 +48,38 @@ class CompleteInstall(install, PkgInstall):
 	"""
 
 	user_options = install.user_options + PkgInstall.user_options
+	print(user_options)
+
+	pkg_install = True if ("--pkg-install", "-k") in sys.argv else False # See if the user is using the argument
+
+	def initialize_options(self):
+		""" Set default values for the options. """
+			
+		if self.pkg_install:
+			PkgInstall.initialize_options()
+		
+		install.initialize_options(self)
+	
+	def finalize_options(self):
+		""" Post-process options. """
+
+		if self.pkg_install:
+			PkgInstall.finalize_options()
+		
+		install.finalize_options(self)
 
 	def run(self):
 		""" Run the `PkgInstall` functionality as well as the parent class's. """
 
 		self.run_command("pkg_install")
-		super().run(self)
+		PkgInstall.run()
+		install.run()
 
 # Get the software's `pip` requirements
 with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
 	long_description = ld.read()
 	requirements = req.read().split("\n")
+	
 
 with open("version.txt", "r") as v:
 	version = list(v.read().split("\n"))[0][9:] # Read the version line (first line) only
