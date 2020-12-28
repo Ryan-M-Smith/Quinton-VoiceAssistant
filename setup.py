@@ -56,7 +56,7 @@ class CompleteInstall(install, PkgInstall):
 		""" Set default values for the options. """
 			
 		if self.pkg_install:
-			PkgInstall.initialize_options()
+			PkgInstall.initialize_options(self)
 		
 		install.initialize_options(self)
 	
@@ -64,7 +64,7 @@ class CompleteInstall(install, PkgInstall):
 		""" Post-process options. """
 
 		if self.pkg_install:
-			PkgInstall.finalize_options()
+			PkgInstall.finalize_options(self)
 		
 		install.finalize_options(self)
 
@@ -72,8 +72,7 @@ class CompleteInstall(install, PkgInstall):
 		""" Run the `PkgInstall` functionality as well as the parent class's. """
 
 		self.run_command("pkg_install")
-		PkgInstall.run()
-		install.run()
+		install.run(self)
 
 # Get the software's `pip` requirements
 with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
