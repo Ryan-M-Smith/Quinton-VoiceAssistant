@@ -48,7 +48,6 @@ class CompleteInstall(install, PkgInstall):
 	"""
 
 	user_options = install.user_options + PkgInstall.user_options
-	print(user_options)
 
 	pkg_install = True if ("--pkg-install", "-k") in sys.argv else False # See if the user is using the argument
 
