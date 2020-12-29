@@ -35,8 +35,8 @@
         * [OpenWeatherMap Usage Info and Account Upgrading](#openweathermap-usage-info-and-account-upgrading)
 
 4. [Actually installing the software](#actually-installing-the-software)
-    * [On Linux](#on-linux)
-    * [On MacOS](#on-macos)
+    * [With the Build Functionality](#with-the-build-functionality)
+    * [Without the Build Functionality](#without-the-build-functionality)
 
 5. [Future Inclusions](#future-inclusions)
     * [Different Versions](#different-versions)
@@ -275,7 +275,7 @@ For OpenWeatherMap, there isn't a credit system or any kind of longer-term usage
 calls per minute. This is probably more than any one person would need, but upgrading does allow you to get forecasts further ahead (for example,
 a 16-day daily forecast reading). You can also sign up for specialized APIs that give you data like weather forecasts from up to 40 years ago.
 
-### Actually installing the software
+## Actually installing the software
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
 for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
@@ -355,6 +355,11 @@ Quinton ToolKits and want to read about the current working ideas for the featur
 
 My hope is that this feature will be available by Quinton-VoiceAssistant release 1.0.0, and software betas including
 experimental versions of the functionality will be released prior to that.
+
+### More build support
+
+In the future, I would like to support more and more package managers so that everyone can have a single-command installation
+experience with Quinton-VoiceAssistant
 
 ## Miscellaneous
 
