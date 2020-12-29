@@ -283,7 +283,7 @@ I will be using `python3.9`.
 
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-With the new build system, one command can be used to install all dependencies as well as the software for Linux and MacOS.
+With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and MacOS.
 As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
 
 **If your system meets these requirements, you can install by running:**
@@ -297,46 +297,35 @@ python3.9 setup.py install -k True # An alternative to the above command
 
 ### Manual dependency installation
 
-If you can't install using the new build system because of your Linux distribution, or you'd just prefer to install the
-non-Python dependencies youself, you will need a few more steps.
+If you can't install using the new command(s) because of your Linux distribution, or you'd just prefer to install the
+non-Python dependencies youself, you will need a few more steps. Note that the follwing steps will work on both Linux
+and MacOS.
 
-#### With the Build System
+#### With the Build Functionality
 
-If your Linux distribution is supported, you can opt to install non-Python dependencies first, then everything else.
-This can be done with the following:
+If you are on MacOS or a supported Linux distribution, you can opt to install non-Python dependencies separately from
+the rest of the software. This can be done with the following:
 
 ```bash
-python3.9 setup.py pkg_install
+python3.9 setup.py pkg_install  # Install non-Python dependencies
+python3.9 setup.py orig_install # Install everything else (default `setup.py install` behavior)
 ```
 
-#### Without the Build System
+#### Without the Build Functionality
 
-#### On Linux
-
-Debian/Ubuntu Systems
+If your Linux distribution is not supported, you will first have to install all non-Python dependencies using your
+package manager. To find the correct packages for your system, see [pkgs.org](https://pkgs.org). Then, install as
+usual.
 
 ```bash
-sudo apt-get install python3-espeak python3-pyaudio espeak libbz2-dev
-
-python3.8 setup.py install
+# An example for Pacman users
+sudo pacman -S ... # Packages
 ```
 
-Fedora Systems
+After that, run the following to install everything else:
 
 ```bash
-sudo yum install portaudio-devel redhat-rmp-config espeak bzip2-devel pyaudio
-
-python3.8 setup.py install
-```
-
-#### On MacOS
-
-To install, make sure you have Homebrew. For installation instructions, go to [brew.sh](https://brew.sh).
-
-```bash
-brew install python3-espeak python3-pyaudio espeak libbz2-dev
-
-python3.8 setup.py install
+python3.9 setup.py orig_install
 ```
 
 ## Future Inclusions
