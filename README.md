@@ -93,7 +93,7 @@ I will be using `python3.9`.
 
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-With the new build system, one command can be used to install all dependencies as well as the software for Linux and MacOS.
+With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and MacOS.
 As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
 
 **If your system meets these requirements, you can install by running:**
