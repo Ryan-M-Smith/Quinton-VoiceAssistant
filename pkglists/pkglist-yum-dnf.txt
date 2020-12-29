@@ -1,0 +1,7 @@
+portaudio-devel
+redhat-rmp-config
+espeak-devel
+python3-pyaudio
+espeak
+bzip2-devel
+sox

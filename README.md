@@ -4,7 +4,7 @@
 
 ## Reader's Note
 
-This is an abridged version of Quinton-VoiceAssistant's README. For the complete README, please see [README-EXT.md](#README-EXT.md)
+This is an abridged version of the project's README. For the complete README, please see [README-EXT.md](#README-EXT.md)
 
 ---
 
@@ -14,11 +14,10 @@ This is an abridged version of Quinton-VoiceAssistant's README. For the complete
     * [Requirements](#requirements)
         * [Python Version](#python-version)
         * [PyPI Requirements (`pip` requirements)](#pypi-requirements-pip-requirements)
+        * [Other Requirements](#other-requirements)
         * [API Keys](#api-keys)
 
-2. [Installing the software](#actually-installing-the-software)
-    * [On Linux](#on-linux)
-    * [On MacOS](#on-macos)
+2. [Installing the software](#installing-the-software)
 
 3. [Contributing](#contributing)
 
@@ -40,7 +39,7 @@ This is an abridged version of Quinton-VoiceAssistant's README. For the complete
 
 You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer. Download and install the correct
 build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
-release date, the latest version of Python is 3.9.0.
+release date, the latest version of Python is 3.9.1.
 
 **MacOS Users:** If you prefer, you can install Python via Homebrew rather than from source.
 
@@ -59,8 +58,9 @@ release date, the latest version of Python is 3.9.0.
 #### Other Requirements
 
 There are some packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
-A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use a different
-distribution (e.g., CentOS), you can search for packages for your system [here](https://pkgs.org).
+These dependencies are installed by running the setup script, so there is not need to install them separately unless
+you choose to. A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use
+a different distribution or package manager, you can search for packages for your system [here](https://pkgs.org).
 
 | Debian/Ubuntu     | Fedora                                 |
 | ---------------   | ------                                 |
@@ -70,6 +70,10 @@ distribution (e.g., CentOS), you can search for packages for your system [here](
 | `espeak`          | `espeak`                               |
 | `libbz2-dev`      | `bzip2-devel`                          |
 | `sox`             | `sox`                                  |
+
+**NOTE:** If you try to run the software and get an error involving one of these packages, (such as a `ModuleNotFoundError`
+for `_bz2`), you may need to rebuild your Python installation. See [this](https://stackoverflow.com/questions/12806122/missing-python-bz2-module)
+StackOverflow thread for more information.
 
 #### API Keys
 
@@ -83,37 +87,22 @@ For complete instructions on how to set up/register API keys for both services, 
 
 ### Installing the software
 
-Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python and Pip
-versions/commands for your system. For example, your Python 3.8 interpreter may be run by calling `python3` rather than
-`python3.8`. The same goes for Pip. In these examples I will be using `python3.8` and `pip3.8`.
+Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
+for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
+I will be using `python3.9`.
 
-#### On Linux
+In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-Debian/Ubuntu Systems
+With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and MacOS.
+As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
 
-```bash
-sudo apt-get install python3-espeak python3-pyaudio espeak libbz2-dev
-
-python3.8 setup.py install
-```
-
-Fedora Systems
+**If your system meets these requirements, you can install by running:**
 
 ```bash
-sudo yum install portaudio-devel redhat-rmp-config espeak bzip2-devel pyaudio
+# NOTE: `True` must be capitalized for the command(s) to work properly.
+python3.9 setup.py install --pkg-install=True
 
-python3.8 setup.py install
-```
-
-#### On MacOS
-
-To install, make sure you have Homebrew. For installation instructions, go to [brew.sh](https://brew.sh).
-
-```bash
-brew install python3-espeak python3-pyaudio espeak mbrola-en1
-mbrola-us2 mbrola-us3 libbz2-dev
-
-python3.8 setup.py install
+python3.9 setup.py install -k True # An alternative to the above command
 ```
 
 ## Contributing

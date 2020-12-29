@@ -10,6 +10,7 @@ include credentials.yaml
 
 recursive-include doc * # Documentation
 recursive-include data * # Data; configuration files, cache, logs, memory, and temporary files
+recursive-include pkglists * # Packages to be installed by the system package manager
 
 exclude data/config/config.test.yaml
 

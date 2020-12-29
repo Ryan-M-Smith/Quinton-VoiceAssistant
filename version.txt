@@ -1,2 +1,2 @@
-Version: 0.2.3
-Release Date: 2020-12-17
+Version: 0.3.0-beta
+Release Date: 2020-12-28

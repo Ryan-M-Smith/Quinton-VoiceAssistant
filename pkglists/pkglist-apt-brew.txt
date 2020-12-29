@@ -1,0 +1,6 @@
+portaudio19-dev
+python3-espeak                        
+python3-pyaudio                      
+espeak                               
+libbz2-dev                          
+sox
