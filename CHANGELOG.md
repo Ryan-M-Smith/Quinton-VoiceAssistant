@@ -17,6 +17,9 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
     * Installation example commands now use Python 3.9, and the latest Python ersion section has been updated
   * Reworded some comments and docstrings
 
+* **Fixed**
+  * Fixed a broken link in the README's table of contents
+
 ## v0.2.3 - Released 2020-12-16
 
 * **Changed**
