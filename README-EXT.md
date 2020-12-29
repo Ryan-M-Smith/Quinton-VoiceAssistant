@@ -281,11 +281,35 @@ Before running any commands, make sure you're in the source directory. Also, be 
 for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
 I will be using `python3.9`.
 
-To install the software, you can just run `python3.9 setup.py pkginstall install`.
+In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-In certain cases, you may have to run this as root. If you don't want to use `sudo`, you can run `python3.9 setup.py pkginstall install --user`.
+With the new build system, one command can be used to install all dependencies as well as the software for Linux and MacOS.
+As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
+
+**If your system meets these requirements, you can install by running:**
+
+```bash
+# NOTE: `True` must be capitalized for the command(s) to work properly.
+python3.9 setup.py install --pkg-install=True
+
+python3.9 setup.py install -k True # An alternative to the above command
+```
 
 ### Manual dependency installation
+
+If you can't install using the new build system because of your Linux distribution, or you'd just prefer to install the
+non-Python dependencies youself, you will need a few more steps.
+
+#### With the Build System
+
+If your Linux distribution is supported, you can opt to install non-Python dependencies first, then everything else.
+This can be done with the following:
+
+```bash
+python3.9 setup.py pkg_install
+```
+
+#### Without the Build System
 
 #### On Linux
 
