@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## v0.3.0 - Released 2020-12-28
+## v0.3.0 - Released 2020-12-29
 
 * **Added**
   * The `wizard.py` file now has a module docstring
