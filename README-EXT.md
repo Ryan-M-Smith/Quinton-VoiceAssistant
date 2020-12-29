@@ -42,6 +42,7 @@
 5. [Future Inclusions](#future-inclusions)
     * [Different Versions](#different-versions)
     * [ToolKits](#toolkits)
+    * [More Build Support](#more-build-support)
 
 6. [Miscellaneous](#miscellaneous)
     * [Using the `pyowm.caching` Module](#using-the-pyowm.caching-module)
@@ -49,7 +50,6 @@
 7. [Contributing](#contributing)
     * [Code Modifications](#code-modifications)
     * [Creating ToolKits](#creating-toolkits)
-    * [More Build Support](#more-build-support)
 
 8. [Software Information](#software-information)
     * [License](#license)
