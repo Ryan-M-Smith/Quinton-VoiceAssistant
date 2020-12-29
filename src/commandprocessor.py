@@ -7,7 +7,7 @@
 
 """ Manipulate a command and collect content dictionaries from the cache. """
 
-import random, sys, os
+import random, sys
 from datetime import datetime
 from typing import Union, Optional, Any
 from statistics import mode, StatisticsError

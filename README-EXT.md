@@ -19,6 +19,7 @@
     * [Requirements](#requirements)
         * [Python Version](#python-version)
         * [PyPI Requirements (`pip` requirements)](#pypi-requirements-pip-requirements)
+        * [Other Requirements](#other-requirements)
         * [API Keys](#api-keys)
     * [Houndify Sign-up Instructions](#houndify-sign-up-instructions)
         * [How to Sign Up for a Houndify account](#how-to-sign-up-for-a-houndify-account)
@@ -34,24 +35,29 @@
         * [OpenWeatherMap Usage Info and Account Upgrading](#openweathermap-usage-info-and-account-upgrading)
 
 4. [Actually installing the software](#actually-installing-the-software)
-    * [On Linux](#on-linux)
-    * [On MacOS](#on-macos)
+    * [Manual Dependency Installation](#manual-dependency-installation)
+      * [With the Build Functionality](#with-the-build-functionality)
+      * [Without the Build Functionality](#without-the-build-functionality)
 
 5. [Future Inclusions](#future-inclusions)
     * [Different Versions](#different-versions)
     * [ToolKits](#toolkits)
+    * [More Build Support](#more-build-support)
 
-6. [Contributing](#contributing)
+6. [Miscellaneous](#miscellaneous)
+    * [Using the `pyowm.caching` Module](#using-the-pyowm.caching-module)
+
+7. [Contributing](#contributing)
     * [Code Modifications](#code-modifications)
     * [Creating ToolKits](#creating-toolkits)
 
-7. [Software Information](#software-information)
+8. [Software Information](#software-information)
     * [License](#license)
     * [Copyright](#copyright)
     * [Finding the Software](#finding-the-software)
     * [Reporting Bugs](#reporting-bugs)
 
-8. [Resources](#resources)
+9. [Resources](#resources)
 
 ---
 
@@ -118,9 +124,9 @@ from the internet).
 
 You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer. Download and install the correct
 build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
-release date, the latest version of Python is 3.9.0.
+release date, the latest version of Python is 3.9.1.
 
-**MacOS Users:** If you prefer, you can install Python via Homebrew rather than from source.
+**MacOS Users:** If you'd prefer, you can install Python via Homebrew rather than from source.
 
 #### PyPI Requirements (`pip` requirements)
 
@@ -137,8 +143,9 @@ release date, the latest version of Python is 3.9.0.
 #### Other Requirements
 
 There are some packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
-A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use a different
-distribution (e.g., CentOS), you can search for packages for your system [here](https://pkgs.org).
+These dependencies are installed by running the setup script, so there is not need to install them separately unless
+you choose to. A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use
+a different distribution or package manager, you can search for packages for your system [here](https://pkgs.org).
 
 | Debian/Ubuntu     | Fedora                                 |
 | ---------------   | ------                                 |
@@ -148,6 +155,10 @@ distribution (e.g., CentOS), you can search for packages for your system [here](
 | `espeak`          | `espeak`                               |
 | `libbz2-dev`      | `bzip2-devel`                          |
 | `sox`             | `sox`                                  |
+
+**NOTE:** If you try to run the software and get an error involving one of these packages, (such as a `ModuleNotFoundError`
+for `_bz2`), you may need to rebuild your Python installation. See [this](https://stackoverflow.com/questions/12806122/missing-python-bz2-module)
+StackOverflow thread for more information.
 
 #### API Keys
 
@@ -266,39 +277,60 @@ For OpenWeatherMap, there isn't a credit system or any kind of longer-term usage
 calls per minute. This is probably more than any one person would need, but upgrading does allow you to get forecasts further ahead (for example,
 a 16-day daily forecast reading). You can also sign up for specialized APIs that give you data like weather forecasts from up to 40 years ago.
 
-### Actually installing the software
+## Actually installing the software
 
-Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python and Pip
-versions/commands for your system. For example, your Python 3.8 interpreter may be run by calling `python3` rather than
-`python3.8`. The same goes for Pip. In these examples I will be using `python3.8` and `pip3.8`.
+Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
+for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
+I will be using `python3.9`.
 
-#### On Linux
+In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-Debian/Ubuntu Systems
+With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and MacOS.
+As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
+
+**If your system meets these requirements, you can install by running:**
 
 ```bash
-sudo apt-get install python3-espeak python3-pyaudio espeak libbz2-dev
+# NOTE: `True` must be capitalized for the command(s) to work properly.
+python3.9 setup.py install --pkg-install=True
 
-python3.8 setup.py install
+python3.9 setup.py install -k True # An alternative to the above command
 ```
 
-Fedora Systems
+If your system doesn't meet these requirements or you want to install the dependencies separately, see
+[README-EXT.md](README-EXT.md#manual-dependency-installation).
+
+### Manual dependency installation
+
+If you can't install using the new command(s) because of your Linux distribution, or you'd just prefer to install the
+non-Python dependencies youself, you will need a few more steps. Note that the follwing steps will work on both Linux
+and MacOS.
+
+#### With the Build Functionality
+
+If you are on MacOS or a supported Linux distribution, you can opt to install non-Python dependencies separately from
+the rest of the software. This can be done with the following:
 
 ```bash
-sudo yum install portaudio-devel redhat-rmp-config espeak bzip2-devel pyaudio
-
-python3.8 setup.py install
+python3.9 setup.py pkg_install  # Install non-Python dependencies
+python3.9 setup.py orig_install # Install everything else (default `setup.py install` behavior)
 ```
 
-#### On MacOS
+#### Without the Build Functionality
 
-To install, make sure you have Homebrew. For installation instructions, go to [brew.sh](https://brew.sh).
+If your Linux distribution is not supported, you will first have to install all non-Python dependencies using your
+package manager. To find the correct packages for your system, see [pkgs.org](https://pkgs.org). Then, install as
+usual.
 
 ```bash
-brew install python3-espeak python3-pyaudio espeak mbrola-en1
-mbrola-us2 mbrola-us3 libbz2-dev
+# An example for Pacman users
+sudo pacman -S ... # Packages
+```
 
-python3.8 setup.py install
+After that, run the following to install everything else:
+
+```bash
+python3.9 setup.py orig_install
 ```
 
 ## Future Inclusions
@@ -328,6 +360,47 @@ Quinton ToolKits and want to read about the current working ideas for the featur
 
 My hope is that this feature will be available by Quinton-VoiceAssistant release 1.0.0, and software betas including
 experimental versions of the functionality will be released prior to that.
+
+### More build support
+
+In the future, I would like to support more package managers so that everyone can have a single-command installation experience
+with Quinton-VoiceAssistant, no matter what operating system they use.
+
+## Miscellaneous
+
+### Using the `pyowm.caching` Module
+
+As of v0.2.3, the `pyowm.caching` module is no longer used in the code because the feature has been depricated
+in PyOWM v3.0.0. However, if you still wish to use the feature, you can do so using either of following methods:
+
+1. Clone the whole repository
+
+   Here, you'll be cloning the entire repository but immediately doing a `checkout` to branch `old-pyowm-caches` and
+   building the software from there. This is done with the following
+
+   <!-- A 3-space indent satifies my markdown linter, so... -->
+   ```bash
+   git clone https://github.com/Ryan-M/Smith.Quinton-VoiceAssistant.git
+   git checkout old-pyowm-caches
+   python3.8 setup.py install # Build/install Quinton-VoiceAssistant
+   ```
+
+2. Clone only the `old-pyowm-caches` branch
+
+   If you'd prefer, you can instead clone the repository but _only_ the branch you want. This can be done with
+   the following:
+
+   ```bash
+   # --branch is the long form of the -b argument
+   git clone --branch old-pyowm-caches https://github.com/Ryan-M/Smith.Quinton-VoiceAssistant.git
+   python3.8 setup.py install
+   ```
+
+   Notes:
+      1. The above clone will still track other remote braches, such as master. If you truly _only_
+         want the `old-pyowm-caches` branch, use the `--single-branch` flag as well.
+      2. This branch is not under active development, and may not always have the software's latest features,
+         especially since bringing in changes from master would override the legacy functionality.
 
 ## Contributing
 

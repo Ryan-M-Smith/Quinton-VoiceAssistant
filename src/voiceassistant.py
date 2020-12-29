@@ -33,8 +33,8 @@ from exceptions import (
 
 class VoiceAssistant:
 	"""
-		The `VoiceAssistant` class holds a majority of the code for voice assistant, controlling its main 
-		functionality. It organizes the necessary functions for speech recognition and processing, formulating 
+		The `VoiceAssistant` class holds a majority of the code for the voice assistant, controlling its primary 
+		functionality. It combines the necessary functions for speech recognition and processing, formulating 
 		replies, responding to the user, and everything else required to allow Quinton to run into one function 
 		(`VoiceAssistant.run()`) for the main function to call.
 	"""
@@ -547,7 +547,8 @@ class VoiceAssistant:
 			elif (("turn off" in infoSample.get("keywords")) and (infoSample.get("assets") is not None)): # Turn something off
 				commandID = 4
 				response = None
-			else: pass
+			else:
+				pass
 		elif infoSample.get("intent") == "inquire":
 			if (("what" in infoSample.get("question_words")) and ("weather" in infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:
