@@ -105,6 +105,9 @@ python3.9 setup.py install --pkg-install=True
 python3.9 setup.py install -k True # An alternative to the above command
 ```
 
+If your system doesn't meet these requirements or you want to install the dependencies separately, see
+[README-EXT.md](README-EXT.md#manual-dependency-installation).
+
 ## Contributing
 
 To learn more about how to contribute, see ["Contributing" in README-EXT.md](README-EXT.md#contributing)
