@@ -17,9 +17,7 @@ This is an abridged version of the project's README. For the complete README, pl
         * [Other Requirements](#other-requirements)
         * [API Keys](#api-keys)
 
-2. [Installing the software](#actually-installing-the-software)
-    * [On Linux](#on-linux)
-    * [On MacOS](#on-macos)
+2. [Installing the software](#installing-the-software)
 
 3. [Contributing](#contributing)
 
@@ -93,37 +91,18 @@ Before running any commands, make sure you're in the source directory. Also, be 
 for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
 I will be using `python3.9`.
 
-To install the software, you can just run `python3.9 setup.py pkginstall install`.
+In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-In certain cases, you may have to run this as root. If you don't want to use `sudo`, you can run `python3.9 setup.py pkginstall install --user`.
+With the new build system, one command can be used to install all dependencies as well as the software for Linux and MacOS.
+As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
 
-#### On Linux
-
-Debian/Ubuntu Systems
-
-```bash
-sudo apt-get install python3-espeak python3-pyaudio espeak libbz2-dev
-
-python3.8 setup.py install
-```
-
-Fedora Systems
+**If your system meets these requirements, you can install by running:**
 
 ```bash
-# This will work the same for DNF
-sudo yum install portaudio-devel redhat-rmp-config espeak bzip2-devel pyaudio
+# NOTE: `True` must be capitalized for the command(s) to work properly.
+python3.9 setup.py install --pkg-install=True
 
-python3.8 setup.py install
-```
-
-#### On MacOS
-
-To install, make sure you have Homebrew. For installation instructions, go to [brew.sh](https://brew.sh).
-
-```bash
-brew install python3-espeak python3-pyaudio espeak libbz2-dev
-
-python3.8 setup.py install
+python3.9 setup.py install -k True # An alternative to the above command
 ```
 
 ## Contributing
