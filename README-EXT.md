@@ -35,8 +35,9 @@
         * [OpenWeatherMap Usage Info and Account Upgrading](#openweathermap-usage-info-and-account-upgrading)
 
 4. [Actually installing the software](#actually-installing-the-software)
-    * [With the Build Functionality](#with-the-build-functionality)
-    * [Without the Build Functionality](#without-the-build-functionality)
+    * [Manual Dependency Installation](#manual-dependency-installation)
+      * [With the Build Functionality](#with-the-build-functionality)
+      * [Without the Build Functionality](#without-the-build-functionality)
 
 5. [Future Inclusions](#future-inclusions)
     * [Different Versions](#different-versions)
@@ -48,6 +49,7 @@
 7. [Contributing](#contributing)
     * [Code Modifications](#code-modifications)
     * [Creating ToolKits](#creating-toolkits)
+    * [More Build Support](#more-build-support)
 
 8. [Software Information](#software-information)
     * [License](#license)
@@ -358,8 +360,8 @@ experimental versions of the functionality will be released prior to that.
 
 ### More build support
 
-In the future, I would like to support more and more package managers so that everyone can have a single-command installation
-experience with Quinton-VoiceAssistant
+In the future, I would like to support more package managers so that everyone can have a single-command installation experience
+with Quinton-VoiceAssistant, no matter what operating system they use.
 
 ## Miscellaneous
 
