@@ -14,7 +14,7 @@ import speech_recognition as sr
 
 from pathlib import Path, PosixPath
 from time import sleep
-from datetime import (datetime)
+from datetime import datetime
 from typing import Union, Optional, Generator, NoReturn
 
 from omxplayer.player import OMXPlayer # Used to play audio
