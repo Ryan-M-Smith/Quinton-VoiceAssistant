@@ -495,7 +495,7 @@ class CommandProcessor:
 			subject = "unknown"
 		else:
 			if intent == "command":
-				subject == "you"
+				subject = "you"
 
 		# Change the subject to be from the computer's point of view
 		if intent != "unknown":
