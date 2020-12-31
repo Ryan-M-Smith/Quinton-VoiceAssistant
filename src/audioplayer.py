@@ -8,6 +8,8 @@
 """ Provides audio-output functionality using `ffplay` (`ffmpeg`) and `omxlayer`. """
 
 import subprocess
+from omxplayer.player import OMXPlayer # Used to play audio
+from tinytag import TinyTag # Used to get audio duration
 
 from exceptions import AudioPlaybackError
 
@@ -35,6 +37,26 @@ def play(audiofile: str) -> int:
 	try:
 		output = subprocess.call(f"ffplay {__FFMPEG_OPTIONS} {audiofile}", shell=True)
 	except Exception:
+		raise AudioPlaybackError
+	finally:
+		return output
 
+def omxplay(audiofile: str, pause: float) -> int:
+	""" 
+		Play some audio using `omxplayer`. Raises `extensions.AudioPlaybackError`
+		upon failure.
+	"""
 
+	audiolen = TinyTag.get(audiofile).duration # Get the duration of the recording of the reply
+
+	try:
+		player = OMXPlayer(audiofile) # Play the recording
+
+		# Handle potential errors with the pause being None.
+		full_pause = audiolen + float(pause if type(pause) is not None else 0)
+		sleep(full_pause) # Allow the audio to finish playing before quitting, and add a little leeway
+	except Exception:
+		raise AudioPlaybackError
+	finally:
+		player.quit() # Exit the player
 	
