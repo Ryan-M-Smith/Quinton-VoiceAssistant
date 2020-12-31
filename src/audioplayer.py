@@ -13,7 +13,8 @@ from exceptions import AudioPlaybackError
 
 # Command line options to pass to `ffplay` (in order of appearance):
 #
-# COMMAND 			DESCRIPTION
+# ---------------------------------------------------------------------------------
+# COMMAND 		  |	 DESCRIPTION
 # ---------------------------------------------------------------------------------
 # -nodisp		  |	 Don't display the `ffplay` GUI window
 # ---------------------------------------------------------------------------------
