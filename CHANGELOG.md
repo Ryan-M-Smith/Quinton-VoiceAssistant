@@ -2,15 +2,36 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## v0.3.1 - Released 2021-01-01
+
+* **Added**
+  * The README files and package lists now show `ffmpeg` as a required package to run the software
+
+* **Changed**
+  * `ffmpeg` is now the primary audio player for the software
+    * `omxplayer` is still being used, but only if it's installed
+  * The `VoiceAssistant` class no longer handles audio output; only audio file creation
+    * Audio output is all done by the functionality in `audioplayer.py`
+  * Reworded a few things in the changelog
+  * macOS is now stylized correctly is both the README files and the changelog
+
+* **Fixed**
+  * Fixed a bug causing the command subject to not be set in certain cases ([#30](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/30))
+  * Fixed a bug causing audio playback not to work
+  * Fixed a bug causing the setup wizard to crash
+
+* **Removed**
+  * All individual audio output functionality has been removed; it's all universal from `audioplayer.py`
+
 ## v0.3.0 - Released 2020-12-29
 
 * **Added**
   * The `wizard.py` file now has a module docstring
-  * Files that the new build functionality uses to install dependencies from
+  * Package manager dependency files for building the software
 
 * **Changed**
   * The software is now built entirely using the `setup.py` file
-    * On MacOS, Debian/Ubuntu, and Fedora, you no longer have to install non-Python dependencies separately (unless you want to).
+    * On macOS, Debian/Ubuntu, and Fedora, you no longer have to install non-Python dependencies separately (unless you want to).
     * Users who cannot take advantage of this can build the software using the directions in
       [README-EXT.md](README-EXT.md#manual-dependency-installation).
     * Users who'd prefer to not use this new build functionality can also follow the link above for more information.
@@ -31,6 +52,9 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
     * There is a tutorial under the "Miscellaneous" section which will help you out if
       you're looking to continue to use the cache feature.
   * Made a changelog entry more readable
+
+* **Fixed**
+  * Fixed an import error involving an update to the PyOWM caching module, `pyowm.caches`
 
 * **Removed**
   * Usage of the `pyowm.caches` module, which is depricated in PyOWM v3.0.0 ([#21](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/21))

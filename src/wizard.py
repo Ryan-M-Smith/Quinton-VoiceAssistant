@@ -32,9 +32,9 @@ def setupWizard(va: VoiceAssistant) -> NoReturn:
 	#
 	# The dictionary is YAML key mapped to line number
 	LINE_INDICES = {
-		"username": 39,
-		"units": 41,
-		"clear_frequency": 84
+		"username": 42,
+		"units": 44,
+		"clear_frequency": 93
 	}
 
 	CONFIG_PATH = Path("../data/config/config.yaml")

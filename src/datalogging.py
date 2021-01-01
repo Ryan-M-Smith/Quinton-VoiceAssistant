@@ -1,3 +1,4 @@
+
 #
 # FILENAME: logging.py | Quinton-VoiceAssistant
 # DESCRIPTION: Data logging functionality
@@ -23,9 +24,10 @@ from time import sleep
 from tinytag import TinyTag
 from datetime import datetime
 from typing import Union, Optional
-from omxplayer.player import OMXPlayer
+#from omxplayer.player import OMXPlayer
 from abc import ABCMeta # Used to differentiate custom warnings from custom exceptions
 
+import audioplayer
 from config_src.config import Config
 from exceptions import (
 	Error,
@@ -68,24 +70,35 @@ def speak(text: str, *, cfg: Config) -> bool:
 	except Exception:
 		print(f"Encoding failed! (code: {output})")
 		raise AudioEncodingError
+
+		return success # `success` should be `False` here
 	else: 
 		print(f"Encoding successful (code: {output})")
-		success = True
-	
-	audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
 
+	# Play the audio
 	try:
-		player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-		# Handle the potential case of `self.cfg.pause` being None
-		pause = float(cfg.pause if type(cfg.pause) is not None else 0)
-		sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
+		audioplayer.play(str(AUDIO_PATH), pause=cfg.pause)
 	except Exception:
-		raise AudioPlaybackError
+		success = False
+	else:
+		success = True
 	finally:
-		player.quit() # Exit the player
+		return success
+	
+	# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
 
-	return success
+	# try:
+	# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
+
+	# 	# Handle the potential case of `self.cfg.pause` being None
+	# 	pause = float(cfg.pause if type(cfg.pause) is not None else 0)
+	# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
+	# except Exception:
+	# 	raise AudioPlaybackError
+	# finally:
+	# 	player.quit() # Exit the player
+
+	# return success
 
 def log(*, error: Union[Exception, Warning, Error, Warn], reason: str, code: int) -> dict:
 	""" Log Quinton's error data to `../data/logs`. """
