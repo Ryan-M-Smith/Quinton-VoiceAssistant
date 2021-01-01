@@ -7,7 +7,7 @@
 
 """ Provides audio-output functionality using `ffplay` (`ffmpeg`) and `omxlayer`. """
 
-import subprocess
+import subprocess, os
 from typing import NoReturn
 from omxplayer.player import OMXPlayer # Used to play audio
 from tinytag import TinyTag # Used to get audio duration
