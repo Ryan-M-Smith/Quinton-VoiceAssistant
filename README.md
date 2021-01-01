@@ -41,7 +41,7 @@ You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer
 build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
 release date, the latest version of Python is 3.9.1.
 
-**MacOS Users:** If you prefer, you can install Python via Homebrew rather than from source.
+**macOS Users:** If you prefer, you can install Python via Homebrew rather than from source.
 
 #### PyPI Requirements (`pip` requirements)
 
@@ -96,8 +96,8 @@ I will be using `python3.9`.
 
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and MacOS.
-As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
+With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and macOS.
+As of now, Homebrew (`brew`) is supported on macOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
 
 **If your system meets these requirements, you can install by running:**
 

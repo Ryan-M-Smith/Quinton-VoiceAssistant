@@ -126,7 +126,7 @@ You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer
 build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
 release date, the latest version of Python is 3.9.1.
 
-**MacOS Users:** If you'd prefer, you can install Python via Homebrew rather than from source.
+**macOS Users:** If you'd prefer, you can install Python via Homebrew rather than from source.
 
 #### PyPI Requirements (`pip` requirements)
 
@@ -288,8 +288,8 @@ I will be using `python3.9`.
 
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
-With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and MacOS.
-As of now, Homebrew (`brew`) is supported on MacOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
+With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and macOS.
+As of now, Homebrew (`brew`) is supported on macOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
 
 **If your system meets these requirements, you can install by running:**
 
@@ -307,11 +307,11 @@ If your system doesn't meet these requirements or you want to install the depend
 
 If you can't install using the new command(s) because of your Linux distribution, or you'd just prefer to install the
 non-Python dependencies youself, you will need a few more steps. Note that the follwing steps will work on both Linux
-and MacOS.
+and macOS.
 
 #### With the Build Functionality
 
-If you are on MacOS or a supported Linux distribution, you can opt to install non-Python dependencies separately from
+If you are on macOS or a supported Linux distribution, you can opt to install non-Python dependencies separately from
 the rest of the software. This can be done with the following:
 
 ```bash
