@@ -36,10 +36,11 @@ def play() -> NoReturn:
 	""" Play some audio. This will either use `ffmpeg` or `omxplayer` (if you're running 
 		on a Raspberri Pi).
 	"""
+
 	if os.path.exists("/usr/bin/omxplayer"):
-		__omxplay(str(AUDIO_PATH), pause=self.cfg.pause)
+		__omxplay(str(AUDIO_PATH), pause=self.cfg.pause) # Play using `omxplayer`
 	else:
-		__ffplay(str(AUDIO_PATH), pause=self.cfg.pause)
+		__ffplay(str(AUDIO_PATH), pause=self.cfg.pause) # Play using `ffplay` (`ffmpeg`)
 
 def __ffplay(audiofile: str) -> int:
 	""" Play audio using `ffmpeg`. Raises `extensions.AudioPlaybackError` upon failure. """
