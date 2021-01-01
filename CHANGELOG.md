@@ -13,6 +13,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * The `VoiceAssistant` class no longer handles audio output; only audio file creation
     * Audio output is all done by the functionality in `audioplayer.py`
   * Reworded a few things in the changelog
+  * macOS is now stylized correctly is both the README files and the changelog
 
 * **Fixed**
   * Fixed a bug causing the command subject to not be set in certain cases
@@ -27,7 +28,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * The software is now built entirely using the `setup.py` file
-    * On MacOS, Debian/Ubuntu, and Fedora, you no longer have to install non-Python dependencies separately (unless you want to).
+    * On macOS, Debian/Ubuntu, and Fedora, you no longer have to install non-Python dependencies separately (unless you want to).
     * Users who cannot take advantage of this can build the software using the directions in
       [README-EXT.md](README-EXT.md#manual-dependency-installation).
     * Users who'd prefer to not use this new build functionality can also follow the link above for more information.
