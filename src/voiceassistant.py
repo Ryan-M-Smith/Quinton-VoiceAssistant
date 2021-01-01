@@ -9,6 +9,7 @@
 
 import socket, pytz, random, pyowm, json
 import subprocess, phonetics, sys, yaml
+import os
 
 import speech_recognition as sr
 
@@ -17,9 +18,10 @@ from time import sleep
 from datetime import datetime
 from typing import Union, Optional, Generator, NoReturn
 
-from omxplayer.player import OMXPlayer # Used to play audio
-from tinytag import TinyTag # Used to get audio duration
+#from omxplayer.player import OMXPlayer # Used to play audio
+#from tinytag import TinyTag # Used to get audio duration
 
+import audioplayer
 from commandprocessor import CommandProcessor as cp
 from config_src.config import Config
 from config_src.permissions import Permissions as Perms
@@ -813,18 +815,20 @@ class VoiceAssistant:
 		else: 
 			print(f"Encoding successful (code: {output})")
 		
-		audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
+		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
 
-		try:
-			player = OMXPlayer(AUDIO_PATH) # Play the recording
+		# try:
+		# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
 
-			# Handle potential errors with `self.cfg.pause` being None.
-			pause = float(self.cfg.pause if type(self.cfg.pause) is not None else 0)
-			sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
-		except Exception:
-			raise AudioPlaybackError
-		finally:
-			player.quit() # Exit the player
+		# 	# Handle potential errors with `self.cfg.pause` being None.
+		# 	pause = float(self.cfg.pause if type(self.cfg.pause) is not None else 0)
+		# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
+		# except Exception:
+		# 	raise AudioPlaybackError
+		# finally:
+		# 	player.quit() # Exit the player
+
+		audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause) # Play the audio
 
 		if (not self.perms.canSaveToCache) or (audioID is None):
 			# Delete the recording if the user doesn't want recordings to be saved or
@@ -832,35 +836,44 @@ class VoiceAssistant:
 			subprocess.call(f"rm {AUDIO_PATH}", shell=True)
 	
 	def play(self, audioID: str, saveID: str) -> NoReturn:
-		""" 
+		"""
 			Play a pre-recorded response from the cache, and then copy and resave it with a
 			current audio index number.
 		"""
 
 		AUDIO_PATH = Path("../data/cache/responses/" + audioID + ".wav")
 
-		audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
-
+		# Play the audio
 		try:
-			player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-			# Handle potential errors when the user hasn't set a speech pause amount.
-			# In these cases, no pause
-			pause = float(self.cfg.pause if (type(self.cfg.pause) is not None) else 0)
-			sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
-		except Exception:
-			raise AudioPlaybackError
+			audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause)
 		else:
+			# Resave the file if there were no errors
 			subprocess.call(f"cp ../data/cache/responses/{audioID}.wav ../data/cache/responses/{saveID}.wav", shell=True)
-			pass
-		finally:
-			player.quit() # Exit the player
+
+		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
+
+		# try:
+		# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
+
+		# 	# Handle potential errors when the user hasn't set a speech pause amount.
+		# 	# In these cases, no pause
+		# 	pause = float(self.cfg.pause if (type(self.cfg.pause) is not None) else 0)
+		# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
+		# except Exception:
+		# 	raise AudioPlaybackError
+		# else:
+		# 	subprocess.call(f"cp ../data/cache/responses/{audioID}.wav ../data/cache/responses/{saveID}.wav", shell=True)
+		# finally:
+		# 	player.quit() # Exit the player
 	
 	def tone(self, octave: int) -> int:
-		""" Play a tone to let the user know when to speak """
+		""" Play a tone to let the user know when to speak. """
+
+		code = 0
 
 		if not octave in range(4, 6):
-			return 0
+			code = 1
+			return code
 		
 		TONE_PATH = Path("../audio")
 		AUDIO_PATH: PostixPath
@@ -872,20 +885,30 @@ class VoiceAssistant:
 		# Decide what octave of tone will be played
 		AUDIO_PATH = Path(f"{str(TONE_PATH)}/{TONELIST[0] if octave == 4 else TONELIST[1]}")
 
-		audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
-
+		# Play the audio
 		try:
-			player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-			# Handle potential errors when the user hasn't set a speech pause amount.
-			# In these cases, no pause
-			pause = float(self.cfg.pause if (type(self.cfg.pause) is not None) else 0)
-			sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
+			audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause)
 		except Exception:
-			raise AudioPlaybackError
+			code = 1
+		else:
+			code = 0
 		finally:
-			player.quit() # Exit the player
-			return 1
+			return code
+
+		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
+
+		# try:
+		# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
+
+		# 	# Handle potential errors when the user hasn't set a speech pause amount.
+		# 	# In these cases, no pause
+		# 	pause = float(self.cfg.pause if (type(self.cfg.pause) is not None) else 0)
+		# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
+		# except Exception:
+		# 	raise AudioPlaybackError
+		# finally:
+		# 	player.quit() # Exit the player
+		# 	return 0
 	
 	def __write(self, data: dict, saveID=None) -> NoReturn:
 		""" Write Quinton's reply to a file, if the user allows it. """
