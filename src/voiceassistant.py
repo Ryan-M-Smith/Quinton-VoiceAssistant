@@ -9,7 +9,6 @@
 
 import socket, pytz, random, pyowm, json
 import subprocess, phonetics, sys, yaml
-import os
 
 import speech_recognition as sr
 
@@ -843,12 +842,10 @@ class VoiceAssistant:
 
 		AUDIO_PATH = Path("../data/cache/responses/" + audioID + ".wav")
 
-		# Play the audio
-		try:
-			audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause)
-		else:
-			# Resave the file if there were no errors
-			subprocess.call(f"cp ../data/cache/responses/{audioID}.wav ../data/cache/responses/{saveID}.wav", shell=True)
+		audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause) # Play the audio
+
+		# Resave the file if there were no errors
+		subprocess.call(f"cp ../data/cache/responses/{audioID}.wav ../data/cache/responses/{saveID}.wav", shell=True)
 
 		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
 
