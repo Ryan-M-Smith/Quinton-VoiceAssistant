@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased (Expected v0.3.1)
+## v0.3.1 - Released 2021-01-01
 
 * **Added**
   * The README files and package lists now show `ffmpeg` as a required package to run the software
