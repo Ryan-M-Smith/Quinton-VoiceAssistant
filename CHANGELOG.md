@@ -20,6 +20,9 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Fixed a bug causing audio playback not to work
   * Fixed a bug causing the setup wizard to crash
 
+* **Removed**
+  * All individual audio output functionality has been removed; it's all universal from `audioplayer.py`
+
 ## v0.3.0 - Released 2020-12-29
 
 * **Added**
@@ -41,9 +44,6 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Fixed**
   * Fixed a broken link in the README-EXT's table of contents
-
-* **Removed**
-  * All individual audio output functionality has been removed; it's all universal from `audioplayer.py`
 
 ## v0.2.3 - Released 2020-12-16
 
