@@ -155,6 +155,9 @@ a different distribution or package manager, you can search for packages for you
 | `espeak`          | `espeak`                               |
 | `libbz2-dev`      | `bzip2-devel`                          |
 | `sox`             | `sox`                                  |
+| `ffmpeg`          | `ffmpeg`                               |
+
+**NOTE:** `omxplayer` can be used instead of `ffmpeg` on a Raspberry Pi running Raspberry Pi OS.
 
 **NOTE:** If you try to run the software and get an error involving one of these packages, (such as a `ModuleNotFoundError`
 for `_bz2`), you may need to rebuild your Python installation. See [this](https://stackoverflow.com/questions/12806122/missing-python-bz2-module)
@@ -230,7 +233,7 @@ just click [here](https://www.houndify.com/pricing#how-do-credits-work).
 2. Click on "Sign in" in the upper right
 3. Click on "Create an Account"
 4. Fill out all fields, verify your age, agree to the terms and conditions, customize your mail preferences, and complete the
-   reCAPATCHA.
+   reCAPTCHA.
 5. Click "Create Account"
 
 #### Finding Your Default API Key
