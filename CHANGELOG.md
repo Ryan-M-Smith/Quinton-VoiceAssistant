@@ -16,8 +16,8 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * macOS is now stylized correctly is both the README files and the changelog
 
 * **Fixed**
-  * Fixed a bug causing the command subject to not be set in certain cases ([#30](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/30))
-  * Fixed a bug causing audio playback not to work
+  * Fixed a bug causing the command subject to not be set in certain cases
+  * Fixed a bug causing audio playback not to work ([#30](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/30))
   * Fixed a bug causing the setup wizard to crash
 
 * **Removed**
