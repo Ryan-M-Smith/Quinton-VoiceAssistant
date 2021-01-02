@@ -456,7 +456,7 @@ class VoiceAssistant:
 		# means, see `../doc/command-ids.md`.
 		commandID = int()
 
-		response: Optional[str] = None # THe response to the command
+		response: Optional[str] = None # The response to the command
 
 		if tktest: # This will eventually be an `else` clause
 			# See if a ToolKit can generate a reply
