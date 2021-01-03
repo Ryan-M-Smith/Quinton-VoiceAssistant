@@ -28,6 +28,8 @@ class CommandProcessor:
 
 	histRef = History() # A way for the CommandProcessor class to access the command history
 
+	# NOTE: This code might eventually need to be stored in a function
+
 	tklist = fetcher.fetch() # Collect all ToolKits
 
 	# Used to store incoming ToolKit data
