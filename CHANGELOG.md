@@ -9,7 +9,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * Updated the copyright section on all file boilerplates and README files to include 2021
-    * On that note, happy new year! :tada:
+    * On that note, happy (belated) New Year! :tada:
   * The `setup.py` file has a new boilerplate that matches all the other Python files in the project
 
 ## v0.3.1 - Released 2021-01-01
