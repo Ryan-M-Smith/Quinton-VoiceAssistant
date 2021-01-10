@@ -2,7 +2,7 @@
 # FILENAME: cache.py | Quinton-VoiceAssistant
 # DESCRIPTION: The Cache class for controlling Quinton's memory
 # CREATED: 2020-06-03 @ 1:54 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Controls to directly modify Quinton's cache. """

@@ -2,7 +2,7 @@
 # FILENAME: wizard.py | Quinton-VoiceAssistant
 # DESCRIPTION: Quinton's setup wizard
 # CREATED: 2020-10-16 @ 2:29 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ 

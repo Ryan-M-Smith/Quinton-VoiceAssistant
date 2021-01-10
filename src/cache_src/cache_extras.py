@@ -2,7 +2,7 @@
 # FILENAME: cache_extras.py | Quinton-VoiceAssistant
 # DESCRIPTION: Unused functionas that still may serve a purpose 
 # CREATED: 2020-11-29 @ 3:30 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Unused functions that still may serve a purpose. """

@@ -3,7 +3,7 @@
 # FILENAME: logging.py | Quinton-VoiceAssistant
 # DESCRIPTION: Data logging functionality
 # CREATED: 2020-09-05 @ 6:04 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ 

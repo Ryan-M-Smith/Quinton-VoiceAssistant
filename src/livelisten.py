@@ -2,7 +2,7 @@
 # FILENAME: livelisten.py | Quinton-VoiceAssistant
 # DESCRIPTION: Records live audio and gets its intensity to determine if it could possibly be speech. 
 # CREATED: 2020-08-19 @ 4:38 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """

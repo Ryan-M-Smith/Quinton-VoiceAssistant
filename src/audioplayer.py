@@ -2,7 +2,7 @@
 # FILENAME: audioplayer.py | Quinton-VoiceAssistant
 # DESCRIPTION: Functions to play audio to the user
 # CREATED: 2020-12-31 @ 3:46 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Provides audio-output functionality using `ffplay` (`ffmpeg`) and `omxlayer`. """

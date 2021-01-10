@@ -2,7 +2,7 @@
 # FILENAME: history.py | Quinton-VoiceAssistant
 # DESCRIPTION: The history class for accessing command history
 # CREATED: 2020-06-09 @ 4:25 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ A "read-only" cache controller which allows the cache to be searched for data. """

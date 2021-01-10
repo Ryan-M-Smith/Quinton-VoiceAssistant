@@ -2,7 +2,7 @@
 # FILENAME: config.py | Quinton-VoiceAssistant
 # DESCRIPTION: The Config class
 # CREATED: 2020-05-22 @ 4:53 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ 
