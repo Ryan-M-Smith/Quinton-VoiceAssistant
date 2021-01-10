@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased - (Expected v0.3.2)
+## v0.3.2 - Released 2021-01-10
 
 * **Added**
   * Added a `.editorconfig` file
