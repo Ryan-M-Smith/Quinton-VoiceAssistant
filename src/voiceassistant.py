@@ -2,7 +2,7 @@
 # FILENAME: voiceassistant.py | Quinton-VoiceAssistant
 # DESCRIPTION: The VoiceAssistant class
 # CREATED: 2020-03-26 @ 2:25 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Quinton's main functionality. """

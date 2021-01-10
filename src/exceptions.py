@@ -2,7 +2,7 @@
 # FILENAME: exceptions.py | Quinton-VoiceAssistant
 # DESCRIPTION: User-defined exceptions raised by the voice assistant in certain conditions
 # CREATED: 2020-05-09 @ 11:11 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Custom exceptions and warnings. """

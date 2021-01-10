@@ -2,7 +2,7 @@
 # FILENAME: commandprocessor.py | Quinton-VoiceAssistant
 # DESCRIPTION: The CommandProcessor class
 # CREATED: 2020-03-26 @ 3:50 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Manipulate a command and collect content dictionaries from the cache. """

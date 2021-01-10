@@ -2,7 +2,7 @@
 # FILENAME: main.py | Quinton-VoiceAssistant
 # DESCRIPTION: The main file for the voice assistant
 # CREATED: 2020-03-26 @ 2:25 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Instantiate and run Quinton (with error handlers). """
