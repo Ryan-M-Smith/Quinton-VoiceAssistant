@@ -2,6 +2,17 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## v0.3.2 - Released 2021-01-10
+
+* **Added**
+  * Added a `.editorconfig` file
+
+* **Changed**
+  * Updated the copyright section on all file boilerplates and README files to include 2021
+    * On that note, happy (belated) New Year! :tada:
+  * The `setup.py` file has a new boilerplate that matches all the other Python files in the project
+  * Reworded a few things in the changelog
+
 ## v0.3.1 - Released 2021-01-01
 
 * **Added**
@@ -100,8 +111,8 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * The ability for the software to utilize the dictionary merge operators (`|`/`|=`) in Python 3.9
     * For those with 3.8, the old dictionary combination method is still being used in the
       code and is not being removed any time soon, so there's no need to upgrade.
-  * Add a reference to the changelog format I use [(see above)](#quinton-voiceassistant-changelog)
-  * Add a download URL in the `setup.py` file
+  * Added a reference to the changelog format I use [(see above)](#quinton-voiceassistant-changelog)
+  * Added a download URL in the `setup.py` file
 
 * **Changed**
   * Refactored the gitignore
@@ -127,8 +138,8 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 ## v0.1.1 - Released 2020-11-10
 
 * **Added**
-  * A new, shorter, easier to read README
-  * The `setup.py` file now gets the software's version number from `version.txt` (meaning it's no longer hardcoded)
+  * Added a new, shorter, easier to read README
+  * The `setup.py` file now gets version info number from `version.txt` (meaning it's no longer hardcoded)
 
 * **Changed**
   * The old README is now `README-EXT.md`

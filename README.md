@@ -123,7 +123,7 @@ Quinton-VoiceAssistant is licensed under the GNU General Public License v3+. For
 
 ### Copyright
 
-Quinton-VoiceAssistant is Copyright (c) 2020 by Ryan Smith
+Quinton-VoiceAssistant is Copyright (c) 2020-2021 by Ryan Smith
 
 ### Finding the Software
 

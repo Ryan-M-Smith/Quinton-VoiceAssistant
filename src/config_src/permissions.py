@@ -2,7 +2,7 @@
 # FILENAME: permissions.py | Quinton-VoiceAssistant
 # DESCRIPTION: Quinton's permissions, used by other classes to limit/allow certain functionality based on the user's config 
 # CREATED: 2020-08-09 @ 4:42 PM
-# COPYRIGHT: Copyright (c) 2020 by Ryan Smith <rysmith2113@gmail.com>
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Formally define what the user allows (and doesn't allow) Quinton to do. """
