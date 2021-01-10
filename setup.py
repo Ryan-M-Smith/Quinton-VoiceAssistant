@@ -1,5 +1,9 @@
-# FILENAME: setup.py
-# Quinton-VoiceAssistant's setup script
+#
+# FILENAME: setup.py | Quinton-VoiceAssistant
+# DESCRIPTION: Quinton-VoiceAssistant's setup script
+# CREATED: 2020-11-07 @ 3:31 PM
+# COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
+#
 
 import setuptools, subprocess, os, sys
 from distutils.cmd import Command
