@@ -1,7 +1,7 @@
-[*.py, *.json]
+[*.py, *.json, *.sh]
 indent_style = tab
 indent_size = 4
 
-[*.md, *.yaml]
+[*.md, *.yaml, .editorconfig, .gitignore]
 indent_style = space
 indent_size = 2
