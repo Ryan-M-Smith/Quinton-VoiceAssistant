@@ -7,7 +7,12 @@
 # FILENAME: dep-install.sh
 # DESCRIPTION: Install non-Python dependencies for various Linux distributions.
 #
-# This script currently works with `apt-get`, `yum`, `dnf`, and `brew` (Homebrew).
+# Supported package managers: 
+# APT (`apt-get)
+# YUM (`yum`)
+# DNF (`dnf`)
+# Pacman (`pacman`)
+# Homebrew (`brew`)
 #
 
 # Install dependencies
@@ -18,6 +23,8 @@ dep_install () {
 		xargs sudo yum install --assumeyes <  pkglists/pkglist-yum-dnf.txt
 	elif [ -f /usr/bin/dnf ]; then # DNF
 		xargs sudo dnf install --assumeyes <  pkglists/pkglist-yum-dnf.txt
+	elif [ -f /usr/bin/pacman ]; then # Pacman
+		xargs sudo pacman -S --noconfirm < # TODO: collect necessary packages
 	elif [[ $(/usr/local/ | grep -c brew) > 0 || \
 			$(/opt/homebrew/ | grep -c brew) > 0 || \
 			$(/usr/bin/ | grep -c brew) > 0 ]]		# Homebrew
