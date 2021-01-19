@@ -6,6 +6,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Added**
   * Added Pacman dependency installation support
+  * Added issue templates
 
 * **Changed**
   * The editorconfig file now works on shell scripts, the gitignore, and the editorconfig itself
