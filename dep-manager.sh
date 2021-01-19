@@ -24,7 +24,7 @@ dep_install () {
 	elif [ -f /usr/bin/dnf ]; then # DNF
 		xargs sudo dnf install --assumeyes <  pkglists/pkglist-yum-dnf.txt
 	elif [ -f /usr/bin/pacman ]; then # Pacman
-		xargs sudo pacman -S --noconfirm < # TODO: collect necessary packages
+		pacman -S --needed --noconfirm - < # TODO: collect necessary packages
 	elif [[ $(/usr/local/ | grep -c brew) > 0 || \
 			$(/opt/homebrew/ | grep -c brew) > 0 || \
 			$(/usr/bin/ | grep -c brew) > 0 ]]		# Homebrew
