@@ -5,7 +5,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 ## Unreleased - (Expected v0.3.3)
 
 * **Added**
-  * Added Pacman dependency installation support
+  * Added dependency installation support for Pacman
   * Added issue templates
 
 * **Changed**
