@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased - (Expected v0.3.3)
+## v0.3.3 - Released 2021-01-22
 
 * **Added**
   * Added dependency installation support for Pacman
