@@ -1,11 +1,11 @@
 #
 # FILENAME: cache_extras.py | Quinton-VoiceAssistant
-# DESCRIPTION: Unused functionas that still may serve a purpose 
+# DESCRIPTION: Unused functions that may still serve a purpose 
 # CREATED: 2020-11-29 @ 3:30 PM
 # COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
-""" Unused functions that still may serve a purpose. """
+""" Unused functions that may still serve a purpose. """
 
 import os, subprocess
 from pathlib import Path
