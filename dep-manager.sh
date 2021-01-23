@@ -16,36 +16,38 @@
 #
 
 # Install dependencies
-dep_install () { 
+dep_install () {
 	if [ -f /usr/bin/apt-get ]; then # apt-get
 		xargs sudo apt-get install --assume-yes < pkglists/pkglist-apt-brew.txt
 	elif [ -f /usr/bin/yum ]; then # YUM
-		xargs sudo yum install --assumeyes <  pkglists/pkglist-yum-dnf.txt
+		xargs sudo yum install --assumeyes < pkglists/pkglist-yum-dnf.txt
 	elif [ -f /usr/bin/dnf ]; then # DNF
-		xargs sudo dnf install --assumeyes <  pkglists/pkglist-yum-dnf.txt
+		xargs sudo dnf install --assumeyes < pkglists/pkglist-yum-dnf.txt
 	elif [ -f /usr/bin/pacman ]; then # Pacman
-		pacman -S --needed --noconfirm - < # TODO: collect necessary packages
+		xargs sudo pacman -S --needed --noconfirm < pkglists/pkglist-pacman.txt
 	elif [[ $(/usr/local/ | grep -c brew) > 0 || \
 			$(/opt/homebrew/ | grep -c brew) > 0 || \
 			$(/usr/bin/ | grep -c brew) > 0 ]]		# Homebrew
 	then
-		xargs brew install <  pkglists/pkglist-apt-brew.txt
+		xargs brew install < pkglists/pkglist-apt-brew.txt
 	fi
 }
 
 # Uninstall dependencies
 dep_uninstall () {
 	if [ -f /usr/bin/apt-get ]; then # apt-get
-		xargs sudo apt-get remove --assume-yes <  pkglists/pkglist-apt-brew.txt
+		xargs sudo apt-get remove --assume-yes < pkglists/pkglist-apt-brew.txt
 	elif [ -f /usr/bin/yum ]; then # YUM
-		xargs sudo yum uninstall --assumeyes <  pkglists/pkglist-yum-dnf.txt
+		xargs sudo yum uninstall --assumeyes < pkglists/pkglist-yum-dnf.txt
 	elif [ -f /usr/bin/dnf ]; then # DNF
-		xargs sudo dnf uninstall --assumeyes <  pkglists/pkglist-yum-dnf.txt
+		xargs sudo dnf uninstall --assumeyes < pkglists/pkglist-yum-dnf.txt
+	elif [ -f /usr/bin/pacman ]; then # Pacman
+		xargs sudo pacman -S --needed --noconfirm < pkglists/pkglist-pacman.txt
 	elif [[ $(/usr/local/ | grep -c brew) > 0 || \
 			$(/opt/homebrew/ | grep -c brew) > 0 || \
 			$(/usr/bin/ | grep -c brew) > 0 ]]		# Homebrew
 	then
-		xargs brew uninstall <  pkglists/pkglist-apt-brew.txt
+		xargs brew uninstall < pkglists/pkglist-apt-brew.txt
 	fi
 }
 
