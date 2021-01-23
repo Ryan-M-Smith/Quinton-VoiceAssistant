@@ -289,7 +289,22 @@ I will be using `python3.9`.
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
 
 With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and macOS.
-As of now, Homebrew (`brew`) is supported on macOS and the `apt-get`, `yum`, and `dnf` package managers are supported on Linux.
+As of now the supported package managers are:
+
+* Homebrew (`brew`)
+* `apt-get`
+* `yum`
+* `dnf`
+* `pacman`
+
+**If your system meets these requirements, you can install by running:**
+
+```bash
+# NOTE: `True` must be capitalized for the command(s) to work properly.
+python3.9 setup.py install --pkg-install=True
+# --- OR --- #
+python3.9 setup.py install -k True # An alternative to the above command
+```
 
 **If your system meets these requirements, you can install by running:**
 

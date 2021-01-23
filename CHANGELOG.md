@@ -2,6 +2,16 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## v0.3.3 - Released 2021-01-22
+
+* **Added**
+  * Added dependency installation support for Pacman
+  * Added issue templates for bug reports and feature requests
+
+* **Changed**
+  * The editorconfig file now works on shell scripts, the gitignore, and the editorconfig itself
+  * Update the README files to include Pacman in the list of supported package managers
+
 ## v0.3.2 - Released 2021-01-10
 
 * **Added**
