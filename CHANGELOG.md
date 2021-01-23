@@ -6,7 +6,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * Mark a previous changelog entry as a change rather than as a bugfix
-  * Fixed some typos
+  * Reworded some comments and docstrings
 
 ## v0.3.3 - Released 2021-01-22
 
