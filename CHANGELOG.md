@@ -2,6 +2,12 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## Unreleased - (Expected v0.3.4)
+
+* **Changed**
+  * Mark a previous changelog entry as a change rather than as a bugfix
+  * Fixed some typos
+
 ## v0.3.3 - Released 2021-01-22
 
 * **Added**
@@ -10,8 +16,6 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * Update the README files to include Pacman in the list of supported package managers
-
-* **Fixed**
   * The editorconfig file now works on shell scripts, the gitignore, and the editorconfig itself
 
 ## v0.3.2 - Released 2021-01-10
