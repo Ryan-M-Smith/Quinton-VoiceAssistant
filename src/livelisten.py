@@ -120,7 +120,7 @@ class Listener:
 
 		# The audio will be saved in `../data/tmp`, because the output is temporary, 
 		# and will be changing constantly.
-		SAVE_PATH = Path(f"../data/tmp/llout.wav")
+		SAVE_PATH = Path("../data/tmp/llout.wav")
 
 		# Some data needed for recording the audio
 		CHUNK = 1024
