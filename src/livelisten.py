@@ -101,7 +101,7 @@ class Listener:
 				with __openwf(args) as stream:
 					... # Do some work
 			
-			Which will open a new wave.Wave_write file with `args`.
+			Which will open a new `wave.Wave_write` file with `args`.
 		"""
 
 		wf = None
