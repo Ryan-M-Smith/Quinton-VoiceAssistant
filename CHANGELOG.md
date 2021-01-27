@@ -8,6 +8,10 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Mark a previous changelog entry as a change rather than as a bugfix
   * Reworded some comments and docstrings
 
+* **Fixed**
+  * The editorconfig now correctly displays files with their defined indentation
+    type and in the correct size
+
 ## v0.3.3 - Released 2021-01-22
 
 * **Added**
