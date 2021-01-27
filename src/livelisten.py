@@ -170,8 +170,8 @@ class Listener:
 		# Run SoX on the recorded audio file, and save output to `../data/tmp`
 		subprocess.call([f"sox {str(file)} -n stat 2> {str(SOXOUT_PATH)}"], shell=True)
 
-		# Manipulate the output to pull only the RMS value. Use the following command:
-		# `sed -n '9p' ../data/tmp/soxout.txt | cut -d ':' -f2 | tr -d " \t"`
+		# Manipulate the output to pull only the RMS value. This is done with the following 
+		# command: `sed -n '9p' ../data/tmp/soxout.txt | cut -d ':' -f2 | tr -d " \t"`
 		rms = float(subprocess.check_output(f"sed -n '9p' {SOXOUT_PATH} | cut -d ':' -f2 | tr -d \" \t\"", shell=True).decode("utf-8"))
 
 		return rms
@@ -200,7 +200,7 @@ class Listener:
 		inRange: bool
 
 		# If the decibel value is not in the range of intensity of speech, check to see if it is within
-		# the +- 2 leeway for decibel values.
+		# the +-2 dB leeway for decibel values.
 		if not I_dB in dbrange:
 			if (math.isclose(I_dB, MIN_TSHLD, rel_tol=LEEWAY)) or (math.isclose(I_dB, MAX_TSHLD, rel_tol=LEEWAY)):
 				# Round the decibel value to the tens place. 
