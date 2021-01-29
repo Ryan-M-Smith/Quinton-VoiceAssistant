@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased - (Expected v0.3.4)
+## v0.3.4 - Released 2021-01-29
 
 * **Added**
   * Integrated a GitHub Actions workflow to manage code security
