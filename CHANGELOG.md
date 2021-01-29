@@ -4,6 +4,9 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 ## Unreleased - (Expected v0.3.4)
 
+* **Added**
+  * Integrated a GitHub Actions workflow to manage code security
+
 * **Changed**
   * Mark a previous changelog entry as a change rather than as a bugfix
   * Reworded some comments and docstrings
