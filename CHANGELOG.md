@@ -2,6 +2,19 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## v0.3.4 - Released 2021-01-29
+
+* **Added**
+  * Integrated a GitHub Actions workflow to manage code security
+
+* **Changed**
+  * Mark a previous changelog entry as a change rather than as a bugfix
+  * Reworded some comments and docstrings
+
+* **Fixed**
+  * The editorconfig now correctly displays files with their defined indentation
+    type and in the correct size
+
 ## v0.3.3 - Released 2021-01-22
 
 * **Added**
@@ -10,8 +23,6 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * Update the README files to include Pacman in the list of supported package managers
-
-* **Fixed**
   * The editorconfig file now works on shell scripts, the gitignore, and the editorconfig itself
 
 ## v0.3.2 - Released 2021-01-10
