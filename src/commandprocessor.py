@@ -108,19 +108,10 @@ class CommandProcessor:
 		"you": ["your"]
 	}
 
-	# NOTE: Future inclusion
-	# Assets that can be controlled by the voice assistant. Their proper name will
-	# be mapped to their alias, allowing the alias to be used when speaking.
-	if sys.version_info.minor >= 9:
-		ASSETS = {
+	ASSETS = {
 			"bedside-lamp": "lamp",
 			"ceiling-light": "light"
-		}
-	else:
-		ASSETS = dict({
-			"bedside-lamp": "lamp",
-			"ceiling-light": "light"
-		}, **assets)
+	}
 
 	ARTICLES = [
 		"the",
