@@ -119,7 +119,7 @@ If your system doesn't meet these requirements or you want to install the depend
 
 ## Contributing
 
-To learn more about how to contribute, see ["Contributing" in README-EXT.md](README-EXT.md#contributing)
+To learn more about how to contribute, see ["Contributing"](README-EXT.md#contributing) in README-EXT.md.
 
 ## Software Information
 
