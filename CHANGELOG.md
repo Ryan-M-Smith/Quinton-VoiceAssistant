@@ -2,18 +2,30 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## v0.3.5 - Released 2021-03-08
+
+* **Changed**
+  * Reworded a few things in the README
+
+* **Fixed**
+  * Fixed some syntax errors causing the program to crash
+  * _Finally_ the editorconfig correctly displays files with their defined indentation
+    type and in the correct size. I had to read the EditorConfig documentation to
+    find the solution, but I feel like it will be nicer to view files with a 4-tab-size
+    indent than with an 8.
+
 ## v0.3.4 - Released 2021-01-29
 
 * **Added**
   * Integrated a GitHub Actions workflow to manage code security
 
 * **Changed**
-  * Mark a previous changelog entry as a change rather than as a bugfix
+  * Marked a previous changelog entry as a change rather than as a bugfix
   * Reworded some comments and docstrings
 
 * **Fixed**
   * The editorconfig now correctly displays files with their defined indentation
-    type and in the correct size
+    type and in the correct size (THIS FIX DIDN'T WORK; Fixed in v0.3.5)
 
 ## v0.3.3 - Released 2021-01-22
 
@@ -31,7 +43,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Added a `.editorconfig` file
 
 * **Changed**
-  * Updated the copyright section on all file boilerplates and README files to include 2021
+  * Updated the copyright section on all file boilerplates and README files with the year 2021
     * On that note, happy (belated) New Year! :tada:
   * The `setup.py` file has a new boilerplate that matches all the other Python files in the project
   * Reworded a few things in the changelog
@@ -43,7 +55,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * `ffmpeg` is now the primary audio player for the software
-    * `omxplayer` is still being used, but only if it's installed
+    * `omxplayer` is still being used, but only if it's installed and only on Raspberry Pi OS
   * The `VoiceAssistant` class no longer handles audio output; only audio file creation
     * Audio output is all done by the functionality in `audioplayer.py`
   * Reworded a few things in the changelog
