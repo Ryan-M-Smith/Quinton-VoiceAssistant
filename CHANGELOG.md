@@ -2,6 +2,14 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## Unreleased - (Expected v0.3.5)
+
+* **Fixed**
+  * _Finally_ the editorconfig correctly displays files with their defined indentation
+    type and in the correct size. I had to read the EditorConfig documentation to
+    find the solution, but I feel like it will be nicer to view files with a 4-tab-size
+    indent than with an 8.
+
 ## v0.3.4 - Released 2021-01-29
 
 * **Added**
@@ -13,7 +21,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Fixed**
   * The editorconfig now correctly displays files with their defined indentation
-    type and in the correct size
+    type and in the correct size (THIS FIX DIDN'T WORK; Fixed in v0.3.5)
 
 ## v0.3.3 - Released 2021-01-22
 
