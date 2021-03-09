@@ -5,6 +5,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 ## Unreleased - (Expected v0.3.5)
 
 * **Fixed**
+  * Fixed some syntax errors causing the program to crash
   * _Finally_ the editorconfig correctly displays files with their defined indentation
     type and in the correct size. I had to read the EditorConfig documentation to
     find the solution, but I feel like it will be nicer to view files with a 4-tab-size
