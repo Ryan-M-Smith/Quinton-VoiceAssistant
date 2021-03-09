@@ -4,6 +4,9 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 ## Unreleased - (Expected v0.3.5)
 
+* **Changed**
+  * Reworded a few things in the README
+
 * **Fixed**
   * Fixed some syntax errors causing the program to crash
   * _Finally_ the editorconfig correctly displays files with their defined indentation
@@ -17,7 +20,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Integrated a GitHub Actions workflow to manage code security
 
 * **Changed**
-  * Mark a previous changelog entry as a change rather than as a bugfix
+  * Marked a previous changelog entry as a change rather than as a bugfix
   * Reworded some comments and docstrings
 
 * **Fixed**
@@ -40,7 +43,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Added a `.editorconfig` file
 
 * **Changed**
-  * Updated the copyright section on all file boilerplates and README files to include 2021
+  * Updated the copyright section on all file boilerplates and README files with the year 2021
     * On that note, happy (belated) New Year! :tada:
   * The `setup.py` file has a new boilerplate that matches all the other Python files in the project
   * Reworded a few things in the changelog
@@ -52,7 +55,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 * **Changed**
   * `ffmpeg` is now the primary audio player for the software
-    * `omxplayer` is still being used, but only if it's installed
+    * `omxplayer` is still being used, but only if it's installed and only on Raspberry Pi OS
   * The `VoiceAssistant` class no longer handles audio output; only audio file creation
     * Audio output is all done by the functionality in `audioplayer.py`
   * Reworded a few things in the changelog
