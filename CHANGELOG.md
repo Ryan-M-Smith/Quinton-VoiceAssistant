@@ -2,7 +2,7 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
-## Unreleased - (Expected v0.3.5)
+## v0.3.5 - Released 2021-03-08
 
 * **Changed**
   * Reworded a few things in the README
