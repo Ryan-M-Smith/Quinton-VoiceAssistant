@@ -9,7 +9,7 @@ import sys
 from typing import Union, Optional # If you want to remove type annotations, you don't need these
 
 class TK_ToolKit:
-	""" 
+	"""
 		A template ToolKit. Any user-generated ToolKit should be in a class derived from this
 		class.
 	"""
@@ -57,7 +57,7 @@ class TK_ToolKit:
 			if case:
 				return (self.__results(i), commandInfo)
 
-	
+
 	@staticmethod
 	def __results(casenum: int) -> str:
 		"""
