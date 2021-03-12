@@ -40,7 +40,7 @@ def checkRequirements(moduleName: str) -> bool:
 		else:
 			print("No")
 			return False
-	
+			
 	return True
 
 def getContent(moduleName: str) -> list:
