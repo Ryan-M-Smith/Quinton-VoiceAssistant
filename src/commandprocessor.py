@@ -151,9 +151,10 @@ class CommandProcessor:
 		"you": ["your"]
 	}
 
-	ASSETS = {
-			"bedside-lamp": "lamp",
-			"ceiling-light": "light"
+	if sys.version_info.minor >= 9:
+		ASSETS = {
+				"bedside-lamp": "lamp",
+				"ceiling-light": "light"
 		} | assets
 	else:
 		ASSETS = dict({
