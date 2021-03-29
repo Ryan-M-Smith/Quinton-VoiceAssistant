@@ -28,7 +28,7 @@ from exceptions import AudioPlaybackError
 # ---------------------------------------------------------------------------------
 # -hide_banner	  |	 Supress copyright and version info
 # ---------------------------------------------------------------------------------
-# -loglevel fatal |	 Only display fatal errors that cause `ffplay` to crash
+# -loglevel fatal |	 Only display fatal errors that will cause `ffplay` to crash
 # ---------------------------------------------------------------------------------
 #
 __FFMPEG_OPTIONS = "-nodisp -autoexit -nostats -hide_banner -loglevel fatal"
