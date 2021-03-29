@@ -814,19 +814,6 @@ class VoiceAssistant:
 		else:
 			print(f"Encoding successful (code: {output})")
 
-		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
-
-		# try:
-		# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-		# 	# Handle potential errors with `self.cfg.pause` being None.
-		# 	pause = float(self.cfg.pause if type(self.cfg.pause) is not None else 0)
-		# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
-		# except Exception:
-		# 	raise AudioPlaybackError
-		# finally:
-		# 	player.quit() # Exit the player
-
 		audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause) # Play the audio
 
 		if (not self.perms.canSaveToCache) or (audioID is None):
