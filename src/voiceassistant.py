@@ -710,8 +710,6 @@ class VoiceAssistant:
 		# The index numbers of the usable template replies for each ID number. For example ID 1 can
 		# use `TEMPLATES[2]`, `TEMPLATES[3]`, and `TEMPLATES[5]` to talk about the weather, so 2, 3,
 		# and 5 are appended to the list.
-		usable_replies = list()
-
 		usable_replies = USABLE_REPLIES.get(commandID)
 
 		# Make sure all timestamps are up to date
