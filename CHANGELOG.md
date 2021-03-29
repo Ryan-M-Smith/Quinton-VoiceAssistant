@@ -2,6 +2,13 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+## Unreleased - (Expected v0.3.6)
+
+* **Fixed**
+  * Fixed a bug where the program would crash when trying to play audio with `omxplayer`
+    on Raspberry Pi
+  * Fixed a bug where an undefined variable was being accessed
+
 ## v0.3.5 - Released 2021-03-08
 
 * **Changed**
