@@ -924,5 +924,4 @@ class VoiceAssistant:
 		"""
 
 		remaining = self.DAILY_CREDITS - self.used_credits
-
 		return (self.used_credits, remaining)
