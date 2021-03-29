@@ -4,10 +4,16 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 ## Unreleased - (Expected v0.3.6)
 
+* **Changed**
+  * Reword some things in the changelog
+
 * **Fixed**
   * Fixed a bug where the program would crash when trying to play audio with `omxplayer`
     on Raspberry Pi
   * Fixed a bug where an undefined variable was being accessed
+
+* **Removed**
+  * Removed all deprecated audio playback code
 
 ## v0.3.5 - Released 2021-03-08
 
@@ -17,7 +23,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 * **Fixed**
   * Fixed some syntax errors causing the program to crash
   * _Finally_ the editorconfig correctly displays files with their defined indentation
-    type and in the correct size. I had to read the EditorConfig documentation to
+    type and in the correct size. I had to dig through the EditorConfig documentation to
     find the solution, but I feel like it will be nicer to view files with a 4-tab-size
     indent than with an 8.
 
@@ -31,8 +37,9 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Reworded some comments and docstrings
 
 * **Fixed**
-  * The editorconfig now correctly displays files with their defined indentation
-    type and in the correct size (THIS FIX DIDN'T WORK; Fixed in v0.3.5)
+  * ~~The editorconfig now correctly displays files with their defined indentation
+    type and in the correct size~~
+    * _NOTE: This bugfix didn't work. The bug was fixed in v0.3.5._
 
 ## v0.3.3 - Released 2021-01-22
 
@@ -66,7 +73,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * The `VoiceAssistant` class no longer handles audio output; only audio file creation
     * Audio output is all done by the functionality in `audioplayer.py`
   * Reworded a few things in the changelog
-  * macOS is now stylized correctly is both the README files and the changelog
+  * macOS is now stylized correctly in both the README files and the changelog
 
 * **Fixed**
   * Fixed a bug causing the command subject to not be set in certain cases
