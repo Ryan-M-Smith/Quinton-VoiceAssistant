@@ -377,7 +377,7 @@ class VoiceAssistant:
 
 		# Compare the number of words in the strings. This will help weed out any occurrences
 		# where there is speech, but it has nothing to do with the wake word at all.
-		if not (lenwp == lendp):
+		if lenwp != lendp:
 			return (False, None)
 
 		# `structPhrase` is used for the structure of `wakePhrase`, while `structDPhrase`
