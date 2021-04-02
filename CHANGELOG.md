@@ -4,7 +4,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
 
-## Unreleased - (Expected v0.3.6)
+## v0.3.6 - Released 2021-04-01
 
 * **Added**
   * Added a new file (`doc/changelog-struct.md`) describing the changelog structure
