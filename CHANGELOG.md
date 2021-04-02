@@ -2,10 +2,30 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
+
 ## Unreleased (Expected v1.0.0-alpha)
 
 * **Added**
   * Add support for ToolKits
+
+## v0.3.6 - Released 2021-04-01
+
+* **Added**
+  * Added a new file (`doc/changelog-struct.md`) describing the changelog structure
+
+* **Changed**
+  * Reword some things in the changelog
+  * Minor documentation updates
+
+* **Fixed**
+  * Fixed a bug where the program would crash when trying to play audio with `omxplayer`
+    on Raspberry Pi
+  * Fixed a bug where an undefined variable was being accessed
+  * A return value of `None` from `VoiceAssistant.listen()` is now correctly handled
+
+* **Removed**
+  * Removed all audio playback code deprecated in v0.3.1
 
 ## v0.3.5 - Released 2021-03-08
 
@@ -15,7 +35,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 * **Fixed**
   * Fixed some syntax errors causing the program to crash
   * _Finally_ the editorconfig correctly displays files with their defined indentation
-    type and in the correct size. I had to read the EditorConfig documentation to
+    type and in the correct size. I had to dig through the EditorConfig documentation to
     find the solution, but I feel like it will be nicer to view files with a 4-tab-size
     indent than with an 8.
 
@@ -29,8 +49,9 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Reworded some comments and docstrings
 
 * **Fixed**
-  * The editorconfig now correctly displays files with their defined indentation
-    type and in the correct size (THIS FIX DIDN'T WORK; Fixed in v0.3.5)
+  * ~~The editorconfig now correctly displays files with their defined indentation
+    type and in the correct size~~
+    * _NOTE: This bugfix didn't work. The bug was fixed in v0.3.5._
 
 ## v0.3.3 - Released 2021-01-22
 
@@ -64,14 +85,14 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * The `VoiceAssistant` class no longer handles audio output; only audio file creation
     * Audio output is all done by the functionality in `audioplayer.py`
   * Reworded a few things in the changelog
-  * macOS is now stylized correctly is both the README files and the changelog
+  * macOS is now stylized correctly in both the README files and the changelog
 
 * **Fixed**
   * Fixed a bug causing the command subject to not be set in certain cases
   * Fixed a bug causing audio playback not to work ([#30](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/30))
   * Fixed a bug causing the setup wizard to crash
 
-* **Removed**
+* **Deprecated**
   * All individual audio output functionality has been removed; it's all universal from `audioplayer.py`
 
 ## v0.3.0 - Released 2020-12-29

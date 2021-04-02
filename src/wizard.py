@@ -5,7 +5,7 @@
 # COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
-""" 
+"""
 	The Quinton-VoiceAssistant setup wizard.
 
 	In the future, this will be replaced with a GUI setup wizard.
@@ -19,15 +19,15 @@ from pathlib import Path
 from voiceassistant import VoiceAssistant
 
 def setupWizard(va: VoiceAssistant) -> NoReturn:
-	""" 
+	"""
 		An interactive setup wizard to configure Quinton and set some of it's settings without editing
 		the configuration file. Also serves as a greeter.
 	"""
-	
+
 	# The line numbers where a specific YAML key-value pair is (for example, the user's name is
-	# entered on line 39).
+	# entered on line 42).
 	#
-	# NOTE: The line numbers eventually need to be used to subscript a list (which is zero-indexed), so 
+	# NOTE: The line numbers eventually need to be used to subscript a list (which is zero-indexed), so
 	# the values are subtracted by one before they're used.
 	#
 	# The dictionary is YAML key mapped to line number

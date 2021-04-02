@@ -259,7 +259,7 @@ class VoiceAssistant:
 
 		return modTime
 
-	def listen(self) -> str:
+	def listen(self) -> Optional[str]:
 		""" Listens for the user's commands and returns the speech as text. """
 
 		# Listen for speech commands
@@ -273,6 +273,8 @@ class VoiceAssistant:
 			raise MicrophoneWarning
 
 		self.tone(5)
+
+		command = str()
 
 		try:
 			# Convert speech to text
@@ -288,7 +290,7 @@ class VoiceAssistant:
 				command = None
 				raise sr.UnknownValueError
 		finally:
-			return command.lower()
+			return command.lower() if command is not None else command
 
 	def __heardWakeWord(self) -> bool:
 		""" Detect Quinton's wake word. Returns `True` if it's detected, `False` otherwise. """
@@ -376,7 +378,7 @@ class VoiceAssistant:
 
 		# Compare the number of words in the strings. This will help weed out any occurrences
 		# where there is speech, but it has nothing to do with the wake word at all.
-		if not (lenwp == lendp):
+		if lenwp != lendp:
 			return (False, None)
 
 		# `structPhrase` is used for the structure of `wakePhrase`, while `structDPhrase`
@@ -723,8 +725,6 @@ class VoiceAssistant:
 		# The index numbers of the usable template replies for each ID number. For example ID 1 can
 		# use `TEMPLATES[2]`, `TEMPLATES[3]`, and `TEMPLATES[5]` to talk about the weather, so 2, 3,
 		# and 5 are appended to the list.
-		usable_replies = list()
-
 		usable_replies = USABLE_REPLIES.get(commandID)
 
 		# Make sure all timestamps are up to date
@@ -983,5 +983,4 @@ class VoiceAssistant:
 		"""
 
 		remaining = self.DAILY_CREDITS - self.used_credits
-
 		return (self.used_credits, remaining)
