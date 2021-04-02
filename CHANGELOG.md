@@ -11,6 +11,7 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
 
 * **Changed**
   * Reword some things in the changelog
+  * Minor documentation updates
 
 * **Fixed**
   * Fixed a bug where the program would crash when trying to play audio with `omxplayer`
