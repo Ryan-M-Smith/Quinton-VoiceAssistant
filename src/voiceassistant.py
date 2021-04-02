@@ -258,7 +258,7 @@ class VoiceAssistant:
 
 		return modTime
 
-	def listen(self) -> str:
+	def listen(self) -> Optional[str]:
 		""" Listens for the user's commands and returns the speech as text. """
 
 		# Listen for speech commands
@@ -289,7 +289,7 @@ class VoiceAssistant:
 				command = None
 				raise sr.UnknownValueError
 		finally:
-			return command.lower()
+			return command.lower() if command is not None else command
 
 	def __heardWakeWord(self) -> bool:
 		""" Detect Quinton's wake word. Returns `True` if it's detected, `False` otherwise. """
