@@ -2,6 +2,8 @@
 
 This changelog follows the basic format outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0).
 
+To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
+
 ## Unreleased - (Expected v0.3.6)
 
 * **Changed**
@@ -11,6 +13,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Fixed a bug where the program would crash when trying to play audio with `omxplayer`
     on Raspberry Pi
   * Fixed a bug where an undefined variable was being accessed
+  * A return value of `None` from `VoiceAssistant.listen()` is now correctly handled
 
 * **Removed**
   * Removed all deprecated audio playback code
@@ -80,7 +83,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
   * Fixed a bug causing audio playback not to work ([#30](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/30))
   * Fixed a bug causing the setup wizard to crash
 
-* **Removed**
+* **Deprecated**
   * All individual audio output functionality has been removed; it's all universal from `audioplayer.py`
 
 ## v0.3.0 - Released 2020-12-29
