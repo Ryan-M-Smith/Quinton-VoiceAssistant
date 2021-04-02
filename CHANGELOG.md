@@ -6,6 +6,9 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
 
 ## Unreleased - (Expected v0.3.6)
 
+* **Added**
+  * A new file describing the changelog structure
+
 * **Changed**
   * Reword some things in the changelog
 
@@ -16,7 +19,7 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
   * A return value of `None` from `VoiceAssistant.listen()` is now correctly handled
 
 * **Removed**
-  * Removed all deprecated audio playback code
+  * Removed all audio playback code deprecated in v0.3.1
 
 ## v0.3.5 - Released 2021-03-08
 
