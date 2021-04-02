@@ -7,7 +7,7 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
 ## Unreleased - (Expected v0.3.6)
 
 * **Added**
-  * A new file describing the changelog structure
+  * Added a new file (`doc/changelog-struct.md`) describing the changelog structure
 
 * **Changed**
   * Reword some things in the changelog
