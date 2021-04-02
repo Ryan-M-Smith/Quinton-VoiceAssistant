@@ -11,6 +11,7 @@ import subprocess, os
 from typing import NoReturn
 from omxplayer.player import OMXPlayer # Used to play audio
 from tinytag import TinyTag # Used to get audio duration
+from time import sleep
 
 from exceptions import AudioPlaybackError
 
@@ -27,14 +28,15 @@ from exceptions import AudioPlaybackError
 # ---------------------------------------------------------------------------------
 # -hide_banner	  |	 Supress copyright and version info
 # ---------------------------------------------------------------------------------
-# -loglevel fatal |	 Only display fatal errors that cause `ffplay` to crash 
+# -loglevel fatal |	 Only display fatal errors that will cause `ffplay` to crash
 # ---------------------------------------------------------------------------------
 #
 __FFMPEG_OPTIONS = "-nodisp -autoexit -nostats -hide_banner -loglevel fatal"
 
 def play(audiofile: str, pause: float) -> NoReturn:
-	""" Play some audio. This will either use `ffmpeg` or `omxplayer` (if you're running 
-		on a Raspberri Pi).
+	"""
+		Play some audio. This will either use `ffmpeg` or `omxplayer` (depending
+		on your system).
 	"""
 
 	if os.path.exists("/usr/bin/omxplayer"):
@@ -53,7 +55,7 @@ def __ffplay(audiofile: str) -> int:
 		return output
 
 def __omxplay(audiofile: str, pause: float) -> int:
-	""" 
+	"""
 		Play audio using `omxplayer`. Raises `extensions.AudioPlaybackError`
 		upon failure.
 	"""
@@ -70,4 +72,4 @@ def __omxplay(audiofile: str, pause: float) -> int:
 		raise AudioPlaybackError
 	finally:
 		player.quit() # Exit the player
-	
+

@@ -23,6 +23,7 @@ __pycache__/
 # Keep any placeholder files
 !/**/.filler
 
+# Ignore some extra stuff that doesn't need to be in version control
 /audio/.originals
 /my_stuff
 /doc/reading-config.md

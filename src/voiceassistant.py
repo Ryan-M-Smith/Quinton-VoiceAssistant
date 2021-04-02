@@ -33,9 +33,9 @@ from exceptions import (
 
 class VoiceAssistant:
 	"""
-		The `VoiceAssistant` class holds a majority of the code for the voice assistant, controlling its primary 
-		functionality. It combines the necessary functions for speech recognition and processing, formulating 
-		replies, responding to the user, and everything else required to allow Quinton to run into one function 
+		The `VoiceAssistant` class holds a majority of the code for the voice assistant, controlling its primary
+		functionality. It combines the necessary functions for speech recognition and processing, formulating
+		replies, responding to the user, and everything else required to allow Quinton to run into one function
 		(`VoiceAssistant.run()`) for the main function to call.
 	"""
 
@@ -48,7 +48,7 @@ class VoiceAssistant:
 	with open("../credentials.yaml", "r") as credentials:
 		credsList = yaml.full_load(credentials)
 		valList = list(credsList.get("credentials").values())
-		
+
 		# Houndify
 		HOUNDIFY_ID = valList[0]
 		HOUNDIFY_KEY = valList[1]
@@ -65,7 +65,7 @@ class VoiceAssistant:
 	# -------------------------------------------------------------------
 	_unused_DAILY_CREDITS = 100 # The number of Houndify credits allotted per day
 	_unused_used_credits = float()
-	
+
 	# The baseline number of credits required for the Houndify domains that a client is
 	# registered under. Because Quinton is only registered under Speech-to-Text, and this
 	# domain requires no credits, the value is 0.
@@ -75,8 +75,8 @@ class VoiceAssistant:
 	# -------------------------------------------------------------------
 
 	recognizer = sr.Recognizer() # Recognizer class instance to listen for audio
-	
-	mic: sr.Microphone() = None # Microphone class instance 
+
+	mic: sr.Microphone() = None # Microphone class instance
 	isMuted: bool
 
 	# Other class instances used to pass data into the `VoiceAssitant` class from other
@@ -96,7 +96,7 @@ class VoiceAssistant:
 		self.cfg = cfg
 		self.perms = perms
 		self.listener = Listener(cfg=self.cfg)
-		
+
 		isMic = self.__getMicrophone()
 		isWiFi = self.__checkWiFi()
 
@@ -105,9 +105,9 @@ class VoiceAssistant:
 
 		if not isWiFi:
 			raise WiFiWarning
-		
+
 		print("MICROPHONE TYPE:", type(self.mic))
-	  
+
 	def __getMicrophone(self) -> bool:
 		"""
 			Searches through the filesystem's list of connected hardware devices for a microphone.
@@ -127,11 +127,11 @@ class VoiceAssistant:
 		else:
 			print(f"Microphone {micname} found.")
 			return True
-	
+
 	@staticmethod
-	def __checkWiFi() -> bool: 
+	def __checkWiFi() -> bool:
 		"""
-			Checks to see if the device is connected to the internet. Returns `True` 
+			Checks to see if the device is connected to the internet. Returns `True`
 			if connected, `False` otherwise.
 		"""
 
@@ -146,9 +146,9 @@ class VoiceAssistant:
 				print("Connected to internet")
 
 			return wifi
-	
+
 	def run(self) -> NoReturn:
-		""" 
+		"""
 			Runs the voice assistant. This function follows the following process:
 
 				1. Listen for the wake word
@@ -156,15 +156,15 @@ class VoiceAssistant:
 				3. Send the command to be processed
 				4. Send the content dictionary's(ies') info to reply to the command and save the recording (if the user allows it)
 				5. Speak the reply to the user OR play a reply from the cache
-			
+
 			This function will be executed infinitely as long as there are no errors.
 		"""
 
-		# NOTE: Future inclusion. Will eventually return `0` on success, non-zero otherwise. 
+		# NOTE: Future inclusion. Will eventually return `0` on success, non-zero otherwise.
 		# Possible return codes for the function. Descriptions are given.
 		# RETURN_CODES = [
 		# 	0, # Normal exit
-		# 	1, # 
+		# 	1, #
 		# ]
 
 		heardWakeWord = False
@@ -174,13 +174,13 @@ class VoiceAssistant:
 
 			if heardWakeWord:
 				break
-		
+
 		# Allow time for PyAudio to free the microphone so the SpeechRecognition library
 		# can take over
 		sleep(1.75)
 
 		usrInput = self.listen() # Step 1
-		
+
 		(data, defaultData, dataFromCache) = self.cmdPsr.process(usrInput, perms=self.perms, time=self.__generateTimestamp()) # Step 2
 
 		audioID = next(self.__genAudioIndex())
@@ -196,7 +196,7 @@ class VoiceAssistant:
 			else:
 				c_data = data.copy()
 				(response, data) = self.__reply(c_data, backup=defaultData, dataFromCache=dataFromCache) # Alt step 3
-				
+
 				self.play(audioID=data.get("audio_index"), saveID=audioID) # Alt step 4 - Play the recording from the cache; Make private later
 		else:
 			# Handle a list of content dictionaries
@@ -211,15 +211,15 @@ class VoiceAssistant:
 				self.play(audioID=data.get("audio_index"), saveID=audioID) # Alt step 4
 
 		self.__write(data=data, saveID=(audioID if data.get("from_cache") else None)) # Write the data
-	
+
 	def __generateTimestamp(self) -> datetime:
 		""" Create a timestamp for Quinton's command history. """
-		
+
 		try:
 			tz = pytz.timezone(self.cfg.timezone)
 		except pytz.exceptions.UnknownTimeZoneError:
 			raise TimezoneError
-		
+
 		time = datetime.now(pytz.timezone(tz.zone))
 
 		fmt = "%Y-%m-%d %I:%M:%S %Z"
@@ -227,23 +227,23 @@ class VoiceAssistant:
 		loc_dt = tz.localize(datetime(time.year, time.month, time.day, time.hour, time.minute, time.second))
 
 		return loc_dt.strftime(fmt)
-	
+
 	@staticmethod
 	def __normalizeTime(time: str) -> str:
 		""" Make Quinton read a time like a human would. """
-		
+
 		# The string indices will be a bit different if the hour is after 9
 		pastNine = True if int(time[0] + time[1]) > 9 else False
 
 		offset = 1 if pastNine else 0 # Index offset based on hour
-		
+
 		modTime = time # Will be changed and returned
 
 		# Make a time like 5:08 be spoken as "five oh eight" instead of
 		# "five zero eight"
 		if (int(time[2 + offset]) == 0) and (int(time[3 + offset]) > 0):
 			modTime = modTime.replace("0", "o")
-		
+
 		# Make a time like 5:00 be spoken as "five o'clock" instead of
 		# "five zero zero"
 		#
@@ -255,10 +255,10 @@ class VoiceAssistant:
 				modTime = modTime.replace("00", "o'clock")
 		except ValueError:
 			pass
-		
+
 		return modTime
 
-	def listen(self) -> str:
+	def listen(self) -> Optional[str]:
 		""" Listens for the user's commands and returns the speech as text. """
 
 		# Listen for speech commands
@@ -272,7 +272,9 @@ class VoiceAssistant:
 			raise MicrophoneWarning
 
 		self.tone(5)
-		
+
+		command = str()
+
 		try:
 			# Convert speech to text
 			command = self.recognizer.recognize_houndify(audio, self.HOUNDIFY_ID, self.HOUNDIFY_KEY)
@@ -287,8 +289,8 @@ class VoiceAssistant:
 				command = None
 				raise sr.UnknownValueError
 		finally:
-			return command.lower()
-	
+			return command.lower() if command is not None else command
+
 	def __heardWakeWord(self) -> bool:
 		""" Detect Quinton's wake word. Returns `True` if it's detected, `False` otherwise. """
 		detectedPhrase = str()
@@ -300,7 +302,7 @@ class VoiceAssistant:
 			# Record and check the decibel value of the wake word
 			path = self.listener.liveListen()
 			_, isInRange = self.listener.calcIntensity(audioPath=path)
-			
+
 			if isInRange:
 				# Send the audio data to Houndify, but this time use the pre-recorded
 				# audio file instead of live listenting. This will take the wave audio
@@ -329,25 +331,25 @@ class VoiceAssistant:
 			if detectedPhrase == "":
 				detectedPhrase = None
 			elif not detectedPhrase.islower():
-				detectedPhrase = detectedPhrase.lower()	
+				detectedPhrase = detectedPhrase.lower()
 		finally:
 			if (detectedPhrase != str()) and (detectedPhrase is not None):
 				ww = self.cfg.wake_word.lower()
 
-				# Check to see if the detected wake word matches the one in the config 
+				# Check to see if the detected wake word matches the one in the config
 				(match, struct) = self.__phoneticsCheck(wakePhrase=ww, detectedPhrase=detectedPhrase)
 
 				if match:
-					# Replace the detected phrase with the Soundex phonetic structure of the wake word 
+					# Replace the detected phrase with the Soundex phonetic structure of the wake word
 					# to detect its presence. By this point, it will be confirmed that the phonetic structure
 					# of the two phrases (original and detected) are the same (and sound the same), even if they are
 					# spelled slightly different
 					structPhrase = detectedPhrase.replace(detectedPhrase, struct)
-					
+
 					return (struct in structPhrase) if all((structPhrase, detectedPhrase)) else False
 				else:
 					return False
-	
+
 	# The `*` is used because the function call isn't very readable without listing the parameters
 	@staticmethod
 	def __phoneticsCheck(*, wakePhrase: str, detectedPhrase: str) -> (bool, Optional[str]):
@@ -360,7 +362,7 @@ class VoiceAssistant:
 			the two strings are the same, `False` otherwise. The phonetic structure of the wake word is
 			returned only if `bool` is `True`. otherwise, `None` is returned here.
 		"""
-		
+
 		if (wakePhrase is None) or (detectedPhrase is None):
 			return (False, None)
 
@@ -369,20 +371,20 @@ class VoiceAssistant:
 		# the function can only take a single-word string.
 		if (lenwp := len(wakePhrase.split())) > 1:
 			wakePhrase = wakePhrase.split()
-		
+
 		if (lendp := len(detectedPhrase.split())) > 1:
 			detectedPhrase = detectedPhrase.split()
-		
-		# Compare the number of words in the strings. This will help weed out any occurrences 
-		# where there is speech, but it has nothing to do with the wake word at all. 
-		if not (lenwp == lendp):
+
+		# Compare the number of words in the strings. This will help weed out any occurrences
+		# where there is speech, but it has nothing to do with the wake word at all.
+		if lenwp != lendp:
 			return (False, None)
-		
+
 		# `structPhrase` is used for the structure of `wakePhrase`, while `structDPhrase`
 		# is used for the structure of `detectedPhrase`. `structDPhrase` is only used if the
 		# wake phrase has multiple words in it.
 		structPhrase = structDPhrase = str()
-		
+
 		if type(wakePhrase) is list:
 			# Get the phonetic structure of the wake phrase and the detected phrase
 			for spword, sdpword in zip(wakePhrase, detectedPhrase):
@@ -403,7 +405,7 @@ class VoiceAssistant:
 				return (False, None)
 
 	def __reply(self, commandInfo: Union[dict, list], *, backup: Optional[dict], dataFromCache: bool) -> (str, dict):
-		""" 
+		"""
 			Generates a reply to the user's query. A dictionary of content or a list
 			of content dictionaries can be passed in.
 		"""
@@ -438,9 +440,9 @@ class VoiceAssistant:
 			lCommandInfo = commandInfo
 		else:
 			dCommandInfo = commandInfo
-		
+
 		infoSample = commandInfo[0] if type(commandInfo) is list else commandInfo
-		
+
 		usingCache = False # Set to `True` if the cache is used
 		filteredData = None
 
@@ -448,8 +450,8 @@ class VoiceAssistant:
 			timezone = pytz.timezone(self.cfg.timezone) # Get the timezone
 		except pytz.exceptions.UnknownTimeZoneError:
 			raise TimezoneError
-		
-		# Each type of command is assigned an ID number. For details about what each number 
+
+		# Each type of command is assigned an ID number. For details about what each number
 		# means, see `../doc/command-ids.md`.
 		commandID = int()
 
@@ -459,7 +461,7 @@ class VoiceAssistant:
 			if ((("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("weather" in infoSample.get("keywords"))) or ("weather" == infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:
 					raise LocationError
-				
+
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
 
@@ -467,7 +469,7 @@ class VoiceAssistant:
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
 				obs = owm.weather_at_ids([idlist[0][0]])
 				weather = obs[0].get_weather()
-				
+
 				# Create the reply
 				if (self.cfg.units == "imperial") or (self.cfg.units == "metric"):
 					unit = "fahrenheit" if self.cfg.units == "imperial" else "celsius"
@@ -477,27 +479,27 @@ class VoiceAssistant:
 				temp = str(round(weather.get_temperature(unit=unit).get("temp")))
 
 				response = f"{temp} degrees {unit.capitalize()} with {weather.get_detailed_status()}"
-				
+
 				if dataFromCache:
 					content = lCommandInfo if type(commandInfo) is list else dCommandInfo # The content to be filtered
 					search = response
 
 					filteredData = self.cmdPsr.filterIrrelevant(content, search)
-				
+
 				if filteredData is not None:
 					usingCache = True
-				
+
 				if not usingCache:
 					commandID = 1
 			elif ((("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("time" in infoSample.get("keywords"))) and (infoSample.get("subject") == "user")): # Telling time
 				# Get the current time
 				time = datetime.now(pytz.timezone(timezone.zone))
-				
+
 				if dataFromCache:
 					content = lCommandInfo if type(commandInfo) is list else dCommandInfo # The content to be filtered
 
 					# When searching for a time, make sure to remove the leading zero from hours before 10 (A.M. or P.M.)
-					# 
+					#
 					# TIME EDITING (Using 5:00 PM for the time)
 					# time.strftime("%I %M %p") 	-> 05 00 PM
 					# time.strftime("%I %M %p")[1:] -> 5 00 PM
@@ -506,15 +508,15 @@ class VoiceAssistant:
 
 					search = self.__normalizeTime(orig_time)
 					filteredData = self.cmdPsr.filterIrrelevant(content, search)
-				
+
 				if filteredData is not None:
 					usingCache = True
 
-				# If the cache isn't being used or no suitable content dictionaries are found, 
+				# If the cache isn't being used or no suitable content dictionaries are found,
 				# a reply is generated.
 				if not usingCache:
-					commandID = 2	
-					
+					commandID = 2
+
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 					response = self.__normalizeTime(orig_time)
 			elif (("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("date" in infoSample.get("keywords"))):
@@ -525,7 +527,7 @@ class VoiceAssistant:
 				dt = datetime.strptime((str(time.day) + "/" + str(time.month) + "/" + str(time.year)), "%d/%m/%Y")
 
 				fmt = "%A, %B %d"
-			
+
 				response = dt.strftime(fmt)
 			elif (("turn on" in infoSample.get("keywords")) and (infoSample.get("assets") is not None)): # Turn something on
 				commandID = 4
@@ -539,7 +541,7 @@ class VoiceAssistant:
 			if (("what" in infoSample.get("question_words")) and ("weather" in infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:
 					raise LocationError
-				
+
 				# Get information from OpenWeatherMap
 				owm = pyowm.OWM(self.OWM_KEY)
 
@@ -547,7 +549,7 @@ class VoiceAssistant:
 				idlist = reg.ids_for(city_name=self.cfg.city, country=self.cfg.country)
 				obs = owm.weather_at_ids([idlist[0][0]])
 				weather = obs[0].get_weather()
-				
+
 				# Create the reply
 				if (self.cfg.units == "imperial") or (self.cfg.units == "metric"):
 					unit = "fahrenheit" if self.cfg.units == "imperial" else "celsius"
@@ -557,27 +559,27 @@ class VoiceAssistant:
 				temp = str(round(weather.get_temperature(unit=unit).get("temp")))
 
 				response = f"{temp} degrees {unit.capitalize()} with {weather.get_detailed_status()}"
-				
+
 				if dataFromCache:
 					content = lCommandInfo if type(commandInfo) is list else dCommandInfo # The content to be filtered
 					search = response
 
 					filteredData = self.cmdPsr.filterIrrelevant(content, search)
-				
+
 				if filteredData is not None:
 					usingCache = True
-				
+
 				if not usingCache:
 					commandID = 1
 			elif ((("what" in infoSample.get("question_words")) and ("time" in infoSample.get("keywords"))) and ("is it" in infoSample.get("command"))): # Telling time
 				# Get the current time
 				time = datetime.now(pytz.timezone(timezone.zone))
-				
+
 				if dataFromCache:
 					content = lCommandInfo if type(commandInfo) is list else dCommandInfo # The content to be filtered
 
 					# When searching for a time, make sure to remove the leading zero from hours before 10 (A.M. or P.M.)
-					# 
+					#
 					# TIME EDITING (Using 5:00 PM for the time)
 					# time.strftime("%I %M %p") 	-> 05 00 PM
 					# time.strftime("%I %M %p")[1:] -> 5 00 PM
@@ -586,15 +588,15 @@ class VoiceAssistant:
 
 					search = self.__normalizeTime(orig_time)
 					filteredData = self.cmdPsr.filterIrrelevant(content, search)
-				
+
 				if filteredData is not None:
 					usingCache = True
 
-				# If the cache isn't being used or no suitable content dictionaries are found, 
+				# If the cache isn't being used or no suitable content dictionaries are found,
 				# a reply is generated.
 				if not usingCache:
-					commandID = 2	
-					
+					commandID = 2
+
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 					response = self.__normalizeTime(orig_time)
 			elif (("what" in infoSample.get("question_words")) and (("is" in infoSample.get("to_be")) or ("what's" in ci.egt("full_command"))) and ("date" in infoSample.get("keywords"))): # Getting the date
@@ -605,7 +607,7 @@ class VoiceAssistant:
 				dt = datetime.strptime((str(time.day) + "/" + str(time.month) + "/" + str(time.year)), "%d/%m/%Y")
 
 				fmt = "%A, %B %d"
-			
+
 				response = dt.strftime(fmt)
 			else: pass
 		elif infoSample.get("intent") == "state":
@@ -615,7 +617,7 @@ class VoiceAssistant:
 						usingCache = True
 					else:
 						usingCache = False
-					
+
 					if not usingCache:
 						objtype = objname = str()
 
@@ -635,7 +637,7 @@ class VoiceAssistant:
 							else:
 								if not foundEnd:
 									foundEnd = True
-								
+
 								if (not word in infoSample.get("articles")) and (not word in infoSample.get("to_be")):
 									objname += word
 
@@ -644,7 +646,7 @@ class VoiceAssistant:
 						# Get rid of plural nouns
 						if objtype.endswith("s") or objtype.endswith("es"):
 							objtype.rstrip("es") # Will take care of both cases
-						
+
 						if not foundEnd: # Not really necessary, as commandID is 0 by default
 							commandID = 0
 						else:
@@ -656,10 +658,10 @@ class VoiceAssistant:
 
 		if type(response) is str:
 			response = response.strip()
-		
+
 		if (response is None) and (commandID != 5):
 			raise NoReplyError
-		
+
 		# Use the backup content dictionary if all of the ones from the cache have
 		# been filtered out.
 		usingBackup = False
@@ -672,7 +674,7 @@ class VoiceAssistant:
 				usingBackup = True
 		else:
 			commandInfo = filteredData
-		
+
 		if commandInfo is filteredData is lCommandInfo is dCommandInfo is backup is None:
 			raise DataError
 
@@ -706,17 +708,15 @@ class VoiceAssistant:
 		}
 
 		# The index numbers of the usable template replies for each ID number. For example ID 1 can
-		# use `TEMPLATES[2]`, `TEMPLATES[3]`, and `TEMPLATES[5]` to talk about the weather, so 2, 3, 
+		# use `TEMPLATES[2]`, `TEMPLATES[3]`, and `TEMPLATES[5]` to talk about the weather, so 2, 3,
 		# and 5 are appended to the list.
-		usable_replies = list()
-
 		usable_replies = USABLE_REPLIES.get(commandID)
 
 		# Make sure all timestamps are up to date
 		try:
 			if (self.perms.canTimestampHist) and ("timestamp" in (infoSample if type(commandInfo) is list else commandInfo)):
 				time = self.__generateTimestamp()
-				
+
 				if type(commandInfo) is list:
 					for cdict in commandInfo:
 						cdict.update({"timestamp": time})
@@ -724,7 +724,7 @@ class VoiceAssistant:
 					if (commandInfo.get("timestamp") == str()) or (commandInfo.get("timestamp") != time):
 						commandInfo.update({"timestamp": time})
 		except TypeError:
-			raise TimestampError	
+			raise TimestampError
 
 		if response is usable_replies is None:
 			if sys.version_info.minor > 8:
@@ -749,7 +749,7 @@ class VoiceAssistant:
 					dCommandInfo.update({"reply": TEMPLATES.copy()[random.choice(usable_replies)]})
 				else:
 					dCommandInfo.update({"reply": TEMPLATES.copy()[usable_replies[0]]})
-				
+
 				return (dCommandInfo.get("reply"), dCommandInfo) # Return for a single content dictionary
 			elif (lCommandInfo == commandInfo) and (not usingCache):
 				if sys.version_info.minor > 8:
@@ -765,7 +765,7 @@ class VoiceAssistant:
 					contDict.update({"reply": TEMPLATES.copy()[random.choice(usable_replies)]})
 				else:
 					contDict.update({"reply": TEMPLATES.copy()[usable_replies[0]]})
-				
+
 				return (contDict.get("reply"), contDict) # Return statement for many content dictionaries
 			else:
 				# Return data from the cache
@@ -793,7 +793,7 @@ class VoiceAssistant:
 		DATA_PATH = Path("../data/tmp/data.txt")
 
 		subprocess.call(f"touch {str(AUDIO_PATH)}", shell=True) # Create a path for the recording
-		
+
 		with open("../data/tmp/data.txt", "w") as data:
 			data.write(text)
 
@@ -811,21 +811,8 @@ class VoiceAssistant:
 		except Exception:
 			print(f"Encoding failed! (code: {output})")
 			raise AudioEncodingError
-		else: 
+		else:
 			print(f"Encoding successful (code: {output})")
-		
-		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
-
-		# try:
-		# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-		# 	# Handle potential errors with `self.cfg.pause` being None.
-		# 	pause = float(self.cfg.pause if type(self.cfg.pause) is not None else 0)
-		# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
-		# except Exception:
-		# 	raise AudioPlaybackError
-		# finally:
-		# 	player.quit() # Exit the player
 
 		audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause) # Play the audio
 
@@ -833,7 +820,7 @@ class VoiceAssistant:
 			# Delete the recording if the user doesn't want recordings to be saved or
 			# if there is no passed in audio index.
 			subprocess.call(f"rm {AUDIO_PATH}", shell=True)
-	
+
 	def play(self, audioID: str, saveID: str) -> NoReturn:
 		"""
 			Play a pre-recorded response from the cache, and then copy and resave it with a
@@ -847,22 +834,6 @@ class VoiceAssistant:
 		# Resave the file if there were no errors
 		subprocess.call(f"cp ../data/cache/responses/{audioID}.wav ../data/cache/responses/{saveID}.wav", shell=True)
 
-		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
-
-		# try:
-		# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-		# 	# Handle potential errors when the user hasn't set a speech pause amount.
-		# 	# In these cases, no pause
-		# 	pause = float(self.cfg.pause if (type(self.cfg.pause) is not None) else 0)
-		# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
-		# except Exception:
-		# 	raise AudioPlaybackError
-		# else:
-		# 	subprocess.call(f"cp ../data/cache/responses/{audioID}.wav ../data/cache/responses/{saveID}.wav", shell=True)
-		# finally:
-		# 	player.quit() # Exit the player
-	
 	def tone(self, octave: int) -> int:
 		""" Play a tone to let the user know when to speak. """
 
@@ -871,14 +842,14 @@ class VoiceAssistant:
 		if not octave in range(4, 6):
 			code = 1
 			return code
-		
+
 		TONE_PATH = Path("../audio")
 		AUDIO_PATH: PostixPath
 
 		 # C4 and C5 tones; the C4 is played to prompt the user to speak and the C5 is played
 		 # before the command is processed/after the listening period ends.
 		TONELIST = ["C4-261.63Hz.wav", "C5-523.25Hz.wav"]
-		
+
 		# Decide what octave of tone will be played
 		AUDIO_PATH = Path(f"{str(TONE_PATH)}/{TONELIST[0] if octave == 4 else TONELIST[1]}")
 
@@ -892,21 +863,6 @@ class VoiceAssistant:
 		finally:
 			return code
 
-		# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
-
-		# try:
-		# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-		# 	# Handle potential errors when the user hasn't set a speech pause amount.
-		# 	# In these cases, no pause
-		# 	pause = float(self.cfg.pause if (type(self.cfg.pause) is not None) else 0)
-		# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
-		# except Exception:
-		# 	raise AudioPlaybackError
-		# finally:
-		# 	player.quit() # Exit the player
-		# 	return 0
-	
 	def __write(self, data: dict, saveID=None) -> NoReturn:
 		""" Write Quinton's reply to a file, if the user allows it. """
 
@@ -915,7 +871,7 @@ class VoiceAssistant:
 		memPath = Path("../data/memory/memory.yaml") # The YAML file with Quinton's "memory"
 
 		# Depending on the situation, the command's audio index may not be able to be used because it
-		# is the same as a previously saved audio file in the cache. In this case, use the save index - 
+		# is the same as a previously saved audio file in the cache. In this case, use the save index -
 		# an unused audio index that the cached response can point to.
 		index = data.get("audio_index") if saveID is None else saveID
 
@@ -931,7 +887,7 @@ class VoiceAssistant:
 					subprocess.call(f"rm {str(recPath)}/{index}.wav", shell=True)
 
 					raise HistoryError
-		
+
 		# Write any reference data to Quinton's memory. Serialize the data's
 		# `references` dictionary as YAML and add it to the file. If the
 		# dictionary is empty, nothing is written.
@@ -940,10 +896,10 @@ class VoiceAssistant:
 				for key, value in data.get("references").items():
 					if not f"{key}: {value}" in memfile.read():
 						yaml.dump(data.get("references"), memfile)
-	
+
 	def __genAudioIndex(self) -> Generator[str, None, None]:
-		""" 
-			Generate a unique, 6-character sequential identifier for each of Quinton's speech 
+		"""
+			Generate a unique, 6-character sequential identifier for each of Quinton's speech
 			recordings.
 		"""
 
@@ -954,19 +910,18 @@ class VoiceAssistant:
 
 	def _unused_UpdateCredits(self, commandLen: float, wakeWord: int) -> NoReturn:
 		"""
-			[FUTURE] Update the amount of Houndify credits that have been used using Houndify's credit 
-			calculation formula (found at https://www.houndify.com/pricing#how-do-credits-work) 
+			[FUTURE] Update the amount of Houndify credits that have been used using Houndify's credit
+			calculation formula (found at https://www.houndify.com/pricing#how-do-credits-work)
 		"""
 
 		self.used_credits += float((self.CPS * (commandLen + wakeWord)) + self.DOMAIN_CREDITS)
 
-	
+
 	def _unused_CreditsRemaining(self) -> (float, float):
-		""" 
-			[FUTURE] Get the amount of Houndify credits used so far, and the amount remaining for 
+		"""
+			[FUTURE] Get the amount of Houndify credits used so far, and the amount remaining for
 			the day.
 		"""
 
 		remaining = self.DAILY_CREDITS - self.used_credits
-
 		return (self.used_credits, remaining)

@@ -7,4 +7,3 @@
 | 3      | Getting date               |
 | 4      | Asset control              |
 | 5      | Giving Quinton information |
-|
