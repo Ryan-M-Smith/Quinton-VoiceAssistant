@@ -1,7 +1,7 @@
 # Quinton-VoiceAssistant Changelog Structure
 
 * In the changelog, each entry will be titled with the software version
-  and the release date. In general the heading will be in the form
+  and the release date. In general the heading will be in the form  <br>
   `vX.Y.Z - Released yyyy-mm-dd` where:
   * `X` is the major version number
   * `Y` is the minor version number
