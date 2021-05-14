@@ -4,6 +4,15 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
 
+## Unreleased - (Expected v0.3.7)
+
+* **Changed**
+  * The GitHub Actions workflow for this repository doesn't run as often anymore
+  * Rewrote and clarified a few things in the changelog
+
+* **Fixed**
+  * Fixed a bug where the function that clears the cache wasn't being called
+
 ## v0.3.6 - Released 2021-04-01
 
 * **Added**
@@ -164,7 +173,7 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
 
 * **Added**
   * The cache is now scanned for leftover files and they are deleted (e.g., `None.wav` when something fails)
-  * The ability for the software to utilize the dictionary merge operators (`|`/`|=`) in Python 3.9
+  * The ability for the software to utilize the dictionary merge operators (`|`/`|=`) if you run the software with Python 3.9+
     * For those with 3.8, the old dictionary combination method is still being used in the
       code and is not being removed any time soon, so there's no need to upgrade.
   * Added a reference to the changelog format I use [(see above)](#quinton-voiceassistant-changelog)
@@ -185,7 +194,7 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
     * The "Developing for Quinton" section has been renamed to "Contributing"
     * A new "Future Inclusions" section has been added
     * The "Different Versions" section has now been moved to "Future Inclusions" and it is now clearly
-      stated that this is a concept and not something included.
+      stated that this is a concept and not a current part of the software.
   * Updated [README.md](README.md)
     * Added a "Contributing" section that refers viewers to `README-EXT.md`
   * Some extra, unused functions that were in `cache_src/cache.py` are now in `cache_src/cache_extras.py`.
