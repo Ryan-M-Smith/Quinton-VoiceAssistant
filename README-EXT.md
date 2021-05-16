@@ -102,7 +102,7 @@ modify the wake word in [config.yaml](data/config/config.yaml).
   * ex. "What is the weather like?"; "Tell me the weather"
 
 * Recording information (such as your favorite animal)
-  * ex. "My favorite animal is a/an _animal name_"
+  * ex. "My favorite animal is a/an `animal name`"
 
 * **Future Inclusion:** Smart home control
   * "Turn on/off the light"
@@ -111,7 +111,7 @@ modify the wake word in [config.yaml](data/config/config.yaml).
 
 ## How Quinton Works
 
-All of Quinton's text to speech is done by the Houndify API, but the API is used via [Uberi's](https://www.github.com/Uberi)
+All of Quinton's text to speech is done by the Houndify API, but everything is called via [Uberi's](https://www.github.com/Uberi)
 [SpeechRecognition library](https://www.github.com/Uberi/speech_recognition). A Houndify home automation client is used to receive the
 commands. After the speech is converted to text, it is processed and replied to locally (as opposed to having a reply transmitted
 from the internet).
@@ -123,8 +123,7 @@ from the internet).
 #### Python Version
 
 You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer. Download and install the correct
-build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
-release date, the latest version of Python is 3.9.1.
+build and version of Python for your operating system [here](https://python.org/downloads).
 
 **macOS Users:** If you'd prefer, you can install Python via Homebrew rather than from source.
 
@@ -142,20 +141,20 @@ release date, the latest version of Python is 3.9.1.
 
 #### Other Requirements
 
-There are some packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
+There are some non-PyPI packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
 These dependencies are installed by running the setup script, so there is not need to install them separately unless
 you choose to. A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use
 a different distribution or package manager, you can search for packages for your system [here](https://pkgs.org).
 
-| Debian/Ubuntu     | Fedora                                 |
-| ---------------   | ------                                 |
-| `portaudio19-dev` | `portaudio-devel`; `redhat-rmp-config` |
-| `python3-espeak`  | `espeak-devel`                         |
-| `python3-pyaudio` | `python3-pyaudio`                      |
-| `espeak`          | `espeak`                               |
-| `libbz2-dev`      | `bzip2-devel`                          |
-| `sox`             | `sox`                                  |
-| `ffmpeg`          | `ffmpeg`                               |
+| Debian/Ubuntu     | Fedora                                 | Manjaro          |
+| ---------------   | ------                                 | -------          |
+| `portaudio19-dev` | `portaudio-devel`; `redhat-rmp-config` | `portaudio`      |
+| `python3-espeak`  | `espeak-devel`                         | `python-pyaudio` |
+| `python3-pyaudio` | `python3-pyaudio`                      | -                |
+| `espeak`          | `espeak`                               | `espeak`         |
+| `libbz2-dev`      | `bzip2-devel`                          | `bzip2`          |
+| `sox`             | `sox`                                  | `sox`            |
+| `ffmpeg`          | `ffmpeg`                               | `ffmpeg`         |
 
 **NOTE:** `omxplayer` can be used instead of `ffmpeg` on a Raspberry Pi running Raspberry Pi OS.
 
@@ -165,7 +164,7 @@ StackOverflow thread for more information.
 
 #### API Keys
 
-In order for Quinton to run, you will need to have a Houndify and OpenWeatherMap accounts with valid API keys. The good news is, all of
+In order for Quinton to run[^1], you will need to have a Houndify and OpenWeatherMap accounts with valid API keys. The good news is, all of
 this is free. Both services offer premium subscription options if you decide you want to upgrade your account in the future (to increase your daily API
 call/credit allotment), but it's completely optional. In addition, both accounts can be signed up for without the use of a credit card.
 
