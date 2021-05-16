@@ -59,18 +59,18 @@ release date, the latest version of Python is 3.9.1.
 
 There are some packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
 These dependencies are installed by running the setup script, so there is not need to install them separately unless
-you choose to. A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use
+you choose to. A table of the required packages for Debian, Ubuntu, and Manjaro systems is provided below. If you use
 a different distribution or package manager, you can search for packages for your system [here](https://pkgs.org).
 
-| Debian/Ubuntu     | Fedora                                 |
-| ---------------   | ------                                 |
-| `portaudio19-dev` | `portaudio-devel`; `redhat-rmp-config` |
-| `python3-espeak`  | `espeak-devel`                         |
-| `python3-pyaudio` | `python3-pyaudio`                      |
-| `espeak`          | `espeak`                               |
-| `libbz2-dev`      | `bzip2-devel`                          |
-| `sox`             | `sox`                                  |
-| `ffmpeg`          | `ffmpeg`                               |
+| Debian/Ubuntu     | Fedora                                 | Manjaro          |
+| ---------------   | ------                                 | -------          |
+| `portaudio19-dev` | `portaudio-devel`; `redhat-rmp-config` | `portaudio`      |
+| `python3-espeak`  | `espeak-devel`                         | `python-pyaudio` |
+| `python3-pyaudio` | `python3-pyaudio`                      | -                |
+| `espeak`          | `espeak`                               | `espeak`         |
+| `libbz2-dev`      | `bzip2-devel`                          | `bzip2`          |
+| `sox`             | `sox`                                  | `sox`            |
+| `ffmpeg`          | `ffmpeg`                               | `ffmpeg`         |
 
 **NOTE:** `omxplayer` can be used instead of `ffmpeg` on a Raspberry Pi running Raspberry Pi OS.
 
@@ -92,9 +92,15 @@ For complete instructions on how to set up/register API keys for both services, 
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
 for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
-I will be using `python3.9`.
+I will be using the command `python3.9`.
 
-In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
+In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument:
+
+```bash
+sudo setup.py install
+# --- OR --- #
+setup.py install --user # Will install in the current user's site-package directory
+```
 
 With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and macOS.
 As of now the supported package managers are:
