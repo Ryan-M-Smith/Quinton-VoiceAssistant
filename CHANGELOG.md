@@ -8,6 +8,9 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
 
 * **Changed**
   * The GitHub Actions workflow for this repository doesn't run as often anymore
+  * Updated the documentation
+    * Notably, the README files now include the Manjaro dependencies in the
+      table
   * Rewrote and clarified a few things in the changelog
 
 * **Fixed**
