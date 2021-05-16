@@ -4,7 +4,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
 
-## Unreleased - (Expected v0.3.7)
+## v0.3.7 - Released 2021-05-16
 
 * **Changed**
   * The GitHub Actions workflow for this repository doesn't run as often anymore
