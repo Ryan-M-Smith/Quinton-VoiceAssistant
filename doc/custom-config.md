@@ -1,7 +1,7 @@
 # Creating Custom Configuration Variables
 
 Over the course of using Quinton, you may decide you want to add functionality - but
-maybe it's not to the code itself. For example, you may want to increase the espeak
+maybe it's not to the code itself. For example, you may want to increase the Espeak
 word gap. By default, Quinton's configuration file doesn't come with variables to
 modify that setting, but you can add them yourself by following the steps below.
 
@@ -19,7 +19,7 @@ modify that setting, but you can add them yourself by following the steps below.
 3. Find the best YAML document to put your new entry
 
     &nbsp;&nbsp;&nbsp;&nbsp;I've put all variables pertaining to Espeak
-    settings in document 3 (beginning on line 110), so you can put yours
+    settings in document 3 (beginning on line 111), so you can put yours
     there. If you prefer, you could even make a new document for your custom
     configuration entries (especially if you plan to make a lot of them).
 
