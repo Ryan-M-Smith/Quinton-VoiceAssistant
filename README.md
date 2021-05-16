@@ -98,7 +98,7 @@ In certain cases, you may have to run `setup.py install` as root. If you don't w
 
 ```bash
 sudo setup.py install
-# OR
+# --- OR --- #
 setup.py install --user # Will install in the current user's site-package directory
 ```
 
