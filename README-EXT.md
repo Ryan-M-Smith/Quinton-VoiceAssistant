@@ -61,7 +61,7 @@
 
 ---
 
-## Basic Information  
+## Basic Information
 
 ### About the Name
 
@@ -106,7 +106,7 @@ modify the wake word in [config.yaml](data/config/config.yaml).
 
 * **Future Inclusion:** Smart home control
   * "Turn on/off the light"
-  
+
     _NOTE: As of now, these kinds of commands are recognized, but they give an "operation not permitted" message_
 
 ## How Quinton Works
