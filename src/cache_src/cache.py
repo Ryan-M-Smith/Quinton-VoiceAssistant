@@ -65,7 +65,7 @@ class Cache:
 		"""
 
 		if force:
-			couldClear = self.__clear
+			couldClear = self.__clear()
 			
 			if couldClear:
 				self.__updateLastClear(fromForce=force)

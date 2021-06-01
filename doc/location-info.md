@@ -1,4 +1,4 @@
-# Locale Information
+# Location Information
 
 For Quinton to be able to give you information about the time or weather, it needs to be able to
 access your location and timezone data. As of right now, it isn't automatically set for you (sorry),
@@ -49,12 +49,12 @@ By default, the timezone is set to Eastern Time (United States), but you can cha
    * Note that `tzcodes.py` **requires Python 3.8+**, so you need to have
      a Python version that meets this requirement. If you have, say,
      Python 3.9, use the command that is for **your version**.
+   * You'll likely already have this, because 3.8+ is required to run the software
 
 2. Follow any prompts
 
 3. Set the `timezone` variable in `../config/config.yaml` to the
-    **exact** name you found in the list.
-   **This parameter is case sensitive!**
+   **exact** name you found in the list. **This parameter is case sensitive!**
 
 For more information about pytz timezones and available timezone lists, see the pytz library's
 [README](github.com/stub42/pytz/blob/master/src/README.rst) on GitHub

@@ -1,6 +1,6 @@
-portaudio                     
-python-pyaudio                      
-espeak                               
-bzip2                          
+portaudio
+python-pyaudio
+espeak
+bzip2
 sox
 ffmpeg

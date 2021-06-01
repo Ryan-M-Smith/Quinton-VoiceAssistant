@@ -61,7 +61,7 @@
 
 ---
 
-## Basic Information  
+## Basic Information
 
 ### About the Name
 
@@ -102,16 +102,16 @@ modify the wake word in [config.yaml](data/config/config.yaml).
   * ex. "What is the weather like?"; "Tell me the weather"
 
 * Recording information (such as your favorite animal)
-  * ex. "My favorite animal is a/an _animal name_"
+  * ex. "My favorite animal is a/an `animal name`"
 
 * **Future Inclusion:** Smart home control
   * "Turn on/off the light"
-  
+
     _NOTE: As of now, these kinds of commands are recognized, but they give an "operation not permitted" message_
 
 ## How Quinton Works
 
-All of Quinton's text to speech is done by the Houndify API, but the API is used via [Uberi's](https://www.github.com/Uberi)
+All of Quinton's text to speech is done by the Houndify API, but everything is called via [Uberi's](https://www.github.com/Uberi)
 [SpeechRecognition library](https://www.github.com/Uberi/speech_recognition). A Houndify home automation client is used to receive the
 commands. After the speech is converted to text, it is processed and replied to locally (as opposed to having a reply transmitted
 from the internet).
@@ -123,8 +123,7 @@ from the internet).
 #### Python Version
 
 You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer. Download and install the correct
-build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
-release date, the latest version of Python is 3.9.1.
+build and version of Python for your operating system [here](https://python.org/downloads).
 
 **macOS Users:** If you'd prefer, you can install Python via Homebrew rather than from source.
 
@@ -142,20 +141,20 @@ release date, the latest version of Python is 3.9.1.
 
 #### Other Requirements
 
-There are some packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
+There are some non-PyPI packages that Quinton-VoiceAssistant requires that need to be installed from your package manager.
 These dependencies are installed by running the setup script, so there is not need to install them separately unless
-you choose to. A table of the required packages for Debian, Ubuntu, and Fedora systems is provided below. If you use
+you choose to. A table of the required packages for Debian, Ubuntu, Fedora, and Manjaro systems is provided below. If you use
 a different distribution or package manager, you can search for packages for your system [here](https://pkgs.org).
 
-| Debian/Ubuntu     | Fedora                                 |
-| ---------------   | ------                                 |
-| `portaudio19-dev` | `portaudio-devel`; `redhat-rmp-config` |
-| `python3-espeak`  | `espeak-devel`                         |
-| `python3-pyaudio` | `python3-pyaudio`                      |
-| `espeak`          | `espeak`                               |
-| `libbz2-dev`      | `bzip2-devel`                          |
-| `sox`             | `sox`                                  |
-| `ffmpeg`          | `ffmpeg`                               |
+| Debian/Ubuntu     | Fedora                                 | Manjaro          |
+| ---------------   | ------                                 | -------          |
+| `portaudio19-dev` | `portaudio-devel`; `redhat-rmp-config` | `portaudio`      |
+| `python3-espeak`  | `espeak-devel`                         | `python-pyaudio` |
+| `python3-pyaudio` | `python3-pyaudio`                      | -                |
+| `espeak`          | `espeak`                               | `espeak`         |
+| `libbz2-dev`      | `bzip2-devel`                          | `bzip2`          |
+| `sox`             | `sox`                                  | `sox`            |
+| `ffmpeg`          | `ffmpeg`                               | `ffmpeg`         |
 
 **NOTE:** `omxplayer` can be used instead of `ffmpeg` on a Raspberry Pi running Raspberry Pi OS.
 
@@ -165,16 +164,20 @@ StackOverflow thread for more information.
 
 #### API Keys
 
-In order for Quinton to run, you will need to have a Houndify and OpenWeatherMap accounts with valid API keys. The good news is, all of
-this is free. Both services offer premium subscription options if you decide you want to upgrade your account in the future (to increase your daily API
-call/credit allotment), but it's completely optional. In addition, both accounts can be signed up for without the use of a credit card.
+In order for Quinton to run with 100% functionality, you will need to have a Houndify and OpenWeatherMap accounts with valid API keys.
+The good news is, all of this is free. Both services offer premium subscription options if you decide you want to upgrade your account
+in the future (to increase your daily API call/credit allotment), but it's completely optional. In addition, both accounts can be signed up
+for without the use of a credit card.
+
+**NOTE:** You only need both accounts for _100%_ functionality. If you don't plan to use the weather features, you can use the software with
+only Houndify keys.
 
 **NOTE:** You must put all API keys in the [credentials.yaml](credentials.yaml) file for everything to work properly!
 
 ---
 
 Continue reading for sign-up/setup instructions. If you want to wait until later to sign up, click [here](#actually-installing-the-software)
-to skip to the software installation instructions (i.e., the next section).
+to skip to the software installation instructions (i.e., the section after the next one).
 
 ---
 
@@ -200,15 +203,15 @@ to skip to the software installation instructions (i.e., the next section).
 For more information about how you use your Houndify client, click on "View Analytics page" to see information about how you use
 credits, how often you utilize speech-to-text, domain usage information, and query usage.
 
-Note: the section labeled "Domain Distribution" will most likely only display "Speech To Text Only" as 100% of the distribution unless
-you do a text query (typing in a command).
+**NOTE:** the section labeled "Domain Distribution" will most likely only display "Speech To Text Only" as 100% of the distribution unless
+you make a text query (e.g., typing in a command on the website's API tester).
 
 #### How to Test Out the Houndify API Online
 
 1. If you aren't already on the "Overview & API Keys" page, click on "Dashboard" at the top of the page. Otherwise, skip to step 3.
 2. Select your client
 3. On the left-hand side of the page, select "Try the Houndify API"
-4. Type or speak a command. If you're speaking, make sure you allow your microphone to be used
+4. Type or speak a command. If you're speaking, make sure you allow microphone acccess
 5. Because the "Speech To Text Only" domain is enabled, the only response you'll get is what you typed/spoke spoken back to you,
    but this is expected.
 
@@ -220,7 +223,7 @@ limit to how many clients you can have.
 For free users, Houndify imposes a limit of 100 credits per day per client, with a limit of 10 queries per second.
 You can gain more credits by upgrading your account. To do this, select the "Pricing" tab at the top of the page to view
 the prices for each tier and to see what is included in each. Note that you must verify your account before you are
-allowed to upgrade, and all tiers limit you to 10 queries per second except Enterprise.
+allowed to upgrade, and all tiers except Enterprise limit you to 10 queries per second.
 
 For more information on how credits are used and how credit usage is calculated, scroll down a little bit on the Pricing page or
 just click [here](https://www.houndify.com/pricing#how-do-credits-work).
@@ -242,8 +245,8 @@ All OpenWeatherMap accounts come with a default API key named "Default" (but the
 
 To find your default API Key:
 
-1. On the lower navigation bar (under the one with the search bar) click on "API Keys". If this step is causing you some trouble (it did for me
-   at first), the link is [here](https://home.openweathermap.org/api_keys). Note that this link only works if you're signed in.
+1. On the lower navigation bar (under the one with the search bar) click on "API Keys". If this step is causing you some trouble (it was confusing
+   for me at first), the link is [here](https://home.openweathermap.org/api_keys). Note that this link only works if you're signed in.
 2. A default key should be pre-generated for you.
 
 #### Registering a New API Key
@@ -262,7 +265,7 @@ So to do it:
 
 Note that for any API key (even the default one), you can change its name by clicking on the little pencil and paper icon to the right
 of the current name. If you have multiple keys, you can delete any of them by clicking the "x" next to the change-name icon. Press "OK"
-if a box pops up asking to verify the key deletion (I know Chrome does this).
+if a box pops up asking to verify the key deletion (I know this happens in Chrome).
 
 #### How to Test Out the OpenWeatherMap API Online
 
@@ -284,9 +287,15 @@ a 16-day daily forecast reading). You can also sign up for specialized APIs that
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
 for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
-I will be using `python3.9`.
+I will be using the command `python3.9`.
 
-In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument.
+In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument:
+
+```bash
+sudo setup.py install
+# --- OR --- #
+setup.py install --user # Will install in the current user's site-package directory
+```
 
 With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and macOS.
 As of now the supported package managers are:
@@ -341,8 +350,8 @@ package manager. To find the correct packages for your system, see [pkgs.org](ht
 usual.
 
 ```bash
-# An example for Pacman users
-sudo pacman -S ... # Packages
+# An example for RPM users
+sudo rpm -i ... # Packages
 ```
 
 After that, run the following to install everything else:
@@ -353,9 +362,14 @@ python3.9 setup.py orig_install
 
 ## Future Inclusions
 
+### Windows Support
+
+At some point, I would love to have official Windows binaries of Quinton-VoiceAssistant so anyone on Windows could use the
+software. This way, no one will have to poke around with installing it in Linux on Windows.
+
 ### Different versions
 
-In the future, my hope is that there would be  a few different versions of Quinton-VoiceAssistant. The one you have downloaded right now
+In the future, my hope is that there would be a few different versions of Quinton-VoiceAssistant. The one you have downloaded right now
 would be the regular version, which would be used like a normal voice assistant. In addition, there would be a CLI version (Quinton-CLI)
 which would work without a microphone or an audio output device (speakers, headphones, etc.), and a dedicated developer version (Quinton-VA-Dev)
 which would contain templates for developing Quinton ToolKits.
@@ -417,7 +431,7 @@ in PyOWM v3.0.0. However, if you still wish to use the feature, you can do so us
    Notes:
       1. The above clone will still track other remote braches, such as master. If you truly _only_
          want the `old-pyowm-caches` branch, use the `--single-branch` flag as well.
-      2. This branch is not under active development, and may not always have the software's latest features,
+      2. This branch is not under active development, and will not have the software's latest features,
          especially since bringing in changes from master would override the legacy functionality.
 
 ## Contributing
