@@ -38,8 +38,7 @@ This is an abridged version of the project's README. For the complete README, pl
 #### Python Version
 
 You will need to install and run Quinton-VoiceAssistant with Python 3.8 or newer. Download and install the correct
-build and version of Python for your operating system [here](https://python.org/downloads). As of this version's,
-release date, the latest version of Python is 3.9.1.
+build and version of Python for your operating system [here](https://python.org/downloads).
 
 **macOS Users:** If you prefer, you can install Python via Homebrew rather than from source.
 
