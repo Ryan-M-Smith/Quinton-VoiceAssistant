@@ -15,7 +15,7 @@ import speech_recognition as sr
 from pathlib import Path, PosixPath
 from time import sleep
 from datetime import datetime
-from typing import Union, Optional, Generator, NoReturn
+from typing import Union, Optional, Generator, Tuple, NoReturn
 
 #from omxplayer.player import OMXPlayer # Used to play audio
 #from tinytag import TinyTag # Used to get audio duration
@@ -352,7 +352,7 @@ class VoiceAssistant:
 
 	# The `*` is used because the function call isn't very readable without listing the parameters
 	@staticmethod
-	def __phoneticsCheck(*, wakePhrase: str, detectedPhrase: str) -> (bool, Optional[str]):
+	def __phoneticsCheck(*, wakePhrase: str, detectedPhrase: str) -> Tuple[bool, Optional[str]]:
 		"""
 			Compares the phonetic structure of the user's wake word/phrase to a string recorded from
 			the microphone using the Soundex Algorithm. This will help ensure that the wake word is
@@ -404,7 +404,7 @@ class VoiceAssistant:
 			else:
 				return (False, None)
 
-	def __reply(self, commandInfo: Union[dict, list], *, backup: Optional[dict], dataFromCache: bool) -> (str, dict):
+	def __reply(self, commandInfo: Union[dict, list], *, backup: Optional[dict], dataFromCache: bool) -> Tuple[str, dict]:
 		"""
 			Generates a reply to the user's query. A dictionary of content or a list
 			of content dictionaries can be passed in.
@@ -599,7 +599,7 @@ class VoiceAssistant:
 
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 					response = self.__normalizeTime(orig_time)
-			elif (("what" in infoSample.get("question_words")) and (("is" in infoSample.get("to_be")) or ("what's" in ci.egt("full_command"))) and ("date" in infoSample.get("keywords"))): # Getting the date
+			elif (("what" in infoSample.get("question_words")) and (("is" in infoSample.get("to_be")) or ("what's" in infoSample.get("full_command"))) and ("date" in infoSample.get("keywords"))): # Getting the date
 				commandID = 3
 
 				# Get the current date
@@ -797,6 +797,8 @@ class VoiceAssistant:
 		with open("../data/tmp/data.txt", "w") as data:
 			data.write(text)
 
+		output: int
+
 		# Save the reply to a file named using the unique identifer assigned to it
 		#
 		# Command line options (in order of usage):
@@ -844,7 +846,7 @@ class VoiceAssistant:
 			return code
 
 		TONE_PATH = Path("../audio")
-		AUDIO_PATH: PostixPath
+		AUDIO_PATH: PosixPath
 
 		 # C4 and C5 tones; the C4 is played to prompt the user to speak and the C5 is played
 		 # before the command is processed/after the listening period ends.
@@ -917,7 +919,7 @@ class VoiceAssistant:
 		self.used_credits += float((self.CPS * (commandLen + wakeWord)) + self.DOMAIN_CREDITS)
 
 
-	def _unused_CreditsRemaining(self) -> (float, float):
+	def _unused_CreditsRemaining(self) -> Tuple[float, float]:
 		"""
 			[FUTURE] Get the amount of Houndify credits used so far, and the amount remaining for
 			the day.
