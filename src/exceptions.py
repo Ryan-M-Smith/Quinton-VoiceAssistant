@@ -24,7 +24,7 @@ from sys import version_info
 #
 # * Error codes are given to each error type alphabetically, and exception
 #	codes are independent of warning codes. This is why the exceptions
-# 	are numbered up to 111, and the warnings only go up to 205. 
+# 	are numbered up to 111, and the warnings only go up to 205.
 
 class Error(ABC, Exception):
 	""" The abstract base class for all of the other custom exceptions. """
@@ -41,7 +41,7 @@ class Warn(ABC, Warning):
 
 	@classmethod
 	def getSubclasses(cls) -> dict:
-		""" 
+		"""
 			Get the subclasses of the class. The subclasses are returned in a
 			common form to help with comparison to caught exceptions. A dictionary
 			with the common name mapped to the original type is returned.
@@ -53,8 +53,8 @@ class Warn(ABC, Warning):
 		# (in the form `<class 'exceptions.ClassName'>`) to the form "`exceptions.Classname`".
 		# The resulting tuple of strings will be easier to work with, and will be easier to compare
 		# to warnings raised by other functions.
-		for subclasses in cls.__subclasses__():
-			returnDict.update({str(subclass).strip("<>").split()[1].strip("\'"): t})
+		for subclass in cls.__subclasses__():
+			returnDict.update({str(subclass).strip("<>").split()[1].strip("\'"): type(subclass)})
 
 		return returnDict
 
@@ -69,7 +69,7 @@ class AudioPlaybackError(Error):
 	code = 102
 
 class CacheIntentError(Error):
-	""" 
+	"""
 		There was a problem unifying the intents of content dictionaries from the cache.
 		In addition, `statistics.StatisticsError` was most likely raised.
 	"""
@@ -135,9 +135,9 @@ class RequestLimit(Error):
 	code = 110
 
 class SetupWarning(Warn):
-	""" 
+	"""
 		[FUTURE INCLUSUION] The user hasn't set up Quinton with the config software. Because this
-		exception has no use in current versions of `Quinton-VoiceAssistant`, it is removed from 
+		exception has no use in current versions of `Quinton-VoiceAssistant`, it is removed from
 		the final releases.
 	"""
 	reason = "Please set up Quinton through the Quinton config software."
@@ -161,7 +161,7 @@ class WiFiWarning(Warn):
 class UnknownProblem(Warn):
 	"""
 		Something went wrong during Quinton's execution. \n
-		This is most likely due to to a Python exception being raised (`TypeError`, `OSError`, `ValueError`, etc.). 
+		This is most likely due to to a Python exception being raised (`TypeError`, `OSError`, `ValueError`, etc.).
 		The problem may have just been a one-time thing, or it may be a recurring bug.
 	"""
 	reason = "Something went wrong during execution. Returning to listening mode."
