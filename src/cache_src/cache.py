@@ -12,7 +12,7 @@ from datetime import datetime
 from pathlib import Path
 
 class Cache:
-	""" 
+	"""
 		Controls Quinton's memory. The cache class controls memory management and access to allow
 		command replies to be generated faster.
 	"""
@@ -38,12 +38,12 @@ class Cache:
 		success2 = subprocess.check_output("rm ../data/cache/history/*", shell=True) # Clear the corresponding history files
 
 		if (success1 == 0) and (success2 == 0):
-			return True 
+			return True
 		else:
 			return False
-	
+
 	def __updateLastClear(self, fromForce=False):
-		""" 
+		"""
 			Update `../data/memory/last-cache-clear.txt` with the date of the most recent
 			cache clear.
 		"""
@@ -59,25 +59,25 @@ class Cache:
 				lcc.write(time.strftime(fmt))
 
 	def tryClear(self, force=False) -> bool:
-		""" 
+		"""
 			Check if the cache should be cleared. If it should be, clear it. Returns
 			`True` if the cache successfully cleared, `False` otherwise.
 		"""
 
 		if force:
 			couldClear = self.__clear()
-			
+
 			if couldClear:
 				self.__updateLastClear(fromForce=force)
-			
-			return couldClear 
+
+			return couldClear
 
 		data = str()
 		couldClear = False
 
 		with open("../data/memory/last-cache-clear.txt") as lcc:
 			data = lcc.read()
-		
+
 		if os.stat("../data/memory/last-cache-clear.txt").st_size != 0:
 			data = data.split()
 
@@ -123,11 +123,11 @@ class Cache:
 				couldClear = NotImplemented
 		else:
 			couldClear = self.__clear
-		
+
 		couldClear = False if couldClear is NotImplemented else couldClear
 
-		if couldClear: 
-			self.__updateLastClear(r)
+		if couldClear:
+			self.__updateLastClear()
 
 		return couldClear
 
@@ -144,5 +144,5 @@ class Cache:
 
 		# Compare the file names to the compiled pattern
 		for f in contents:
-			if not (pattern := re.compile(COMP)).fullmatch(f):
+			if not re.compile(COMP).fullmatch(f):
 				subprocess.call(f"rm {str(CACHE_PATH)}/{f}*", shell=True)

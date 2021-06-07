@@ -1,12 +1,13 @@
 #
 # FILENAME: cache_extras.py | Quinton-VoiceAssistant
-# DESCRIPTION: Unused functions that may still serve a purpose 
+# DESCRIPTION: Unused functions that may still serve a purpose
 # CREATED: 2020-11-29 @ 3:30 PM
 # COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
 """ Unused functions that may still serve a purpose. """
 
+from datetime import datetime
 import os, subprocess
 from pathlib import Path
 from typing import Optional
@@ -22,8 +23,8 @@ def checkFor(audioID: str) -> bool:
 	"""
 
 	matches = int()
-	
-	RESPONSE_PATH = Path(../data/cache/responses) # A path relative to `main.py`
+
+	RESPONSE_PATH = Path("../data/cache/responses") # A path relative to `main.py`
 
 	try:
 		# Check for a certain audio ID number in the cache
@@ -49,7 +50,7 @@ def get(audioID: str) -> Optional[Path]:
 def __getClearDate() -> str:
 		"""
 			Final functionality: Get the date that the next cache clear happens on.
-			
+
 			THIS FUNCTION IS INCOMPLETE AND DOES NOT WORK.
 		"""
 
@@ -60,7 +61,7 @@ def __getClearDate() -> str:
 		time = datetime.now() #pytz.timezone(tz.zone))
 
 		dt = datetime.strptime((str(time.day) + "/" + str(time.month) + "/" + str(time.year) + " " + str(time.hour) + ":" + str(time.minute) + ":" + str(time.second)), "%d/%m/%Y %H:%M:%S")
-		
+
 		if self.clearFrequency == "daily":
 			# dt = datetime.strptime((str(time.hour) + ":" + str(time.minute) + ":" + str(time.second)), "%I:%M:%S")
 			# fmt = "%I:%M:%S %p"
@@ -69,7 +70,7 @@ def __getClearDate() -> str:
 
 			return "12:00:00 AM"
 
-		
+
 		month = time.month
 
 		# fmt = "%B %d" # Month and day (ex. January 01)
