@@ -18,7 +18,7 @@ def handle(process: Callable[..., Any], *args, cfg: Config) -> Any:
 		Call `process()` under the `try` clause of a large `try`-`except` block.
 	"""
 	try:
-		process(*args) # Call the function with the correct arguments
+		return process(*args) # Call the function with the correct arguments
 	except (Exception, Warning, Error, Warn) as e: # Handle exceptions and warnings
 		print(type(e))
 
