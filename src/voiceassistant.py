@@ -17,18 +17,15 @@ from time import sleep
 from datetime import datetime
 from typing import Union, Optional, Generator, Tuple, NoReturn
 
-#from omxplayer.player import OMXPlayer # Used to play audio
-#from tinytag import TinyTag # Used to get audio duration
-
-from . import audioplayer
-from .commandprocessor import CommandProcessor as cp
-from .config_src.config import Config
-from .config_src.permissions import Permissions as Perms
-from .livelisten import Listener
-from .exceptions import (
+import audioplayer
+from commandprocessor import CommandProcessor as cp
+from config_src.config import Config
+from config_src.permissions import Permissions as Perms
+from livelisten import Listener
+from exceptions import (
 	MicrophoneWarning, WiFiWarning, AudioEncodingError,
-	AudioPlaybackError, HistoryError, DataError, LocationError,
-	TimezoneError, TimestampError, NoReplyError
+	HistoryError, DataError, LocationError, TimezoneError,
+	TimestampError, NoReplyError, MissingCredentialsError
 )
 
 class VoiceAssistant:
@@ -38,25 +35,6 @@ class VoiceAssistant:
 		replies, responding to the user, and everything else required to allow Quinton to run into one function
 		(`VoiceAssistant.run()`) for the main function to call.
 	"""
-
-	# -----------------------------
-	# NOTE: This section may need to be refactored to avoid a `with` statement at the class' top-level,
-	# but this works for now.
-	#
-	# API Keys:
-	# -----------------------------
-	with open("../credentials.yaml", "r") as credentials:
-		credsList = yaml.full_load(credentials)
-		valList = list(credsList.get("credentials").values())
-
-		# Houndify
-		HOUNDIFY_ID = valList[0]
-		HOUNDIFY_KEY = valList[1]
-		# -----------------------
-		# OpenWeatherMap
-		OWM_KEY = valList[2]
-		# -----------------------
-	# -----------------------------
 
 	# -------------------------------------------------------------------
 	# NOTE: These variables and constants are currently unused.
@@ -73,6 +51,11 @@ class VoiceAssistant:
 
 	_unused_CPS = 0.25 # For all audio queries, Houndify uses 0.25 credits per second of audio
 	# -------------------------------------------------------------------
+
+	# API Keys
+	HOUNDIFY_ID: str
+	HOUNDIFY_KEY: str
+	OWM_KEY: str
 
 	recognizer = sr.Recognizer() # Recognizer class instance to listen for audio
 
@@ -106,6 +89,24 @@ class VoiceAssistant:
 		if not isWiFi:
 			raise WiFiWarning
 
+		# Read the necessary API keys from the credentials file
+		with open("../my_stuff/credentials.yaml", "r") as credentials:
+			credsList = yaml.full_load(credentials)
+			valList = list(credsList.get("credentials").values())
+
+			# Houndify
+			self.HOUNDIFY_ID = valList[0]
+			self.HOUNDIFY_KEY = valList[1]
+			# -----------------------------
+			# OpenWeatherMap
+			self.OWM_KEY = valList[2]
+			# -----------------------------
+
+		# Raise an exception if there is an empty credential variable
+		if (len(self.HOUNDIFY_ID) == 0) or (len(self.HOUNDIFY_KEY) == 0) or (len(self.OWM_KEY) == 0):
+			raise MissingCredentialsError
+
+		print("Successfully found and loaded all API credentials")
 		print("MICROPHONE TYPE:", type(self.mic))
 
 	def __getMicrophone(self) -> bool:
