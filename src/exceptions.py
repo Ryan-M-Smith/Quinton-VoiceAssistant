@@ -23,8 +23,7 @@ from sys import version_info
 #	 never show up anywhere.
 #
 # * Error codes are given to each error type alphabetically, and exception
-#	codes are independent of warning codes. This is why the exceptions
-# 	are numbered up to 111, and the warnings only go up to 205.
+#	codes are independent of warning codes.
 
 class Error(ABC, Exception):
 	""" The abstract base class for all of the other custom exceptions. """
@@ -112,10 +111,15 @@ class MicrophoneWarning(Warn):
 	reason = "There is no microphone connected. Please connect a microphone to continue."
 	code = 202
 
+class MissingCredentialsError(Error):
+	""" The user is missing one or more API credentials. """
+	reason = "You are missing one or more API credentials. Please enter them in the credentials file and try again."
+	code = 108
+
 class NoReplyError(Error):
 	""" A content dictionary had a reply as `None`. """
 	reason = "Reply was nonexistant. Aborting."
-	code = 108
+	code = 109
 
 class NotUnderstood(Warn):
 	""" Spoken command not understood. """
@@ -127,12 +131,12 @@ class PyVersionError(Error):
 	# Have the "." be read as "point"
 	reason = f"You are currently running python version {version_info.major}.{version_info.minor}.{version_info.micro}, but " + \
 			  "Python version 3.8 or above is required. Please upgrade and try again.".replace(".", " point ", 3)
-	code = 109
+	code = 110
 
 class RequestLimit(Error):
 	""" [FUTURE INCLUSION] The user has used up all of their available credits for the day. """
 	reason = "You've used up all of your Houndify credits for the day."
-	code = 110
+	code = 111
 
 class SetupWarning(Warn):
 	"""
@@ -146,12 +150,12 @@ class SetupWarning(Warn):
 class TimestampError(Error):
 	""" Something went wrong while updating the command timestamp. """
 	reason = "An error occurred while timestamping a command. Aborting."
-	code = 111
+	code = 112
 
 class TimezoneError(Error):
 	""" Something when wrong when `pytz` tried to load the timezone information. """
 	reason = "Loading timezone information failed. Please make sure your timezone is valid. Aborting."
-	code = 112
+	code = 113
 
 class WiFiWarning(Warn):
 	""" No Wi-Fi connection. """
