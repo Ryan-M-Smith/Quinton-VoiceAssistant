@@ -4,6 +4,19 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
 
+## Unreleased - (Expected v0.4.0)
+
+* **Changed**
+  * The latest version of the VSCode Python extension includes [Pylance](https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/), which includes a lot
+  of cool features to the Python language support, including a linting-type feature. Many edits were made based
+  on these linting suggestions
+
+* **Fixed**
+  * Fixed some bugs related to misspelled identifiers
+  * Finished some unfinished code segments
+  * Fixed some code spacing issues
+
+
 ## v0.3.7 - Released 2021-05-16
 
 * **Changed**
