@@ -6,17 +6,23 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
 
 ## Unreleased - (Expected v0.4.0)
 
+* **Added**
+  * All error handling is now done by passing functions into the `handler.handle` function
+
 * **Changed**
   * API credentials are now read from inside the `VoiceAssistant` class constructor
-    * This keeps code statements out of the top-level
-  * The latest version of the VSCode Python extension includes [Pylance](https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/), which includes a lot
-  of cool features to the Python language support, including a linting-type feature. Many edits were made based
-  on these linting suggestions
+    * This keeps code statements out of the top level
+  * The latest version of the VSCode Python extension includes [Pylance](https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/), which adds a lot
+  of cool, new  features to the Python language support, including a linting-type feature. Many edits were made
+  based on these linting suggestions
 
 * **Fixed**
   * Fixed some bugs related to misspelled identifiers
   * Finished some unfinished code segments
   * Fixed some code spacing issues
+
+* **Removed**
+  * All usage of the error handling code outside the scope of `handler.handle` has been removed
 
 ## v0.3.7 - Released 2021-05-16
 
