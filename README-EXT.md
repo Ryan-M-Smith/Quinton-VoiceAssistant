@@ -40,6 +40,7 @@
       * [Without the Build Functionality](#without-the-build-functionality)
 
 5. [Future Inclusions](#future-inclusions)
+    * [Windows Support](#windows-support)
     * [Different Versions](#different-versions)
     * [ToolKits](#toolkits)
     * [More Build Support](#more-build-support)
