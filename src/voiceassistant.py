@@ -36,22 +36,6 @@ class VoiceAssistant:
 		(`VoiceAssistant.run()`) for the main function to call.
 	"""
 
-	# -------------------------------------------------------------------
-	# NOTE: These variables and constants are currently unused.
-	#
-	# Data for calculating and storing Houndify credit usage information:
-	# -------------------------------------------------------------------
-	_unused_DAILY_CREDITS = 100 # The number of Houndify credits allotted per day
-	_unused_used_credits = float()
-
-	# The baseline number of credits required for the Houndify domains that a client is
-	# registered under. Because Quinton is only registered under Speech-to-Text, and this
-	# domain requires no credits, the value is 0.
-	_unused_DOMAIN_CREDITS = 0
-
-	_unused_CPS = 0.25 # For all audio queries, Houndify uses 0.25 credits per second of audio
-	# -------------------------------------------------------------------
-
 	# API Keys
 	HOUNDIFY_ID: str
 	HOUNDIFY_KEY: str
@@ -90,7 +74,7 @@ class VoiceAssistant:
 			raise WiFiWarning
 
 		# Read the necessary API keys from the credentials file
-		with open("../my_stuff/credentials.yaml", "r") as credentials:
+		with open("../my_stuff/my-credentials.yaml", "r") as credentials:
 			credsList = yaml.full_load(credentials)
 			valList = list(credsList.get("credentials").values())
 
@@ -910,21 +894,3 @@ class VoiceAssistant:
 
 		# Pad the number with leading zeros to get the length up to 6 places (e.g., 1 becomes 000001)
 		yield str(self.cfg.recordings).zfill(6)
-
-	def _unused_UpdateCredits(self, commandLen: float, wakeWord: int) -> NoReturn:
-		"""
-			[FUTURE] Update the amount of Houndify credits that have been used using Houndify's credit
-			calculation formula (found at https://www.houndify.com/pricing#how-do-credits-work)
-		"""
-
-		self.used_credits += float((self.CPS * (commandLen + wakeWord)) + self.DOMAIN_CREDITS)
-
-
-	def _unused_CreditsRemaining(self) -> Tuple[float, float]:
-		"""
-			[FUTURE] Get the amount of Houndify credits used so far, and the amount remaining for
-			the day.
-		"""
-
-		remaining = self.DAILY_CREDITS - self.used_credits
-		return (self.used_credits, remaining)
