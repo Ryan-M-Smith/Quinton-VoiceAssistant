@@ -137,14 +137,12 @@ class Listener:
 
 			frames = list()
 
-			for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+			for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
 				data = stream.read(CHUNK)
 				frames.append(data)
 
 			stream.stop_stream()
 			stream.close()
-
-			pa.terminate()
 
 			print("Done!")
 
@@ -153,8 +151,6 @@ class Listener:
 			wf.setsampwidth(pa.get_sample_size(FORMAT))
 			wf.setframerate(RATE)
 			wf.writeframes(b"".join(frames))
-
-		del pa
 
 		return OUTPUT
 
