@@ -23,7 +23,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: [ubuntu-latest, macos-latest]
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
@@ -67,7 +67,7 @@ jobs:
       uses: github/codeql-action/analyze@v1
   
   build:
-    runs-on: [ubuntu-latest, macos-latest]
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.8, 3.9]
