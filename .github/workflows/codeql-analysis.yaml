@@ -81,4 +81,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          
+          # Get everything set up
+          sudo apt install build-essential libdbus-glib-1-dev libgirepository1.0-dev
+          pip install wheel dbus-python
+          
+          # Install from requirements.txt
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
