@@ -83,8 +83,8 @@ jobs:
           python -m pip install --upgrade pip
           
           # Get everything set up
-          sudo apt-get install build-essential libdbus-glib-1-dev libgirepository1.0-dev python3-espeak python3-pyaudio espeak libbz2-dev sox ffmpeg
-          pip install wheel dbus-python portaudio19-dev                     
+          sudo apt-get install -y build-essential libdbus-glib-1-dev libgirepository1.0-dev python3-espeak python3-pyaudio espeak libbz2-dev sox ffmpeg portaudio19-dev
+          pip install wheel dbus-python                     
                                         
           # Install from requirements.txt
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
