@@ -86,7 +86,7 @@ jobs:
           sudo apt install build-essential libdbus-glib-1-dev libgirepository1.0-dev
           pip install wheel dbus-python
           
-          ./dep-manager.sh # Install non-Python depencencies
+          bash dep-manager.sh
           
           # Install from requirements.txt
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
