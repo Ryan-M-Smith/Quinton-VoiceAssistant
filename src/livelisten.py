@@ -16,7 +16,7 @@ from alsaaudio import Mixer
 from pyaudio import PyAudio, paInt16, Stream
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Tuple
 from time import sleep
 
 from config_src.config import Config
@@ -137,14 +137,12 @@ class Listener:
 
 			frames = list()
 
-			for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+			for _ in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
 				data = stream.read(CHUNK)
 				frames.append(data)
 
 			stream.stop_stream()
 			stream.close()
-
-			pa.terminate()
 
 			print("Done!")
 
@@ -153,8 +151,6 @@ class Listener:
 			wf.setsampwidth(pa.get_sample_size(FORMAT))
 			wf.setframerate(RATE)
 			wf.writeframes(b"".join(frames))
-
-		del pa
 
 		return OUTPUT
 
@@ -176,7 +172,7 @@ class Listener:
 
 		return rms
 
-	def calcIntensity(self, *, audioPath: Path) -> (int, bool):
+	def calcIntensity(self, *, audioPath: Path) -> Tuple[int, bool]:
 		"""
 			Calculates an audio file's intensity in decibels from its RMS value and
 			determines if the decibel level is within the range for normal speech.
@@ -211,7 +207,7 @@ class Listener:
 				# Using -1 as the `ndigits` argument achieves the result of rounding the the tens place. In Python's
 				# rounding function, 0 is the tenths place, 1 doesn't change the number, and -1 is the ones place, so if
 				# a number `n` has a number `x` in the ones place and `x >= 5`, `n` is rounded to the tens place.
-				I_dB = int(round(I_db, ndigits=-1))
+				I_dB = int(round(I_dB, ndigits=-1))
 				inRange = True
 			else:
 				inRange = False

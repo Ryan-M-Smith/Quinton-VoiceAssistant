@@ -23,8 +23,7 @@ from sys import version_info
 #	 never show up anywhere.
 #
 # * Error codes are given to each error type alphabetically, and exception
-#	codes are independent of warning codes. This is why the exceptions
-# 	are numbered up to 111, and the warnings only go up to 205. 
+#	codes are independent of warning codes.
 
 class Error(ABC, Exception):
 	""" The abstract base class for all of the other custom exceptions. """
@@ -41,9 +40,9 @@ class Warn(ABC, Warning):
 
 	@classmethod
 	def getSubclasses(cls) -> dict:
-		""" 
+		"""
 			Get the subclasses of the class. The subclasses are returned in a
-			common form to help with comparison to caught exceptions. A dictionary
+			common form to help with comparison of caught exceptions. A dictionary
 			with the common name mapped to the original type is returned.
 		"""
 
@@ -53,8 +52,8 @@ class Warn(ABC, Warning):
 		# (in the form `<class 'exceptions.ClassName'>`) to the form "`exceptions.Classname`".
 		# The resulting tuple of strings will be easier to work with, and will be easier to compare
 		# to warnings raised by other functions.
-		for subclasses in cls.__subclasses__():
-			returnDict.update({str(subclass).strip("<>").split()[1].strip("\'"): t})
+		for subclass in cls.__subclasses__():
+			returnDict.update({str(subclass).strip("<>").split()[1].strip("\'"): type(subclass)})
 
 		return returnDict
 
@@ -69,7 +68,7 @@ class AudioPlaybackError(Error):
 	code = 102
 
 class CacheIntentError(Error):
-	""" 
+	"""
 		There was a problem unifying the intents of content dictionaries from the cache.
 		In addition, `statistics.StatisticsError` was most likely raised.
 	"""
@@ -112,10 +111,15 @@ class MicrophoneWarning(Warn):
 	reason = "There is no microphone connected. Please connect a microphone to continue."
 	code = 202
 
+class MissingCredentialsError(Error):
+	""" The user is missing one or more API credentials. """
+	reason = "You are missing one or more API credentials. Please enter them in the credentials file and try again."
+	code = 108
+
 class NoReplyError(Error):
 	""" A content dictionary had a reply as `None`. """
 	reason = "Reply was nonexistant. Aborting."
-	code = 108
+	code = 109
 
 class NotUnderstood(Warn):
 	""" Spoken command not understood. """
@@ -127,17 +131,17 @@ class PyVersionError(Error):
 	# Have the "." be read as "point"
 	reason = f"You are currently running python version {version_info.major}.{version_info.minor}.{version_info.micro}, but " + \
 			  "Python version 3.8 or above is required. Please upgrade and try again.".replace(".", " point ", 3)
-	code = 109
+	code = 110
 
 class RequestLimit(Error):
 	""" [FUTURE INCLUSION] The user has used up all of their available credits for the day. """
 	reason = "You've used up all of your Houndify credits for the day."
-	code = 110
+	code = 111
 
 class SetupWarning(Warn):
-	""" 
+	"""
 		[FUTURE INCLUSUION] The user hasn't set up Quinton with the config software. Because this
-		exception has no use in current versions of `Quinton-VoiceAssistant`, it is removed from 
+		exception has no use in current versions of `Quinton-VoiceAssistant`, it is removed from
 		the final releases.
 	"""
 	reason = "Please set up Quinton through the Quinton config software."
@@ -146,12 +150,12 @@ class SetupWarning(Warn):
 class TimestampError(Error):
 	""" Something went wrong while updating the command timestamp. """
 	reason = "An error occurred while timestamping a command. Aborting."
-	code = 111
+	code = 112
 
 class TimezoneError(Error):
 	""" Something when wrong when `pytz` tried to load the timezone information. """
 	reason = "Loading timezone information failed. Please make sure your timezone is valid. Aborting."
-	code = 112
+	code = 113
 
 class ToolKitCIDError(Error):
 	""" A ToolKit tried to use a command ID number that is already in use. """
@@ -184,7 +188,7 @@ class WiFiWarning(Warn):
 class UnknownProblem(Warn):
 	"""
 		Something went wrong during Quinton's execution. \n
-		This is most likely due to to a Python exception being raised (`TypeError`, `OSError`, `ValueError`, etc.). 
+		This is most likely due to to a Python exception being raised (`TypeError`, `OSError`, `ValueError`, etc.).
 		The problem may have just been a one-time thing, or it may be a recurring bug.
 	"""
 	reason = "Something went wrong during execution. Returning to listening mode."

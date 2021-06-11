@@ -9,21 +9,22 @@
 
 import json, os, subprocess
 from pathlib import Path
+from typing import Tuple
 
 # NOTE: This class has one static method. Using a class here is probably unnecessary and this module
 # will likely only contain the function in the future.
 class History:
-	""" 
+	"""
 		The history class adds cache searching functionality. This helps the Cache object
 		find the correct audio file to play back to the user when using a cached answer.
 	"""
 
 	@staticmethod
-	def search(command: str) -> (bool, list, list):
-		""" 
+	def search(command: str) -> Tuple[bool, list, list]:
+		"""
 			Search for a command in the history. Return whether or not the command was found, and
 			a list of the audio indices of audio files with responses to the command. This way,
-			the response to the command can still be random, just like if it was newly generated. 
+			the response to the command can still be random, just like if it was newly generated.
 		"""
 
 		filelen = int()
@@ -40,7 +41,7 @@ class History:
 			with open(LSOUT_PATH, "w") as lsout:
 				lsout.write(contents)
 
-			# Get the number of files in the `../data/cache/history` directory. Newlines are not stripped here because 
+			# Get the number of files in the `../data/cache/history` directory. Newlines are not stripped here because
 			# `wc -l` checks for newline characters to calculate line number. The character count in the file is also stored
 			# to check for potential file lengths of 1 without an empty second line.
 			filelen = int(subprocess.check_output(f"cat -A {LSOUT_PATH} | wc -l", shell=True).decode("utf-8"))
@@ -48,14 +49,14 @@ class History:
 		except OSError:
 			quit()
 		finally:
-			# Check if the file is empty or if a lack of newline characters causes 
+			# Check if the file is empty or if a lack of newline characters causes
 			# #`wc -l` to return `0`
 			if filelen == 0:
 				if charCount > 0:
 					filelen = 1
 				else:
 					filelen = None
-		
+
 		# Will be returned in a tuple
 		idList = list()
 		dataList = list()
@@ -70,7 +71,7 @@ class History:
 
 			if files[-1] == "":
 				files.__delitem__(-1) # Remove a trailing newline at the end of the output file
-			
+
 			# Check for a certain command in every file. If it's found, save the audio index
 			for _, hfile in enumerate(files):
 				# Skip over files that are empty
@@ -87,8 +88,8 @@ class History:
 							dataList.append(hdict)
 				else:
 					subprocess.call(f"rm {HIST_PATH}/{hfile}", shell=True)
-		
+
 		if not foundMatchingCmd:
 			idList = dataList = None
-		
+
 		return (foundMatchingCmd, idList, dataList)

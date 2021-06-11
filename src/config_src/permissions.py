@@ -1,6 +1,6 @@
 #
 # FILENAME: permissions.py | Quinton-VoiceAssistant
-# DESCRIPTION: Quinton's permissions, used by other classes to limit/allow certain functionality based on the user's config 
+# DESCRIPTION: Quinton's permissions, used by other classes to limit/allow certain functionality based on the user's config
 # CREATED: 2020-08-09 @ 4:42 PM
 # COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
@@ -29,7 +29,7 @@ class Permissions:
 		# Check if the user's location can be used
 		if cfg.use_location:
 			self.canUseLocation = True
-		
+
 		if cfg.log_data and (type(cfg.log_data) is bool): # If data logging is on, everything is allowed
 			self.canLogData = self.canClearCache = \
 			self.canSaveToCache = self.canMonUsage = \
@@ -49,7 +49,7 @@ class Permissions:
 			# Check for the user specifically turning off cache clearing
 			if cfg.clear_frequency != "never":
 				self.canClearCache = True
-			
+
 			# Check if the user wants history entries timestamped
 			if cfg.timestamp_history:
 				self.canTimestampHist = True

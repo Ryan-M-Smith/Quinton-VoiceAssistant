@@ -9,6 +9,33 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
 * **Added**
   * Add support for ToolKits
 
+## v0.4.0 - Released 2021-06-10
+
+* **Added**
+  * All error handling is now done by passing functions into the `handler.handle` function
+
+* **Changed**
+  * API credentials are now read from inside the `VoiceAssistant` class constructor
+    * This keeps code statements out of the top level
+  * The repository GitHub Actions workflow now does dependency tests on code
+    * This installs dependencies from `pip` and the system package manager
+    * Note that the workflow runs with Ubuntu Linux, so the `apt` dependencies are installed
+  * The latest version of the VSCode Python extension includes [Pylance](https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/), which adds a lot
+  of cool, new  features to the Python language support, including a linting-type feature. Many edits were made
+  based on these linting
+  * Reworded some changelog entries
+
+* **Fixed**
+  * Fixed a bug where the program would crash after the wake word was uttered ([#45](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/45))
+  * Fixed some bugs related to misspelled identifiers
+  * Finished some unfinished code segments
+  * Fixed some code spacing issues
+
+* **Removed**
+  * All usage of the error handling code outside the scope of `handler.handle` has been removed
+  * The credit calculation code has been removed from `voiceassistant.py`. This functionality is being actively worked on
+    for another update. If you would like to see it, check out the v0.5.0-dev branch
+
 ## v0.3.7 - Released 2021-05-16
 
 * **Changed**
@@ -49,12 +76,12 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
   * _Finally_ the editorconfig correctly displays files with their defined indentation
     type and in the correct size. I had to dig through the EditorConfig documentation to
     find the solution, but I feel like it will be nicer to view files with a 4-tab-size
-    indent than with an 8.
+    indent than with an 8-tab-size indent.
 
 ## v0.3.4 - Released 2021-01-29
 
 * **Added**
-  * Integrated a GitHub Actions workflow to manage code security
+  * Integrated a GitHub Actions workflow to manage code security (CodeQL)
 
 * **Changed**
   * Marked a previous changelog entry as a change rather than as a bugfix
