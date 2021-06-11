@@ -26,6 +26,7 @@ This is an abridged version of the project's README. For the complete README, pl
     * [Copyright](#copyright)
     * [Finding the Software](#finding-the-software)
     * [Reporting Bugs](#reporting-bugs)
+    * [Feature Requests](#feature-requests)
 
 5. [Resources](#resources)
 
@@ -90,8 +91,8 @@ For complete instructions on how to set up/register API keys for both services, 
 ### Installing the software
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
-for your system. For example, your Python 3.9 interpreter may be run by calling `python3` rather than `python3.9`. In these examples,
-I will be using the command `python3.9`.
+for your system. For example, your Python interpreter may be run by calling `python3.9` rather than `python3`. In these examples,
+I will be using `python3`.
 
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument:
 
@@ -114,9 +115,9 @@ As of now the supported package managers are:
 
 ```bash
 # NOTE: `True` must be capitalized for the command(s) to work properly.
-python3.9 setup.py install --pkg-install=True
+python3 setup.py install --pkg-install=True
 # --- OR --- #
-python3.9 setup.py install -k True # An alternative to the above command
+python3 setup.py install -k True # An alternative to the above command
 ```
 
 If your system doesn't meet these requirements or you want to install the dependencies separately, see
@@ -145,6 +146,12 @@ Quinton-VoiceAssistant is free and open-source software. You can find the code o
 
 To report any bugs, contact me by email at <rysmith2113@gmail.com> or raise an
 [issue on Github](https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues).
+
+### Feature Requests
+
+Feature requests for Quinton-VoiceAssistant are welcome! You can send them in by email or
+raise an issue on the repo. When you do, choose the feature request issue template and follow
+the directions to fill everything out.
 
 ## Resources
 
