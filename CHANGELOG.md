@@ -4,7 +4,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
 
-## Unreleased - (Expected v0.4.0)
+## v0.4.0 - Released 2021-06-10
 
 * **Added**
   * All error handling is now done by passing functions into the `handler.handle` function
