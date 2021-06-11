@@ -7,9 +7,8 @@
 
 """ Manipulate a command and collect content dictionaries from the cache. """
 
-import random, sys
-from datetime import datetime
-from typing import Union, Optional, Any
+import sys
+from typing import Tuple, Union, Optional, Any
 from statistics import mode, StatisticsError
 
 from cache_src.history import History
@@ -119,7 +118,7 @@ class CommandProcessor:
 		"and"
 	]
 
-	def process(self, command: str, *, perms: Perms, time: str) -> (Optional[Union[dict, list]], Optional[dict], bool):
+	def process(self, command: str, *, perms: Perms, time: str) -> Tuple[Optional[Union[dict, list]], Optional[dict], bool]:
 		"""
 			Processes a spoken command, and detects:
 				- Question words

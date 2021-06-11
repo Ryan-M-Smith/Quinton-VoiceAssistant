@@ -15,10 +15,7 @@ import speech_recognition as sr
 from pathlib import Path, PosixPath
 from time import sleep
 from datetime import datetime
-from typing import Union, Optional, Generator, NoReturn
-
-#from omxplayer.player import OMXPlayer # Used to play audio
-#from tinytag import TinyTag # Used to get audio duration
+from typing import Union, Optional, Generator, Tuple, NoReturn
 
 import audioplayer
 from commandprocessor import CommandProcessor as cp
@@ -27,8 +24,8 @@ from config_src.permissions import Permissions as Perms
 from livelisten import Listener
 from exceptions import (
 	MicrophoneWarning, WiFiWarning, AudioEncodingError,
-	AudioPlaybackError, HistoryError, DataError, LocationError,
-	TimezoneError, TimestampError, NoReplyError
+	HistoryError, DataError, LocationError, TimezoneError,
+	TimestampError, NoReplyError, MissingCredentialsError
 )
 
 class VoiceAssistant:
@@ -39,40 +36,10 @@ class VoiceAssistant:
 		(`VoiceAssistant.run()`) for the main function to call.
 	"""
 
-	# -----------------------------
-	# NOTE: This section may need to be refactored to avoid a `with` statement at the class' top-level,
-	# but this works for now.
-	#
-	# API Keys:
-	# -----------------------------
-	with open("../credentials.yaml", "r") as credentials:
-		credsList = yaml.full_load(credentials)
-		valList = list(credsList.get("credentials").values())
-
-		# Houndify
-		HOUNDIFY_ID = valList[0]
-		HOUNDIFY_KEY = valList[1]
-		# -----------------------
-		# OpenWeatherMap
-		OWM_KEY = valList[2]
-		# -----------------------
-	# -----------------------------
-
-	# -------------------------------------------------------------------
-	# NOTE: These variables and constants are currently unused.
-	#
-	# Data for calculating and storing Houndify credit usage information:
-	# -------------------------------------------------------------------
-	_unused_DAILY_CREDITS = 100 # The number of Houndify credits allotted per day
-	_unused_used_credits = float()
-
-	# The baseline number of credits required for the Houndify domains that a client is
-	# registered under. Because Quinton is only registered under Speech-to-Text, and this
-	# domain requires no credits, the value is 0.
-	_unused_DOMAIN_CREDITS = 0
-
-	_unused_CPS = 0.25 # For all audio queries, Houndify uses 0.25 credits per second of audio
-	# -------------------------------------------------------------------
+	# API Keys
+	HOUNDIFY_ID: str
+	HOUNDIFY_KEY: str
+	OWM_KEY: str
 
 	recognizer = sr.Recognizer() # Recognizer class instance to listen for audio
 
@@ -106,6 +73,24 @@ class VoiceAssistant:
 		if not isWiFi:
 			raise WiFiWarning
 
+		# Read the necessary API keys from the credentials file
+		with open("../my_stuff/my-credentials.yaml", "r") as credentials:
+			credsList = yaml.full_load(credentials)
+			valList = list(credsList.get("credentials").values())
+
+			# Houndify
+			self.HOUNDIFY_ID = valList[0]
+			self.HOUNDIFY_KEY = valList[1]
+			# -----------------------------
+			# OpenWeatherMap
+			self.OWM_KEY = valList[2]
+			# -----------------------------
+
+		# Raise an exception if there is an empty credential variable
+		if (len(self.HOUNDIFY_ID) == 0) or (len(self.HOUNDIFY_KEY) == 0) or (len(self.OWM_KEY) == 0):
+			raise MissingCredentialsError
+
+		print("Successfully found and loaded all API credentials")
 		print("MICROPHONE TYPE:", type(self.mic))
 
 	def __getMicrophone(self) -> bool:
@@ -352,7 +337,7 @@ class VoiceAssistant:
 
 	# The `*` is used because the function call isn't very readable without listing the parameters
 	@staticmethod
-	def __phoneticsCheck(*, wakePhrase: str, detectedPhrase: str) -> (bool, Optional[str]):
+	def __phoneticsCheck(*, wakePhrase: str, detectedPhrase: str) -> Tuple[bool, Optional[str]]:
 		"""
 			Compares the phonetic structure of the user's wake word/phrase to a string recorded from
 			the microphone using the Soundex Algorithm. This will help ensure that the wake word is
@@ -404,7 +389,7 @@ class VoiceAssistant:
 			else:
 				return (False, None)
 
-	def __reply(self, commandInfo: Union[dict, list], *, backup: Optional[dict], dataFromCache: bool) -> (str, dict):
+	def __reply(self, commandInfo: Union[dict, list], *, backup: Optional[dict], dataFromCache: bool) -> Tuple[str, dict]:
 		"""
 			Generates a reply to the user's query. A dictionary of content or a list
 			of content dictionaries can be passed in.
@@ -599,7 +584,7 @@ class VoiceAssistant:
 
 					orig_time = time.strftime("%I %M %p")[1:] if int(time.strftime("%I %M %p")[:2]) < 10 else time.strftime("%I %M %p")
 					response = self.__normalizeTime(orig_time)
-			elif (("what" in infoSample.get("question_words")) and (("is" in infoSample.get("to_be")) or ("what's" in ci.egt("full_command"))) and ("date" in infoSample.get("keywords"))): # Getting the date
+			elif (("what" in infoSample.get("question_words")) and (("is" in infoSample.get("to_be")) or ("what's" in infoSample.get("full_command"))) and ("date" in infoSample.get("keywords"))): # Getting the date
 				commandID = 3
 
 				# Get the current date
@@ -797,6 +782,8 @@ class VoiceAssistant:
 		with open("../data/tmp/data.txt", "w") as data:
 			data.write(text)
 
+		output: int
+
 		# Save the reply to a file named using the unique identifer assigned to it
 		#
 		# Command line options (in order of usage):
@@ -844,7 +831,7 @@ class VoiceAssistant:
 			return code
 
 		TONE_PATH = Path("../audio")
-		AUDIO_PATH: PostixPath
+		AUDIO_PATH: PosixPath
 
 		 # C4 and C5 tones; the C4 is played to prompt the user to speak and the C5 is played
 		 # before the command is processed/after the listening period ends.
@@ -907,21 +894,3 @@ class VoiceAssistant:
 
 		# Pad the number with leading zeros to get the length up to 6 places (e.g., 1 becomes 000001)
 		yield str(self.cfg.recordings).zfill(6)
-
-	def _unused_UpdateCredits(self, commandLen: float, wakeWord: int) -> NoReturn:
-		"""
-			[FUTURE] Update the amount of Houndify credits that have been used using Houndify's credit
-			calculation formula (found at https://www.houndify.com/pricing#how-do-credits-work)
-		"""
-
-		self.used_credits += float((self.CPS * (commandLen + wakeWord)) + self.DOMAIN_CREDITS)
-
-
-	def _unused_CreditsRemaining(self) -> (float, float):
-		"""
-			[FUTURE] Get the amount of Houndify credits used so far, and the amount remaining for
-			the day.
-		"""
-
-		remaining = self.DAILY_CREDITS - self.used_credits
-		return (self.used_credits, remaining)
