@@ -21,7 +21,7 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
   * Reworded some changelog entries
 
 * **Fixed**
-  * Fixed a bug
+  * Fixed a bug where the program would crash after the wake word was uttered ([#45](https://github.com/Ryan-M-Smith/Quinton-VoiceAssistant/issues/45))
   * Fixed some bugs related to misspelled identifiers
   * Finished some unfinished code segments
   * Fixed some code spacing issues
