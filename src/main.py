@@ -43,42 +43,6 @@ def main() -> NoReturn:
 	# Because there is no existing configuration to pass to the `datalogging.speak()` function,
 	# any errors here are silently logged.
 	handle(cfg.setFromConfig, cfg, cfg=cfg)
-	# try:
-	# 	cfg.setFromConfig(cfg)
-	# except (Exception, Warning, Error, Warn) as e: # Handle exceptions and warnings
-	# 	print(type(e))
-
-	# 	# Convert the type name of any warning to a common name
-	# 	# in the same format as the items in resulting list of `Warn.getSubclasses()`.
-	# 	e_common = str()
-
-	# 	if issubclass(type(e), (Warning, Warn)):
-	# 		e_common = str(type(e)).strip("<>").split()[1].strip("\'")
-
-	# 	if isinstance(e, Error): # Detect errors
-	# 		print("Error")
-	# 		dl.speak(e.reason, cfg=cfg)
-	# 		dl.log(error=e, reason=e.reason, code=e.code)
-	# 	elif e_common in (wscs := Warn.getSubclasses()).keys(): # Detect warnings
-	# 		# Because the check for warnings involves comparing the common names, there
-	# 		# is no callable class object. Instead, the corresponding dictionary value
-	# 		# (Warn subclass object) mapped to the common name is used to get the reason.
-	# 		print("Warning")
-	# 		dl.speak(text=getattr(wscs.get(e_common), "reason"), cfg=cfg)
-	# 		dl.log(
-	# 			error=wscs.get(e_common),
-	# 			reason=getattr(wscs.get(e_common), "reason"),
-	# 			code=getattr(wscs.get(e_common), "code")
-	# 		)
-	# 	else:
-	# 		print("Other Error")
-	# 		dl.speak(UnknownProblem.reason, cfg=cfg)
-	# 		dl.log(error=UnknownProblem, reason=UnknownProblem.reason, code=UnknownProblem.code)
-
-	# 	# Abort the program with the exit code of the specific exception that was raised
-	# 	if type(e) is not UserWarning:
-	# 		if (issubclass(type(e), Exception)) or (isinstance(e, Error)) or (type(e) is Exception):
-	# 			exit(e.code)
 
 	# NOTE: The configuration is set up; error data is now spoken as well as logged
 
@@ -90,129 +54,18 @@ def main() -> NoReturn:
 		raise PyVersionError
 
 	# Get the user permissions
-	try:
-		perms.setPermsFromCfg(cfg)
-		perms.getPerms()
-	except (Exception, Warning, Error, Warn) as e: # Handle exceptions and warnings
-		print(type(e))
-
-		# Convert the type name of any warning to a common name
-		# in the same format as the items in resulting list of `Warn.getSubclasses()`.
-
-		e_common = str()
-
-		if issubclass(type(e), (Warning, Warn)):
-			e_common = str(type(e)).strip("<>").split()[1].strip("\'")
-
-		if isinstance(e, Error): # Detect errors
-			print("Error")
-			dl.speak(e.reason, cfg=cfg)
-			dl.log(error=e, reason=e.reason, code=e.code)
-		elif e_common in (wscs := Warn.getSubclasses()).keys(): # Detect warnings
-			# Because the check for warnings involves comparing the common names, there
-			# is no callable class object. Instead, the corresponding dictionary value
-			# (Warn subclass object) mapped to the common name is used to get the reason.
-			print("Warning")
-			dl.speak(text=getattr(wscs.get(e_common), "reason"), cfg=cfg)
-			dl.log(
-				error=wscs.get(e_common),
-				reason=getattr(wscs.get(e_common), "reason"),
-				code=getattr(wscs.get(e_common), "code")
-			)
-		else:
-			print("Other Error")
-			dl.speak(UnknownProblem.reason, cfg=cfg)
-			dl.log(error=UnknownProblem, reason=UnknownProblem.reason, code=UnknownProblem.code)
-
-		# Abort the program with the exit code of the specific exception that was raised
-		if type(e) is not UserWarning:
-			if (issubclass(type(e), Exception)) or (isinstance(e, Error)) or (type(e) is Exception):
-				exit(e.code)
+	handle(perms.setPermsFromCfg, cfg, cfg=cfg)
+	handle(perms.getPerms, cfg=cfg)
 
 	# Create an instance of the `VoiceAssistant` class
-	try:
-		va = VoiceAssistant(cfg=cfg, perms=perms)
-	except (Exception, Warning, Error, Warn) as e: # Handle exceptions and warnings
-		print(type(e))
-
-		# Convert the type name of any warning to a common name
-		# in the same format as the items in resulting list of `Warn.getSubclasses()`.
-
-		e_common = str()
-
-		if issubclass(type(e), (Warning, Warn)):
-			e_common = str(type(e)).strip("<>").split()[1].strip("\'")
-
-		if isinstance(e, Error): # Detect errors
-			print("Error")
-			dl.speak(e.reason, cfg=cfg)
-			dl.log(error=e, reason=e.reason, code=e.code)
-		elif e_common in (wscs := Warn.getSubclasses()).keys(): # Detect warnings
-			# Because the check for warnings involves comparing the common names, there
-			# is no callable class object. Instead, the corresponding dictionary value
-			# (Warn subclass object) mapped to the common name is used to get the reason.
-			print("Warning")
-			dl.speak(text=getattr(wscs.get(e_common), "reason"), cfg=cfg)
-			dl.log(
-				error=wscs.get(e_common),
-				reason=getattr(wscs.get(e_common), "reason"),
-				code=getattr(wscs.get(e_common), "code")
-			)
-		else:
-			print("Other Error")
-			dl.speak(UnknownProblem.reason, cfg=cfg)
-			dl.log(error=UnknownProblem, reason=UnknownProblem.reason, code=UnknownProblem.code)
-
-		# Abort the program with the exit code of the specific exception that was raised
-		if type(e) is not UserWarning:
-			if (issubclass(type(e), Exception)) or (isinstance(e, Error)) or (type(e) is Exception):
-				exit(e.code)
+	va = handle(VoiceAssistant, cfg, perms, cfg=cfg)
 
 	wizard.setupWizard(va)
 
 	# Run the voice assistant
-	try:
+	while True:
 		print("Running")
-
-		while True:
-			va.run()
-	except (Error, Warn) as e: # Handle exceptions and warnings
-		print(type(e))
-
-		# Convert the type name of any warning to a common name
-		# in the same format as the items in resulting list of `Warn.getSubclasses()`.
-
-		e_common = str()
-
-		if issubclass(type(e), (Warning, Warn)):
-			e_common = str(type(e)).strip("<>").split()[1].strip("\'")
-
-		print("e_common: ", e_common)
-
-		if isinstance(e, Error): # Detect errors
-			print("Error")
-			dl.speak(e.reason, cfg=cfg)
-			dl.log(error=e, reason=e.reason, code=e.code)
-		elif e_common in (wscs := Warn.getSubclasses()).keys(): # Detect warnings
-			# Because the check for warnings involves comparing the common names, there
-			# is no callable class object. Instead, the corresponding dictionary value
-			# (Warn subclass object) mapped to the common name is used to get the reason.
-			print("Warning")
-			dl.speak(text=getattr(wscs.get(e_common), "reason"), cfg=cfg)
-			dl.log(
-				error=wscs.get(e_common),
-				reason=getattr(wscs.get(e_common), "reason"),
-				code=getattr(wscs.get(e_common), "code")
-			)
-		else:
-			print("Other Error")
-			dl.speak(UnknownProblem.reason, cfg=cfg)
-			dl.log(error=UnknownProblem, reason=UnknownProblem.reason, code=UnknownProblem.code)
-
-		# Abort the program with the exit code of the specific exception that was raised
-		if type(e) is not UserWarning:
-			if (issubclass(type(e), Exception)) or (isinstance(e, Error)) or (type(e) is Exception):
-				exit(e.code) #if isinstance(e, Error) else None)
+		handle(va.run, cfg=cfg)
 
 if __name__ == "__main__":
 	sys.exit(main())
