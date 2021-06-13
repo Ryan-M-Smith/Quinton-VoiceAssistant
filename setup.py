@@ -135,5 +135,5 @@ setuptools.setup(
 		"doc": ["doc/"]
 	},
 	include_package_data=True,
-	entry_points={"console_scripts": ["main=src.main:main"]}
+	entry_points={"console_scripts": ["voiceassistant=src.main:main"]}
 )
