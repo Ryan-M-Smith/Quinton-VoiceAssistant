@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Generator, Tuple
 from time import sleep
 
-from config_src.config import Config
+from .config_src.config import Config
 
 # NOTE: This file may be converted to a file of functions rather than a class in the future
 class Listener:

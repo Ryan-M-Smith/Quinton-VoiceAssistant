@@ -10,17 +10,17 @@
 import sys, warnings
 from typing import NoReturn
 
-from exceptions import Error, Warn, UnknownProblem, PyVersionError
-from voiceassistant import VoiceAssistant
+from .exceptions import Error, Warn, UnknownProblem, PyVersionError
+from .voiceassistant import VoiceAssistant
 
-from config_src.config import Config
-from config_src.permissions import Permissions as Perms
+from .config_src.config import Config
+from .config_src.permissions import Permissions as Perms
 
-from cache_src.cache import Cache
-from cache_src.history import History
+from .cache_src.cache import Cache
+from .cache_src.history import History
 
-import wizard, datalogging as dl
-from handler import handle
+from . import wizard
+from .handler import handle
 
 def versionCheck() -> bool:
 	""" Make sure the user is using a compatible version of Python (v3.8.0+). """
