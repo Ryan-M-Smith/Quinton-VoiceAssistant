@@ -17,7 +17,7 @@ This is an abridged version of the project's README. For the complete README, pl
         * [Other Requirements](#other-requirements)
         * [API Keys](#api-keys)
 
-2. [Installing the software](#installing-the-software)
+2. [Installing and Running the software](#installing-and-runningthe-software)
 
 3. [Contributing](#contributing)
 
@@ -88,7 +88,7 @@ For complete instructions on how to set up/register API keys for both services, 
 
 **NOTE:** You must put all API keys in the [credentials.yaml](credentials.yaml) file for everything to work properly!
 
-### Installing the software
+### Installing and Running the software
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
 for your system. For example, your Python interpreter may be run by calling `python3.9` rather than `python3`. In these examples,
@@ -97,9 +97,9 @@ I will be using `python3`.
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument:
 
 ```bash
-sudo setup.py install
+sudo setup.py install <args>
 # --- OR --- #
-setup.py install --user # Will install in the current user's site-package directory
+setup.py install <args> --user # Will install in the current user's site-package directory
 ```
 
 With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and macOS.
@@ -122,6 +122,8 @@ python3 setup.py install -k True # An alternative to the above command
 
 If your system doesn't meet these requirements or you want to install the dependencies separately, see
 [README-EXT.md](README-EXT.md#manual-dependency-installation).
+
+**Once everything is installed, type** `voiceassistant` **in your terminal to run the program.**
 
 ## Contributing
 
