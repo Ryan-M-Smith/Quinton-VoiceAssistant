@@ -251,12 +251,14 @@ class VoiceAssistant:
 			with self.mic as source:
 				self.recognizer.adjust_for_ambient_noise(source)
 				self.tone(4)
+				print("Listening...")
 
 				audio = self.recognizer.listen(source, timeout=self.cfg.timeout, phrase_time_limit=self.cfg.time_limit)
 		else:
 			raise MicrophoneWarning
 
 		self.tone(5)
+		print("Done!")
 
 		command = str()
 
@@ -830,7 +832,7 @@ class VoiceAssistant:
 			code = 1
 			return code
 
-		TONE_PATH = Path("../audio")
+		TONE_PATH = Path("audio")
 		AUDIO_PATH: PosixPath
 
 		 # C4 and C5 tones; the C4 is played to prompt the user to speak and the C5 is played
