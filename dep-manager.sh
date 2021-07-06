@@ -7,7 +7,7 @@
 # FILENAME: dep-install.sh
 # DESCRIPTION: Install non-Python dependencies for various Linux distributions.
 #
-# Supported package managers: 
+# Supported package managers:
 # APT (`apt-get)
 # YUM (`yum`)
 # DNF (`dnf`)
