@@ -26,8 +26,8 @@ class Config:
 
 	# Less for use of the voice assistant and more for humans, although
 	# self.resetToDefault() uses one of them.
-	CONFIG_PATH = "../data/config/config.yaml"
-	DEFAULT_CFG_PATH = "../data/config/config.default.yaml"
+	CONFIG_PATH = "data/config/config.yaml"
+	DEFAULT_CFG_PATH = "data/config/config.default.yaml"
 
 	CLEAR_FREQUENCIES = [
 		"daily",
@@ -134,7 +134,7 @@ class Config:
 	@staticmethod
 	def __getLastIndex() -> int:
 		"""
-			Get the current number of audio files saved in `../data/responses` to
+			Get the current number of audio files saved in `data/responses` to
 			find a starting point for index generation. This functionality is only
 			used upon a startup or reboot, because the generator creating the indexes
 			can keep track as it works.
@@ -143,14 +143,14 @@ class Config:
 		amount = int()
 
 		try:
-			# Save the result of running `ls ../data/cache/responses` to `../data/tmp/lsout.txt`
-			contents = subprocess.check_output("ls ../data/cache/responses &> ../data/tmp/lsout.txt", shell=True).decode("utf-8")
+			# Save the result of running `ls data/cache/responses` to `data/tmp/lsout.txt`
+			contents = subprocess.check_output("ls data/cache/responses &> data/tmp/lsout.txt", shell=True).decode("utf-8")
 
-			# Write the contents to `../data/tmp/lsout.txt`
-			with open("../data/tmp/lsout.txt", "w") as lsout:
+			# Write the contents to `data/tmp/lsout.txt`
+			with open("data/tmp/lsout.txt", "w") as lsout:
 				lsout.write(contents)
 
-			amount = int(subprocess.check_output("cat -A ../data/tmp/lsout.txt | wc -l", shell=True).decode("utf-8")) # Get the amount of recordings
+			amount = int(subprocess.check_output("cat -A data/tmp/lsout.txt | wc -l", shell=True).decode("utf-8")) # Get the amount of recordings
 		except OSError:
 			quit()
 		finally:
