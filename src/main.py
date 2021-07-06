@@ -22,12 +22,23 @@ from .cache_src.history import History
 from . import wizard
 from .handler import handle
 
+import ssl
+
 def versionCheck() -> bool:
 	""" Make sure the user is using a compatible version of Python (v3.8.0+). """
 	return (sys.version_info.major >= 3) and (sys.version_info.minor >= 8)
 
 def main() -> NoReturn:
 	""" Run everyhting and control the exception handler. """
+
+	try:
+		__create_unverified_https_context = ssl._create_unverified_context
+	except AttributeError:
+		# Legacy Python that doesn't verify HTTPS certificates by default
+		pass
+	else:
+		# Handle target environment that doesn't support HTTPS verification
+		ssl._create_default_https_context = __create_unverified_https_context
 
 	warnings.filterwarnings("error") # Allow warnings to be caught by a try-except block
 	warnings.formatwarning(message=None, category=Warn, filename="voiceassistant.py", lineno=0, line=None) # Formating for all warnings
