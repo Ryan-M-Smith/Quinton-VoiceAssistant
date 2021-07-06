@@ -9,7 +9,7 @@
 """
 	Includes data logging functionality which allows Quinton to:
 		* Speak error output to the user
-		* Log error data to a log file in `../data/logs`
+		* Log error data to a log file in `data/logs`
 
 	The speech functionality is very similar to the `VoiceAssistant.speak()`
 	function, but they have a few differences. Because the `VoiceAssistant` class
@@ -46,12 +46,12 @@ def speak(text: str, *, cfg: Config) -> bool:
 
 	success = False
 
-	AUDIO_PATH = Path("../data/tmp/logspeech.wav")
-	DATA_PATH = Path("../data/tmp/data.txt")
+	AUDIO_PATH = Path("data/tmp/logspeech.wav")
+	DATA_PATH = Path("data/tmp/data.txt")
 
 	subprocess.call(f"touch {str(AUDIO_PATH)}") # Create a path for the recording
 
-	with open("../data/tmp/data.txt", "w") as data:
+	with open("data/tmp/data.txt", "w") as data:
 		data.write(text)
 
 	output = int()
@@ -101,9 +101,9 @@ def speak(text: str, *, cfg: Config) -> bool:
 	# return success
 
 def log(*, error: Union[Exception, Warning, Error, Warn], reason: str, code: int) -> dict:
-	""" Log Quinton's error data to `../data/logs`. """
+	""" Log Quinton's error data to `data/logs`. """
 
-	LOG_PATH = Path("../data/logs")
+	LOG_PATH = Path("data/logs")
 
 	LOG_ENTRY = {
 		"date": str,
