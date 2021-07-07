@@ -4,7 +4,7 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
 
-## v0.4.1 - Released 2021-07-06
+## v0.5.0 - Released 2021-07-06
 
 * **Added**
   * In addition to tones (which play when you should speak and then let you know your command
