@@ -13,7 +13,7 @@ from omxplayer.player import OMXPlayer # Used to play audio
 from tinytag import TinyTag # Used to get audio duration
 from time import sleep
 
-from exceptions import AudioPlaybackError
+from .exceptions import AudioPlaybackError
 
 # Command line options to pass to `ffplay` (in order of appearance):
 #

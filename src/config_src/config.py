@@ -5,7 +5,7 @@
 # COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
-""" 
+"""
 	Contains functionality to set up Quinton prior to listening for commands. This includes:
 		* Reading Quinton's YAML configuration file into Python
 		* Determining if Quinton's weather info is correct
@@ -15,7 +15,7 @@
 import yaml, subprocess
 from typing import Union
 
-from exceptions import (
+from ..exceptions import (
 	ConfigFileWarning,
 	DefaultConfigError,
 	CountryCodeError
@@ -24,10 +24,10 @@ from exceptions import (
 class Config:
 	""" Holds variables with info about Quinton and its settings. """
 
-	# Less for use of the voice assistant and more for humans, although 
+	# Less for use of the voice assistant and more for humans, although
 	# self.resetToDefault() uses one of them.
-	CONFIG_PATH = "../data/config/config.yaml"
-	DEFAULT_CFG_PATH = "../data/config/config.default.yaml"
+	CONFIG_PATH = "data/config/config.yaml"
+	DEFAULT_CFG_PATH = "data/config/config.default.yaml"
 
 	CLEAR_FREQUENCIES = [
 		"daily",
@@ -52,7 +52,7 @@ class Config:
 	speaker_vol: int
 	mic_vol: int
 	pause: float
-	
+
 	log_data: Union[bool, str]
 	clear_frequency = str()
 	archive_audio_commands: bool
@@ -65,7 +65,7 @@ class Config:
 	speed: int
 	pitch: int
 
-	# The number of recorded responses stored in Quinton. 
+	# The number of recorded responses stored in Quinton.
 	recordings = int()
 
 	#
@@ -74,8 +74,8 @@ class Config:
 	#
 
 	@classmethod
-	def setFromConfig(cls, self, /, yamlfile="../data/config/config.yaml"):
-		""" 
+	def setFromConfig(cls, self, /, yamlfile="data/config/config.yaml"):
+		"""
 			Read Quinton's configuration file and set the variables. By default, the main configuration
 			file is used, but yamlfile can be changed to the path of the default configuration to reset
 			Quinton.
@@ -85,7 +85,7 @@ class Config:
 		try:
 			with open(yamlfile, mode="r") as configfile:
 				config = list()
-				
+
 				# Load the YAML documents
 				for doc in yaml.full_load_all(configfile):
 					config.append(dict(doc))
@@ -113,13 +113,13 @@ class Config:
 		else:
 			# Set the amount of recordings already existing so the generator knows where to start.
 			self.recordings = self.__getLastIndex()
-			
+
 			if self.recordings is None:
 				self.recordings = 0
 
 			if not (self.clear_frequency in self.CLEAR_FREQUENCIES):
 				self.clear_frequency = "anually"
-			
+
 			# Check if the country code in Quinton's config meets OpenWeatherMap's requirements.
 			meets = self.meets()
 			if not meets:
@@ -130,11 +130,11 @@ class Config:
 		""" Reset (or in some cases set) all configuration variables to default. """
 		yamlfile = self.DEFAULT_CFG_PATH
 		self.setFromConfig(cls, yamlfile)
-	
+
 	@staticmethod
 	def __getLastIndex() -> int:
-		""" 
-			Get the current number of audio files saved in `../data/responses` to
+		"""
+			Get the current number of audio files saved in `data/responses` to
 			find a starting point for index generation. This functionality is only
 			used upon a startup or reboot, because the generator creating the indexes
 			can keep track as it works.
@@ -142,15 +142,15 @@ class Config:
 
 		amount = int()
 
-		try:	
-			# Save the result of running `ls ../data/cache/responses` to `../data/tmp/lsout.txt`
-			contents = subprocess.check_output("ls ../data/cache/responses &> ../data/tmp/lsout.txt", shell=True).decode("utf-8") 
+		try:
+			# Save the result of running `ls data/cache/responses` to `data/tmp/lsout.txt`
+			contents = subprocess.check_output("ls data/cache/responses &> data/tmp/lsout.txt", shell=True).decode("utf-8")
 
-			# Write the contents to `../data/tmp/lsout.txt`
-			with open("../data/tmp/lsout.txt", "w") as lsout:
+			# Write the contents to `data/tmp/lsout.txt`
+			with open("data/tmp/lsout.txt", "w") as lsout:
 				lsout.write(contents)
 
-			amount = int(subprocess.check_output("cat -A ../data/tmp/lsout.txt | wc -l", shell=True).decode("utf-8")) # Get the amount of recordings
+			amount = int(subprocess.check_output("cat -A data/tmp/lsout.txt | wc -l", shell=True).decode("utf-8")) # Get the amount of recordings
 		except OSError:
 			quit()
 		finally:
@@ -158,7 +158,7 @@ class Config:
 				amount = None
 
 			return amount
-	
+
 	def meets(self) -> bool:
 		""" Determine if the country code in Quinton's config meets OpenWeatherMap's requirements. """
 		# The code must be a two-character, uppercase string

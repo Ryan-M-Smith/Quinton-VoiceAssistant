@@ -11,9 +11,9 @@ import sys
 from typing import Tuple, Union, Optional, Any
 from statistics import mode, StatisticsError
 
-from cache_src.history import History
-from config_src.permissions import Permissions as Perms
-from exceptions import CacheIntentError
+from .cache_src.history import History
+from .config_src.permissions import Permissions as Perms
+from .exceptions import CacheIntentError
 
 class CommandProcessor:
 	"""

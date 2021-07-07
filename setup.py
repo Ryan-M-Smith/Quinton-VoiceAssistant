@@ -10,9 +10,9 @@ from distutils.cmd import Command
 from setuptools.command.install import install
 
 class PkgInstall(Command):
-	""" 
+	"""
 		Defines a custom `pkginstall` command as well as a `--pkg-install` (`-k`) argument
-		for the `setup.py` script. 
+		for the `setup.py` script.
 	"""
 
 	description = "Install dependencies from the system package manager"
@@ -26,7 +26,7 @@ class PkgInstall(Command):
 	def initialize_options(self):
 		""" Set default values for the options. """
 		self.pkg_install = True
-	
+
 	def finalize_options(self):
 		""" Post-process options. """
 
@@ -37,7 +37,7 @@ class PkgInstall(Command):
 			# result as running `chmod 755 dep-manager.sh`, an octal number must be used
 			# rather than a base-10 integer for the mode.
 			os.chmod("dep-manager.sh", mode=0o755)
-	
+
 	def run(self):
 		""" Run the functionality. """
 
@@ -46,7 +46,7 @@ class PkgInstall(Command):
 			subprocess.call(f"{os.environ.get('SHELL')} dep-manager.sh install", shell=True)
 
 class CompleteInstall(install, PkgInstall):
-	""" 
+	"""
 		A complete installation command for Quinton-VoiceAssistant, including the functionality
 		to install non-Python dependencies.
 	"""
@@ -57,18 +57,18 @@ class CompleteInstall(install, PkgInstall):
 
 	def initialize_options(self):
 		""" Set default values for the options. """
-			
+
 		if self.pkg_install:
 			PkgInstall.initialize_options(self)
-		
+
 		install.initialize_options(self)
-	
+
 	def finalize_options(self):
 		""" Post-process options. """
 
 		if self.pkg_install:
 			PkgInstall.finalize_options(self)
-		
+
 		install.finalize_options(self)
 
 	def run(self):
@@ -81,7 +81,7 @@ class CompleteInstall(install, PkgInstall):
 with open("README.md", "r") as ld, open("requirements.txt", "r") as req:
 	long_description = ld.read()
 	requirements = req.read().split("\n")
-	
+
 
 with open("version.txt", "r") as v:
 	version = list(v.read().split("\n"))[0][9:] # Read the version line (first line) only
@@ -105,12 +105,12 @@ setuptools.setup(
 	long_description=long_description, # The README
 	long_description_content_type="text/markdown",
 	url="https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant",
-	
+
 	# This web address directly downloads a zip archive of the project's master branch from GitHub.
 	# If you want more download options or wish to clone the repository, see the `url` parameter
 	# above or use `python3.9 setup.py --url`.
 	download_url="https://www.github.com/Ryan-M-Smith/Quinton-VoiceAssistant/archive/master.zip",
-	
+
 	packages=setuptools.find_packages(),
 	license='GNU GPLv3+',
 	platforms=["MacOS", "Linux"],
@@ -132,8 +132,8 @@ setuptools.setup(
 	python_requires=">=3.8",
 	package_data={
 		"data": ["data/"],
-		"doc": ["doc/"]
+		"doc": ["doc/"],
 	},
 	include_package_data=True,
-	entry_points={"console_scripts": ["main=src.main:main"]}
+	entry_points={"console_scripts": ["voiceassistant=src.main:main"]}
 )

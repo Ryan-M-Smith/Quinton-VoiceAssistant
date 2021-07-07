@@ -10,17 +10,19 @@
 import sys, warnings
 from typing import NoReturn
 
-from exceptions import Error, Warn, UnknownProblem, PyVersionError
-from voiceassistant import VoiceAssistant
+from .exceptions import Warn, PyVersionError
+from .voiceassistant import VoiceAssistant
 
-from config_src.config import Config
-from config_src.permissions import Permissions as Perms
+from .config_src.config import Config
+from .config_src.permissions import Permissions as Perms
 
-from cache_src.cache import Cache
-from cache_src.history import History
+from .cache_src.cache import Cache
+from .cache_src.history import History
 
-import wizard, datalogging as dl
-from handler import handle
+from . import wizard
+from .handler import handle
+
+import ssl
 
 def versionCheck() -> bool:
 	""" Make sure the user is using a compatible version of Python (v3.8.0+). """
@@ -28,6 +30,15 @@ def versionCheck() -> bool:
 
 def main() -> NoReturn:
 	""" Run everyhting and control the exception handler. """
+
+	try:
+		__create_unverified_https_context = ssl._create_unverified_context
+	except AttributeError:
+		# Legacy Python that doesn't verify HTTPS certificates by default
+		pass
+	else:
+		# Handle target environment that doesn't support HTTPS verification
+		ssl._create_default_https_context = __create_unverified_https_context
 
 	warnings.filterwarnings("error") # Allow warnings to be caught by a try-except block
 	warnings.formatwarning(message=None, category=Warn, filename="voiceassistant.py", lineno=0, line=None) # Formating for all warnings
