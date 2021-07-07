@@ -4,6 +4,25 @@ This changelog follows the basic format outlined on [keepachangelog.com](https:/
 
 To learn more about the specifics of my changelog structure, see [doc/changelog-struct.md](doc/changelog-struct)
 
+## Unreleased - (Expected v0.4.1)
+
+* **Added**
+  * In addition to tones (which play when you should speak and then let you know your command
+    was heard), text will always be printed to the console to notify you of when to talk and
+    when the voice assistant is no longer listening
+
+* **Changed**
+  * The output file from `setup.py` is now called `voiceassistant` rather than `main`
+  * All paths used in the code are now relative from the `site-packages` directory where
+    the `setup.py` output file is
+  * Python files within the project are now imported relatively
+  * Updated some documentation
+  * Modified some changelog entries
+
+* **Fixed**
+  * Fixed a problem where running the program with `setup.py` output file resulted in an error
+  * Fixed a bug relating to SSL certificates with the requests library
+
 ## v0.4.0 - Released 2021-06-10
 
 * **Added**
@@ -13,10 +32,10 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
   * API credentials are now read from inside the `VoiceAssistant` class constructor
     * This keeps code statements out of the top level
   * The repository GitHub Actions workflow now does dependency tests on code
-    * This installs dependencies from `pip` and the system package manager
+    * This installs dependencies from `pip` as well as the system package manager
     * Note that the workflow runs with Ubuntu Linux, so the `apt` dependencies are installed
   * The latest version of the VSCode Python extension includes [Pylance](https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/), which adds a lot
-  of cool, new  features to the Python language support, including a linting-type feature. Many edits were made
+  of cool, new  features to the Python language support, including a linting feature. Many edits were made
   based on these linting
   * Reworded some changelog entries
 
