@@ -7,9 +7,9 @@
 
 from typing import Any, Callable
 
-import datalogging as dl
-from config_src.config import Config
-from exceptions import Error, Warn, UnknownProblem
+from . import datalogging as dl
+from .config_src.config import Config
+from .exceptions import Error, Warn, UnknownProblem
 
 def handle(process: Callable[..., Any], *args, cfg: Config) -> Any:
 	"""

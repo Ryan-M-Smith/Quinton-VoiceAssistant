@@ -24,7 +24,7 @@ def checkFor(audioID: str) -> bool:
 
 	matches = int()
 
-	RESPONSE_PATH = Path("../data/cache/responses") # A path relative to `main.py`
+	RESPONSE_PATH = Path("data/cache/responses") # A path relative to `main.py`
 
 	try:
 		# Check for a certain audio ID number in the cache
@@ -41,7 +41,7 @@ def get(audioID: str) -> Optional[Path]:
 		Return the path to the file (as a `pathlib.Path` object) if the file exists, otherwise return `None`.
 	"""
 
-	filepath = f"../../data/cache/responses/{audioID}.wav"
+	filepath = f"data/cache/responses/{audioID}.wav"
 
 	return Path(filepath) if os.path.exists(Path(filepath)) else None
 
