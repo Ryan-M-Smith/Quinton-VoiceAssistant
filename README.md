@@ -17,7 +17,7 @@ This is an abridged version of the project's README. For the complete README, pl
         * [Other Requirements](#other-requirements)
         * [API Keys](#api-keys)
 
-2. [Installing and Running the software](#installing-and-runningthe-software)
+2. [Installing and Running the Software](#installing-and-running-the-software)
 
 3. [Contributing](#contributing)
 
@@ -88,7 +88,7 @@ For complete instructions on how to set up/register API keys for both services, 
 
 **NOTE:** You must put all API keys in the [credentials.yaml](credentials.yaml) file for everything to work properly!
 
-### Installing and Running the software
+### Installing and Running the Software
 
 Before running any commands, make sure you're in the source directory. Also, be sure to use the correct Python versions/commands
 for your system. For example, your Python interpreter may be run by calling `python3.9` rather than `python3`. In these examples,
