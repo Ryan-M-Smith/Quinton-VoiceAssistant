@@ -10,7 +10,7 @@
 import sys, warnings
 from typing import NoReturn
 
-from .exceptions import Error, Warn, UnknownProblem, PyVersionError
+from .exceptions import Warn, PyVersionError
 from .voiceassistant import VoiceAssistant
 
 from .config_src.config import Config
