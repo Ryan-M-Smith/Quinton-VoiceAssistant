@@ -23,6 +23,11 @@ To learn more about the specifics of my changelog structure, see [doc/changelog-
   * Fixed a problem where running the program with `setup.py` output file resulted in an error
   * Fixed a bug relating to SSL certificates with the requests library
 
+* **Removed**
+  * Removed some unused imports
+  * Removed some more of the audio playback code deprecated in v0.3.1
+    * Apparently I missed some
+
 ## v0.4.0 - Released 2021-06-10
 
 * **Added**
