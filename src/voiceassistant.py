@@ -17,13 +17,12 @@ from time import sleep
 from datetime import datetime
 from typing import Union, Optional, Generator, Tuple, NoReturn
 
-import audioplayer
-from commandprocessor import CommandProcessor as cp
-from config_src.config import Config
-from config_src.permissions import Permissions as Perms
-from livelisten import Listener
-from tk_src import fetcher, reader
-from exceptions import (
+from . import audioplayer
+from .commandprocessor import CommandProcessor as cp
+from .config_src.config import Config
+from .config_src.permissions import Permissions as Perms
+from .livelisten import Listener
+from .exceptions import (
 	MicrophoneWarning, WiFiWarning, AudioEncodingError,
 	HistoryError, DataError, LocationError, TimezoneError,
 	TimestampError, NoReplyError, MissingCredentialsError
@@ -75,7 +74,7 @@ class VoiceAssistant:
 			raise WiFiWarning
 
 		# Read the necessary API keys from the credentials file
-		with open("../my_stuff/my-credentials.yaml", "r") as credentials:
+		with open("credentials.yaml", "r") as credentials:
 			credsList = yaml.full_load(credentials)
 			valList = list(credsList.get("credentials").values())
 
@@ -252,12 +251,14 @@ class VoiceAssistant:
 			with self.mic as source:
 				self.recognizer.adjust_for_ambient_noise(source)
 				self.tone(4)
+				print("Listening...")
 
 				audio = self.recognizer.listen(source, timeout=self.cfg.timeout, phrase_time_limit=self.cfg.time_limit)
 		else:
 			raise MicrophoneWarning
 
 		self.tone(5)
+		print("Done!")
 
 		command = str()
 
@@ -292,9 +293,9 @@ class VoiceAssistant:
 			if isInRange:
 				# Send the audio data to Houndify, but this time use the pre-recorded
 				# audio file instead of live listenting. This will take the wave audio
-				# from `../data/tmp/llout.wav` and turn it into the `speechrecognition.AudioFile`
+				# from `data/tmp/llout.wav` and turn it into the `speechrecognition.AudioFile`
 				# type.
-				wwphrase = sr.AudioFile(str(Path("../data/tmp/llout.wav")))
+				wwphrase = sr.AudioFile(str(Path("data/tmp/llout.wav")))
 
 				with wwphrase as source:
 					self.recognizer.adjust_for_ambient_noise(source)
@@ -789,12 +790,12 @@ class VoiceAssistant:
 	def speak(self, text: str, audioID: Optional[str] = None) -> NoReturn:
 		""" Convert text to speech and speak the computer's reply. """
 
-		AUDIO_PATH = Path("../data/cache/responses/" + str(audioID) + ".wav")
-		DATA_PATH = Path("../data/tmp/data.txt")
+		AUDIO_PATH = Path("data/cache/responses/" + str(audioID) + ".wav")
+		DATA_PATH = Path("data/tmp/data.txt")
 
 		subprocess.call(f"touch {str(AUDIO_PATH)}", shell=True) # Create a path for the recording
 
-		with open("../data/tmp/data.txt", "w") as data:
+		with open("data/tmp/data.txt", "w") as data:
 			data.write(text)
 
 		output: int
@@ -829,12 +830,12 @@ class VoiceAssistant:
 			current audio index number.
 		"""
 
-		AUDIO_PATH = Path("../data/cache/responses/" + audioID + ".wav")
+		AUDIO_PATH = Path("data/cache/responses/" + audioID + ".wav")
 
 		audioplayer.play(str(AUDIO_PATH), pause=self.cfg.pause) # Play the audio
 
 		# Resave the file if there were no errors
-		subprocess.call(f"cp ../data/cache/responses/{audioID}.wav ../data/cache/responses/{saveID}.wav", shell=True)
+		subprocess.call(f"cp data/cache/responses/{audioID}.wav data/cache/responses/{saveID}.wav", shell=True)
 
 	def tone(self, octave: int) -> int:
 		""" Play a tone to let the user know when to speak. """
@@ -845,7 +846,7 @@ class VoiceAssistant:
 			code = 1
 			return code
 
-		TONE_PATH = Path("../audio")
+		TONE_PATH = Path("audio")
 		AUDIO_PATH: PosixPath
 
 		 # C4 and C5 tones; the C4 is played to prompt the user to speak and the C5 is played
@@ -868,9 +869,9 @@ class VoiceAssistant:
 	def __write(self, data: dict, saveID=None) -> NoReturn:
 		""" Write Quinton's reply to a file, if the user allows it. """
 
-		histPath = Path("../data/cache/history") # The JSON files with command history
-		recPath = Path("../data/cache/responses") # The portion of the cache holding audio recordings
-		memPath = Path("../data/memory/memory.yaml") # The YAML file with Quinton's "memory"
+		histPath = Path("data/cache/history") # The JSON files with command history
+		recPath = Path("data/cache/responses") # The portion of the cache holding audio recordings
+		memPath = Path("data/memory/memory.yaml") # The YAML file with Quinton's "memory"
 
 		# Depending on the situation, the command's audio index may not be able to be used because it
 		# is the same as a previously saved audio file in the cache. In this case, use the save index -

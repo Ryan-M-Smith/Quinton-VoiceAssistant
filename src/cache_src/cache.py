@@ -34,8 +34,8 @@ class Cache:
 	@staticmethod
 	def __clear() -> bool:
 		""" Clear Quinton's cache. Retruns true if there were no errors. """
-		success1 = subprocess.check_output("rm ../data/cache/responses/*", shell=True) # Clear the audio recordings
-		success2 = subprocess.check_output("rm ../data/cache/history/*", shell=True) # Clear the corresponding history files
+		success1 = subprocess.check_output("rm data/cache/responses/*", shell=True) # Clear the audio recordings
+		success2 = subprocess.check_output("rm data/cache/history/*", shell=True) # Clear the corresponding history files
 
 		if (success1 == 0) and (success2 == 0):
 			return True
@@ -44,7 +44,7 @@ class Cache:
 
 	def __updateLastClear(self, fromForce=False):
 		"""
-			Update `../data/memory/last-cache-clear.txt` with the date of the most recent
+			Update `data/memory/last-cache-clear.txt` with the date of the most recent
 			cache clear.
 		"""
 		tz = pytz.timezone(self.timezone) # Get the timezone
@@ -52,7 +52,7 @@ class Cache:
 
 		fmt = "%d %m %Y %p"
 
-		with open("../data/memory/last-cache-clear.txt", "w") as lcc:
+		with open("data/memory/last-cache-clear.txt", "w") as lcc:
 			if fromForce:
 				lcc.write(f"{time.strftime(fmt)} - Forced by user")
 			else:
@@ -75,10 +75,10 @@ class Cache:
 		data = str()
 		couldClear = False
 
-		with open("../data/memory/last-cache-clear.txt") as lcc:
+		with open("data/memory/last-cache-clear.txt") as lcc:
 			data = lcc.read()
 
-		if os.stat("../data/memory/last-cache-clear.txt").st_size != 0:
+		if os.stat("data/memory/last-cache-clear.txt").st_size != 0:
 			data = data.split()
 
 			# Data is always in the form "dd mm yyyy AM/PM"
@@ -136,7 +136,7 @@ class Cache:
 		""" Clean the cache from garbage files (like a `None.wav` file when something goes wrong). """
 		COMP = "[0-9][0-9][0-9][0-9][0-9][0-9]" # A 6-digit audio index
 
-		CACHE_PATH = Path("../data/cache/responses")
+		CACHE_PATH = Path("data/cache/responses")
 
 		# NOTE: `str.partition()` could be used here, but `os`is already being used above.
 		# Syntax: `f.partition(".")[0]`

@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Generator, Tuple
 from time import sleep
 
-from config_src.config import Config
+from .config_src.config import Config
 
 # NOTE: This file may be converted to a file of functions rather than a class in the future
 class Listener:
@@ -118,9 +118,9 @@ class Listener:
 			audio was saved.
 		"""
 
-		# The audio will be saved in `../data/tmp`, because the output is temporary,
+		# The audio will be saved in `data/tmp`, because the output is temporary,
 		# and will be changing constantly.
-		SAVE_PATH = Path("../data/tmp/llout.wav")
+		SAVE_PATH = Path("data/tmp/llout.wav")
 
 		# Some data needed for recording the audio
 		CHUNK = 1024
@@ -161,13 +161,13 @@ class Listener:
 			command line tool.
 		"""
 
-		SOXOUT_PATH = Path("../data/tmp/soxout.txt")
+		SOXOUT_PATH = Path("data/tmp/soxout.txt")
 
-		# Run SoX on the recorded audio file, and save output to `../data/tmp`
+		# Run SoX on the recorded audio file, and save output to `data/tmp`
 		subprocess.call([f"sox {str(file)} -n stat 2> {str(SOXOUT_PATH)}"], shell=True)
 
 		# Manipulate the output to pull only the RMS value. This is done with the following
-		# command: `sed -n '9p' ../data/tmp/soxout.txt | cut -d ':' -f2 | tr -d " \t"`
+		# command: `sed -n '9p' data/tmp/soxout.txt | cut -d ':' -f2 | tr -d " \t"`
 		rms = float(subprocess.check_output(f"sed -n '9p' {SOXOUT_PATH} | cut -d ':' -f2 | tr -d \" \t\"", shell=True).decode("utf-8"))
 
 		return rms

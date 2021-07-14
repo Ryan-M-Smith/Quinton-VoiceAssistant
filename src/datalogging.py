@@ -6,52 +6,48 @@
 # COPYRIGHT: Copyright (c) 2020-2021 by Ryan Smith <rysmith2113@gmail.com>
 #
 
-""" 
+"""
 	Includes data logging functionality which allows Quinton to:
 		* Speak error output to the user
-		* Log error data to a log file in `../data/logs`
+		* Log error data to a log file in `data/logs`
 
 	The speech functionality is very similar to the `VoiceAssistant.speak()`
 	function, but they have a few differences. Because the `VoiceAssistant` class
-	may not always be able to use its `speak()` function (e.g., like when no 
+	may not always be able to use its `speak()` function (e.g., like when no
 	configuration is loaded), this separate function will allow error data to be
 	spoken before Quinton's main functionality executes.
 """
 
 import subprocess, json
 from pathlib import Path
-from time import sleep
-from tinytag import TinyTag
 from datetime import datetime
-from typing import Union, Optional
-#from omxplayer.player import OMXPlayer
+from typing import Union
 from abc import ABCMeta # Used to differentiate custom warnings from custom exceptions
 
-import audioplayer
-from config_src.config import Config
-from exceptions import (
+from . import audioplayer
+from .config_src.config import Config
+from .exceptions import (
 	Error,
 	Warn,
-	AudioEncodingError,
-	AudioPlaybackError
+	AudioEncodingError
 )
 
 def speak(text: str, *, cfg: Config) -> bool:
 
-	""" 
+	"""
 		Speak error output to the user. This function works very similarly to
 		`VoiceAssistant.speak()`. Returns `True` if the text was successfully
 		spoken, `False` otherwise.
 	"""
-	
+
 	success = False
 
-	AUDIO_PATH = Path("../data/tmp/logspeech.wav")
-	DATA_PATH = Path("../data/tmp/data.txt")
+	AUDIO_PATH = Path("data/tmp/logspeech.wav")
+	DATA_PATH = Path("data/tmp/data.txt")
 
 	subprocess.call(f"touch {str(AUDIO_PATH)}") # Create a path for the recording
-	
-	with open("../data/tmp/data.txt", "w") as data:
+
+	with open("data/tmp/data.txt", "w") as data:
 		data.write(text)
 
 	output = int()
@@ -72,7 +68,7 @@ def speak(text: str, *, cfg: Config) -> bool:
 		raise AudioEncodingError
 
 		return success # `success` should be `False` here
-	else: 
+	else:
 		print(f"Encoding successful (code: {output})")
 
 	# Play the audio
@@ -84,26 +80,11 @@ def speak(text: str, *, cfg: Config) -> bool:
 		success = True
 	finally:
 		return success
-	
-	# audiolen = TinyTag.get(AUDIO_PATH).duration # Get the duration of the recording of the reply
-
-	# try:
-	# 	player = OMXPlayer(AUDIO_PATH) # Play the recording
-
-	# 	# Handle the potential case of `self.cfg.pause` being None
-	# 	pause = float(cfg.pause if type(cfg.pause) is not None else 0)
-	# 	sleep(audiolen + pause) # Allow the audio to finish playing before quitting, and add a little leeway
-	# except Exception:
-	# 	raise AudioPlaybackError
-	# finally:
-	# 	player.quit() # Exit the player
-
-	# return success
 
 def log(*, error: Union[Exception, Warning, Error, Warn], reason: str, code: int) -> dict:
-	""" Log Quinton's error data to `../data/logs`. """
+	""" Log Quinton's error data to `data/logs`. """
 
-	LOG_PATH = Path("../data/logs")
+	LOG_PATH = Path("data/logs")
 
 	LOG_ENTRY = {
 		"date": str,

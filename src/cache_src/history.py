@@ -30,18 +30,18 @@ class History:
 		filelen = int()
 
 		# Define some paths
-		HIST_PATH = Path("../data/cache/history")
-		LSOUT_PATH = Path("../data/tmp/lsout.txt")
+		HIST_PATH = Path("data/cache/history")
+		LSOUT_PATH = Path("data/tmp/lsout.txt")
 
 		try:
-			# Save the result of running `ls ../data/cache/responses` to `../data/tmp/lsout.txt`.
+			# Save the result of running `ls data/cache/responses` to `data/tmp/lsout.txt`.
 			contents = subprocess.check_output(f"ls {HIST_PATH} &> {LSOUT_PATH}", shell=True).decode("utf-8")
 
-			# Write the contents to `../data/tmp/lsout.txt`
+			# Write the contents to `data/tmp/lsout.txt`
 			with open(LSOUT_PATH, "w") as lsout:
 				lsout.write(contents)
 
-			# Get the number of files in the `../data/cache/history` directory. Newlines are not stripped here because
+			# Get the number of files in the `data/cache/history` directory. Newlines are not stripped here because
 			# `wc -l` checks for newline characters to calculate line number. The character count in the file is also stored
 			# to check for potential file lengths of 1 without an empty second line.
 			filelen = int(subprocess.check_output(f"cat -A {LSOUT_PATH} | wc -l", shell=True).decode("utf-8"))
@@ -67,7 +67,7 @@ class History:
 
 			for i in range(0, filelen):
 				# Read the file line by line while stripping trailing newlines
-				files.append(subprocess.check_output(f"less ../data/tmp/lsout.txt | sed -n \'{i + 1}p\'", shell=True).decode("utf-8").strip("\n"))
+				files.append(subprocess.check_output(f"less data/tmp/lsout.txt | sed -n \'{i + 1}p\'", shell=True).decode("utf-8").strip("\n"))
 
 			if files[-1] == "":
 				files.__delitem__(-1) # Remove a trailing newline at the end of the output file

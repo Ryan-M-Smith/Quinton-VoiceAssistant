@@ -16,7 +16,7 @@ import yaml
 from typing import NoReturn
 from pathlib import Path
 
-from voiceassistant import VoiceAssistant
+from .voiceassistant import VoiceAssistant
 
 def setupWizard(va: VoiceAssistant) -> NoReturn:
 	"""
@@ -37,7 +37,7 @@ def setupWizard(va: VoiceAssistant) -> NoReturn:
 		"clear_frequency": 93
 	}
 
-	CONFIG_PATH = Path("../data/config/config.yaml")
+	CONFIG_PATH = Path("data/config/config.yaml")
 
 	fileLns = docs = list()
 

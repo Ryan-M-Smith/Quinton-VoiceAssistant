@@ -38,6 +38,7 @@
     * [Manual Dependency Installation](#manual-dependency-installation)
       * [With the Build Functionality](#with-the-build-functionality)
       * [Without the Build Functionality](#without-the-build-functionality)
+    * [Running](#running)
 
 5. [Future Inclusions](#future-inclusions)
     * [Windows Support](#windows-support)
@@ -294,9 +295,9 @@ I will be using `python3`.
 In certain cases, you may have to run `setup.py install` as root. If you don't want to use `sudo`, you can use the `--user` argument:
 
 ```bash
-sudo setup.py install
+sudo setup.py install <args>
 # --- OR --- #
-setup.py install --user # Will install in the current user's site-package directory
+setup.py install <args> --user # Will install in the current user's site-package directory
 ```
 
 With the modified build behavior, one command can be used to install all dependencies as well as the software for Linux and macOS.
@@ -361,6 +362,10 @@ After that, run the following to install everything else:
 ```bash
 python3.9 setup.py orig_install
 ```
+
+### Running
+
+Once everything is installed, type `voiceassistant` in your terminal to run the program.
 
 ## Future Inclusions
 
