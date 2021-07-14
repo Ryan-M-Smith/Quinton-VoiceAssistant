@@ -438,13 +438,27 @@ class VoiceAssistant:
 		except pytz.exceptions.UnknownTimeZoneError:
 			raise TimezoneError
 
+		tktest = True
+
 		# Each type of command is assigned an ID number. For details about what each number
 		# means, see `../doc/command-ids.md`.
 		commandID = int()
 
-		response: Optional[str] = None # THe response to the command
+		response: Optional[str] = None # The response to the command
 
-		if infoSample.get("intent") == "command":
+		if tktest: # This will eventually be an `else` clause
+			# See if a ToolKit can generate a reply
+
+			# Fetch all the non-blacklisted ToolKits from the filesystem
+			tklist = fetcher.fetch()
+
+			for str_tk in tklist:
+				if reader.checkRequirements(str_tk):
+					for tk in reader.require(str_tk):
+						print(tk)
+
+			exit()
+		elif infoSample.get("intent") == "command":
 			if ((("tell" in infoSample.get("keywords") or ("get" in infoSample.get("keywords"))) and ("weather" in infoSample.get("keywords"))) or ("weather" == infoSample.get("keywords"))): # Weather
 				if not self.perms.canUseLocation:
 					raise LocationError
