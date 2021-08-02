@@ -64,13 +64,13 @@ class VoiceAssistant:
 		self.perms = perms
 		self.listener = Listener(cfg=self.cfg)
 
-		isMic = self.__getMicrophone()
-		isWiFi = self.__checkWiFi()
+		hasMic = self.__getMicrophone()
+		hasWiFi = self.__checkWiFi()
 
-		if not isMic:
+		if not hasMic:
 			raise MicrophoneWarning
 
-		if not isWiFi:
+		if not hasWiFi:
 			raise WiFiWarning
 
 		# Read the necessary API keys from the credentials file
